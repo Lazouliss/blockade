@@ -98,7 +98,7 @@ public class IHM : MonoBehaviour
                 tempPawn.startPos = (0, 0);
                 tempPawn.destPos = (1, 1);
                 tempPawn.mooves = (Common.Direction.UP, Common.Direction.RIGHT);
-                receiveDTO(tempPawn);
+                sendDTO(tempPawn);
                 break;
 
             case 1:
@@ -106,13 +106,13 @@ public class IHM : MonoBehaviour
                 wall.coord1 = (0, 0);
                 wall.coord2 = (0, 1);
                 wall.direction = Common.Direction.UP;
-                receiveDTO(wall);
+                sendDTO(wall);
                 break;
 
             case 2:
                 Common.DTOError error = new Common.DTOError();
                 error.errorCode = rand.Next(10);
-                receiveDTO(error);
+                sendDTO(error);
                 break;
 
             default: Debug.Log("case default !"); break;
