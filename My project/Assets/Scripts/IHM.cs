@@ -6,9 +6,7 @@ using sys = System;
 
 public class IHM : MonoBehaviour
 {
-    private List<object> receivedDTOs = new List<object>();               // la liste des DTOs en attente d'application
     private List<object> DTOsToSend = new List<object>();                 // la liste des DTOs à envoyer
-    private object lastDTO = null;             // dernier DTO gardé pour pouvoir annuler un coup --> ne suffit pas si plusieurs erreurs d'affilé ?
 
     // Start is called before the first frame update
     void Start()
@@ -21,19 +19,6 @@ public class IHM : MonoBehaviour
     {
         // for tests !!!!!!!!!!!!!!!!!!!
         randomAction();
-
-        // Si pas de DTOs reçus, ne fait rien
-        if (receivedDTOs.Count == 0) return;
-
-        // Appliquer les DTOs
-        foreach (var dto in receivedDTOs)
-        {
-            applyDTO(dto);
-            lastDTO = dto;
-        }
-
-        // Effacer la liste des DTOs reçus
-        receivedDTOs.Clear();
 
         // TODO --> recevoir une action du plateau / jouer une action ?
         /* 
@@ -56,9 +41,9 @@ public class IHM : MonoBehaviour
     }
 
     // Fonction pour recevoir les DTOs
-    public void receiveDTO(object dto)
+    public void sendDTO(object dto)
     {
-        receivedDTOs.Add(dto);
+        applyDTO(dto);
     }
 
     // Pour appliquer un DTO
@@ -101,7 +86,8 @@ public class IHM : MonoBehaviour
     // TODO --> fonctions pour appliquer les DTOs --> dans la partie déplacement des pions ?
 
     // TODO --> envoyer les DTOs
-    
+
+    // for tests !!!!!!!!!!!!!!!
     private void randomAction()
     {
         sys.Random rand = new sys.Random();
