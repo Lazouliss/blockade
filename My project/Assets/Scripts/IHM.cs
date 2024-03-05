@@ -7,6 +7,7 @@ using sys = System;
 public class IHM : MonoBehaviour
 {
     private List<object> DTOsToSend = new List<object>();                 // la liste des DTOs à envoyer
+    public Board board;                 // plateau
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class IHM : MonoBehaviour
     void Update()
     {
         // for tests !!!!!!!!!!!!!!!!!!!
-        randomAction();
+        //randomAction();
 
         // TODO --> recevoir une action du plateau / jouer une action ?
         /* 
@@ -65,13 +66,15 @@ public class IHM : MonoBehaviour
     {
         // TODO
         Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
+        board.actionWall(dto);
     }
 
     private void applyDTOPawn(Common.DTOPawn dto)
     {
         // TODO
         Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
-        // si mooves pas init, renvoie UP, UP (la première info trouvée dans Direction) -> à init avec null, null  
+        // si mooves pas init, renvoie UP, UP (la première info trouvée dans Direction) -> à init avec null, null
+        board.moovePawn(dto);
     }
 
     private void applyDTOError(Common.DTOError dto)

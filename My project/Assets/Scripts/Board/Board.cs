@@ -47,7 +47,7 @@ public class Board : MonoBehaviour
         
     }
     
-    void moovePawn(Common.DTOPawn dto)
+    public void moovePawn(Common.DTOPawn dto)
     {
         
         Pawn p = this.selectedPawn;
@@ -59,7 +59,7 @@ public class Board : MonoBehaviour
 
     }
 
-    void actionWall(Common.DTOWall dto)
+    public void actionWall(Common.DTOWall dto)
     {
         Debug.Log("Début du actionWall");
         if (dto.isAdd)
