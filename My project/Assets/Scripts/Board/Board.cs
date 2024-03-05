@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
     {
 
         stackWall = new Stack<GameObject>();
+        /*
         Common.DTOPawn dto = new Common.DTOPawn();
         dto.startPos = (0, 0);
         dto.destPos = (1000, 1000);
@@ -38,7 +39,7 @@ public class Board : MonoBehaviour
         dtoWall.isAdd = true;
         actionWall(dtoWall);
 
-
+        */
     }
 
     // Update is called once per frame

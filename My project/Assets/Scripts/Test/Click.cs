@@ -7,8 +7,18 @@ using sys = System;
 public class Click : MonoBehaviour
 {
     public IHM ihm;
-    private sys.Random rand = new sys.Random();
+    private sys.Random rand;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        rand = new sys.Random();
+    }
+
+    /// <summary>
+    /// A destination de l'IHM et seulement pour les tests
+    /// Crée un DTO aléatoire : pion, mur ou erreur
+    /// </summary>
     public void ClickRandomAction()
     {
         switch (rand.Next(3))
@@ -52,6 +62,10 @@ public class Click : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Retourne une direction aléatoire
+    /// </summary>
+    /// <returns></returns>
     private Common.Direction getRandomDirection()
     {
         switch(rand.Next(4)) 
