@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
     {
 
         stackWall = new Stack<GameObject>();
+        /*
         Common.DTOPawn dto = new Common.DTOPawn();
         dto.startPos = (0, 0);
         dto.destPos = (1000, 1000);
@@ -38,7 +39,7 @@ public class Board : MonoBehaviour
         dtoWall.isAdd = true;
         actionWall(dtoWall);
 
-
+        */
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class Board : MonoBehaviour
         
     }
     
-    void moovePawn(Common.DTOPawn dto)
+    public void moovePawn(Common.DTOPawn dto)
     {
         
         Pawn p = this.selectedPawn;
@@ -55,11 +56,11 @@ public class Board : MonoBehaviour
         p.mooves(dto.mooves.Item1);
         p.mooves(dto.mooves.Item2);
 
-        selectedPawn = null;
+        //selectedPawn = null;
 
     }
 
-    void actionWall(Common.DTOWall dto)
+    public void actionWall(Common.DTOWall dto)
     {
         Debug.Log("Début du actionWall");
         if (dto.isAdd)

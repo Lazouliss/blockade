@@ -6,7 +6,7 @@ using sys = System;
 
 public class IHM : MonoBehaviour
 {
-    private List<object> DTOsToSend = new List<object>();                 // la liste des DTOs à envoyer
+    public Board board;                 // plateau
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +17,6 @@ public class IHM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // for tests !!!!!!!!!!!!!!!!!!!
-        randomAction();
-
         // TODO --> recevoir une action du plateau / jouer une action ?
         /* 
         Common.DTOPawn dtoPawn = new Common.DTOPawn();
@@ -40,13 +37,22 @@ public class IHM : MonoBehaviour
         //transmitDTO(dtoGameState);
     }
 
-    // Fonction pour recevoir les DTOs
+    /// <summary>
+    /// Appelé par la logique de jeu
+    /// Publique
+    /// Fonction pour recevoir les DTOs
+    /// </summary>
+    /// <param name="dto"></param>
     public void sendDTO(object dto)
     {
         applyDTO(dto);
     }
 
-    // Pour appliquer un DTO
+    /// <summary>
+    /// Pour appliquer un DTO
+    /// Privée
+    /// </summary>
+    /// <param name="dto"></param>
     private void applyDTO(object dto)
     {
         switch(dto)
@@ -61,61 +67,39 @@ public class IHM : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Applique un DTO mur
+    /// Privée
+    /// </summary>
+    /// <param name="dto"></param>
     private void applyDTOWall(Common.DTOWall dto)
     {
-        // TODO
         Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
+        board.actionWall(dto);
     }
 
+    /// <summary>
+    /// Applique un DTO pion
+    /// Privée
+    /// </summary>
+    /// <param name="dto"></param>
     private void applyDTOPawn(Common.DTOPawn dto)
     {
-        // TODO
         Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
-        // si mooves pas init, renvoie UP, UP (la première info trouvée dans Direction) -> à init avec null, null  
+        board.moovePawn(dto);
     }
 
+    /// <summary>
+    /// Applique un DTO erreur
+    /// Privée
+    /// TODO : indiquer visuellement qu'il y a eu une erreur
+    /// </summary>
+    /// <param name="dto"></param>
     private void applyDTOError(Common.DTOError dto)
     {
-        // TODO
         Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
-        // applyDTO(lastDTO);       ??
     }
-
-
-
-    // TODO --> fonctions pour appliquer les DTOs --> dans la partie déplacement des pions ?
 
     // TODO --> envoyer les DTOs
 
-    // for tests !!!!!!!!!!!!!!!
-    private void randomAction()
-    {
-        sys.Random rand = new sys.Random();
-        switch (rand.Next(3))
-        {
-            case 0:
-                Common.DTOPawn tempPawn = new Common.DTOPawn();
-                tempPawn.startPos = (0, 0);
-                tempPawn.destPos = (1, 1);
-                tempPawn.mooves = (Common.Direction.UP, Common.Direction.RIGHT);
-                sendDTO(tempPawn);
-                break;
-
-            case 1:
-                Common.DTOWall wall = new Common.DTOWall();
-                wall.coord1 = (0, 0);
-                wall.coord2 = (0, 1);
-                wall.direction = Common.Direction.UP;
-                sendDTO(wall);
-                break;
-
-            case 2:
-                Common.DTOError error = new Common.DTOError();
-                error.errorCode = rand.Next(10);
-                sendDTO(error);
-                break;
-
-            default: Debug.Log("case default !"); break;
-        }
-    }
 }
