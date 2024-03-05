@@ -55,7 +55,7 @@ public class Board : MonoBehaviour
         p.mooves(dto.mooves.Item1);
         p.mooves(dto.mooves.Item2);
 
-        selectedPawn = null;
+        //selectedPawn = null;
 
     }
 
