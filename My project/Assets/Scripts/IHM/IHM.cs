@@ -23,24 +23,7 @@ public class IHM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO --> recevoir une action du plateau / jouer une action ?
-        /* 
-        Common.DTOPawn dtoPawn = new Common.DTOPawn();
         
-        Common.DTOGameState dtoGameState = new Common.DTOGameState();
-        dtoGameState.yellowPlayer = new Common.DTOGameState.Player();
-        dtoGameState.yellowPlayer.verticalWalls = 5; 
-        dtoGameState.yellowPlayer.horizontalWalls = 4;
-        dtoGameState.yellowPlayer.isPlaying = true;
-
-        dtoGameState.redPlayer = new Common.DTOGameState.Player();
-        dtoGameState.redPlayer.verticalWalls = 6; 
-        dtoGameState.redPlayer.horizontalWalls = 6;
-        dtoGameState.redPlayer.isPlaying = false; 
-        */
-
-        // Envoyer les nouveaux DTOs
-        //transmitDTO(dto);
     }
 
     /// <summary>
@@ -110,6 +93,7 @@ public class IHM : MonoBehaviour
     /// 
     /// Applique un DTO état du jeu
     /// Privée
+    /// TODO : changer de joueur / envoyer les infos à l'interface pour le nombre de murs restants ?
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOGameState(Common.DTOGameState dto)
