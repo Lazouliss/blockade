@@ -4,6 +4,12 @@ using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
 
+/// <summary>
+/// Par Thomas MONTIGNY
+/// 
+/// Classe IHM global, s'occupe de l'envoi et de la réception des DTOs
+/// Gère la communication avec le pôle algorithmie (logique de jeu)
+/// </summary>
 public class IHM : MonoBehaviour
 {
     public Board board;                 // plateau
@@ -20,6 +26,7 @@ public class IHM : MonoBehaviour
         // TODO --> recevoir une action du plateau / jouer une action ?
         /* 
         Common.DTOPawn dtoPawn = new Common.DTOPawn();
+        
         Common.DTOGameState dtoGameState = new Common.DTOGameState();
         dtoGameState.yellowPlayer = new Common.DTOGameState.Player();
         dtoGameState.yellowPlayer.verticalWalls = 5; 
@@ -34,10 +41,11 @@ public class IHM : MonoBehaviour
 
         // Envoyer les nouveaux DTOs
         //transmitDTO(dto);
-        //transmitDTO(dtoGameState);
     }
 
     /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
     /// Appelé par la logique de jeu
     /// Publique
     /// Fonction pour recevoir les DTOs
@@ -49,6 +57,8 @@ public class IHM : MonoBehaviour
     }
 
     /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
     /// Pour appliquer un DTO
     /// Privée
     /// </summary>
@@ -61,6 +71,8 @@ public class IHM : MonoBehaviour
 
             case Common.DTOPawn dtoPawn: applyDTOPawn(dtoPawn); break;
 
+            case Common.DTOGameState dtoGameState: applyDTOGameState(dtoGameState); break;
+
             case Common.DTOError dtoError: applyDTOError(dtoError); break;
 
             default: Debug.Log("error during applying dto"); break;
@@ -68,6 +80,8 @@ public class IHM : MonoBehaviour
     }
 
     /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
     /// Applique un DTO mur
     /// Privée
     /// </summary>
@@ -79,6 +93,8 @@ public class IHM : MonoBehaviour
     }
 
     /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
     /// Applique un DTO pion
     /// Privée
     /// </summary>
@@ -90,6 +106,29 @@ public class IHM : MonoBehaviour
     }
 
     /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
+    /// Applique un DTO état du jeu
+    /// Privée
+    /// </summary>
+    /// <param name="dto"></param>
+    private void applyDTOGameState(Common.DTOGameState dto)
+    {
+        if (dto.yellowPlayer.isPlaying)
+        {
+            Debug.Log("applyDTOGameState, yellowPlayer.verticalWalls = " + dto.yellowPlayer.verticalWalls + ", yellowPlayer.horizontalWalls = " + dto.yellowPlayer.horizontalWalls);
+        }
+        else
+        {
+            Debug.Log("applyDTOGameState, redPlayer.verticalWalls = " + dto.redPlayer.verticalWalls + ", redPlayer.horizontalWalls = " + dto.redPlayer.horizontalWalls);
+        }
+
+        //board.actionGameState(dto);
+    }
+
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
     /// Applique un DTO erreur
     /// Privée
     /// TODO : indiquer visuellement qu'il y a eu une erreur
