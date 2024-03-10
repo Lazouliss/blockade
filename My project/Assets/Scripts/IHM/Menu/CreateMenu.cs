@@ -64,6 +64,7 @@ public class CreateMenu : MonoBehaviour
         // CodeText = GetComponent<Text>();
         CodeText.text = CreatorCode.ToString();
         Debug.Log(CreatorCode);
+        // TODO afficher le code dans un textUI
     }
 
     public void SetNumberOfPlayer (int nb)
@@ -72,5 +73,6 @@ public class CreateMenu : MonoBehaviour
         // NumberText = GetComponent<Text>();
         NumberText.text = nbPlayer.ToString();
         Debug.Log(nbPlayer);
+        // TODO comment recup l'info et l'afficher ???
     }
 }
