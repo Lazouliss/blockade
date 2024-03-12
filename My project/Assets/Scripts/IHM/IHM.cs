@@ -123,6 +123,15 @@ public class IHM : MonoBehaviour
         Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
     }
 
-    // TODO --> envoyer les DTOs
-
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
+    /// Envoie un DTO à la logique de jeu
+    /// Publique
+    /// </summary>
+    /// <param name="dto"></param>
+    public void sendDTOToLogic(object dto)
+    {
+        // logic.sendDTO(dto);
+    }
 }
