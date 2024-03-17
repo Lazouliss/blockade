@@ -3,58 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using System.Threading;
 
 public class JoinMenu : MonoBehaviour
 {
 
     public string JoinerPlayerName;
     public int JoinerCode;
-    public string points;
-    public TMP_Text PointText;
-    public int i;
-    public GameObject menuObject;
-    public GameObject waitScreenObject;
-    public bool wait;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        points = "";
-        PointText.SetText(points);
-        i = 0;
-        wait = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // quand partie commence
-        // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
-        if(wait == true)
-        {
-            points += ".";
-            PointText.SetText(points);
-            i += 1;
-            if(i == 3)
-            {
-                points = "";
-                i = 0;
-            }
-            Thread.Sleep(500);
-        }
-    }
 
     // Méthode qui change de scène (en l'occurence la scène de jeu)
-    public void JoinGame ()
+    public void PlayGame ()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // TODO verifier si le code rentré est le meme que celui de la partie
-        // si oui
-        // Passer a un ecran d'attente
-        menuObject.SetActive(false);
-        waitScreenObject.SetActive(true);
-        wait = true;
+        // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
     }
 
     // Méthode qui set le nom du joueur qui rejoint
