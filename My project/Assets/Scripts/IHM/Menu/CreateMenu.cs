@@ -3,22 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 public class CreateMenu : MonoBehaviour
 {
     public string CreatorPlayerName;
     public int CreatorCode;
     public int nbPlayer;
-    public Text CodeText;
-    public Text NumberText;
+    public TMP_Text CodeText;
+    public TMP_Text NumberText;
+
+    void Start()
+    {
+        SetCreatorCode (1234);
+        SetNumberOfPlayer (1);
+    }
+
+    void Update()
+    {
+        SetNumberOfPlayer (1);
+    }
 
     // Méthode qui change de scène (en l'occurence la scène de jeu)
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        // TODO verifier si le code rentré est le meme que celui de la partie
         // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
+        // TODO envoi l'info que la partie commence a lautre joueur
     }
 
     // Méthode qui set le nom du joueur qui crée la partie
@@ -58,21 +69,20 @@ public class CreateMenu : MonoBehaviour
         return true;
     }
 
+    // Méthode qui affiche le code de la partie 
     public void SetCreatorCode (int code)
     {
         CreatorCode = code;
-        // CodeText = GetComponent<Text>();
-        CodeText.text = CreatorCode.ToString();
+        CodeText.SetText(CreatorCode.ToString());
         Debug.Log(CreatorCode);
-        // TODO afficher le code dans un textUI
     }
 
+    // Méthode qui affiche le nombre de joueur dans la partie
     public void SetNumberOfPlayer (int nb)
     {
         nbPlayer = nb;
-        // NumberText = GetComponent<Text>();
-        NumberText.text = nbPlayer.ToString();
+        NumberText.SetText(nbPlayer.ToString());
         Debug.Log(nbPlayer);
-        // TODO comment recup l'info et l'afficher ???
+        // TODO comment recup l'info ?
     }
 }

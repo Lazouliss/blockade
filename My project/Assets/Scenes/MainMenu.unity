@@ -9910,7 +9910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &924224519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16226,7 +16226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9er une partie"
+  m_text: Creer une partie
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3f5b57016266d147b636fa162ba1d1b, type: 2}
   m_sharedMaterial: {fileID: 9112044687862377691, guid: c3f5b57016266d147b636fa162ba1d1b, type: 2}
@@ -19273,7 +19273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1982366424
 RectTransform:
   m_ObjectHideFlags: 0
