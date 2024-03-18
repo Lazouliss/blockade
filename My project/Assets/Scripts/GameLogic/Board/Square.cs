@@ -8,46 +8,42 @@ public class Square : MonoBehaviour
     private int idCase;
 
     // inner cases metadata
-    private int upperSquare;
-    private int lowerSquare;
-    private int leftSquare;
-    private int rightSquare;
+    private Square upperSquare;
+    private Square lowerSquare;
+    private Square leftSquare;
+    private Square rightSquare;
 
     // id of the player that has the pawn
     private int playerID;
 
-    private bool horizontalWall; 
-    private bool verticalWall;
     public Square(int idCase)
     {
         this.idCase = idCase;
-        this.horizontalWall = false;
-        this.verticalWall = false;
     }
 
     public int getIdCase() { 
         return idCase; 
     }
     // Setter for upperSquare
-    public void SetUpperSquare(int newUpperSquare)
+    public void SetUpperSquare(Square newUpperSquare)
     {
         upperSquare = newUpperSquare;
     }
 
     // Setter for lowerSquare
-    public void SetLowerSquare(int newLowerSquare)
+    public void SetLowerSquare(Square newLowerSquare)
     {
         lowerSquare = newLowerSquare;
     }
 
     // Setter for leftSquare
-    public void SetLeftSquare(int newLeftSquare)
+    public void SetLeftSquare(Square newLeftSquare)
     {
         leftSquare = newLeftSquare;
     }
 
     // Setter for rightSquare
-    public void SetRightSquare(int newRightSquare)
+    public void SetRightSquare(Square newRightSquare)
     {
         rightSquare = newRightSquare;
     }

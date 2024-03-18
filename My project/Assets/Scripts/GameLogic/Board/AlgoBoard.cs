@@ -27,30 +27,30 @@ public class AlgoBoard : MonoBehaviour
             {
                 index = i - 11;
                 if(index < 0)
-                    this.cases[i].SetLowerSquare(cases[-index].getIdCase());
+                    this.cases[i].SetLowerSquare(cases[-index]);
                 else
-                    this.cases[i].SetLowerSquare(cases[index].getIdCase());
+                    this.cases[i].SetLowerSquare(cases[index]);
             }
             else
-                this.cases[i].SetLowerSquare(-1);
+                this.cases[i].SetLowerSquare(null);
 
             // Upper Square  
             if (row < 13 && row >= 0)
-                this.cases[i].SetUpperSquare(cases[i + 11].getIdCase());           
+                this.cases[i].SetUpperSquare(cases[i + 11]);           
             else
-                this. cases[i].SetUpperSquare(-1);
+                this. cases[i].SetUpperSquare(null);
 
             // Left Square
             if (col > 0 && col <= 10)
-                this.cases[i].SetLeftSquare(cases[i - 1].getIdCase());
+                this.cases[i].SetLeftSquare(cases[i - 1]);
             else
-                this.cases[i].SetLeftSquare(-1);
+                this.cases[i].SetLeftSquare(null);
 
             // Right Square
             if (col < 10 && col >= 0)
-                this.cases[i].SetRightSquare(cases[i + 1].getIdCase());
+                this.cases[i].SetRightSquare(cases[i + 1]);
             else
-                this.cases[i].SetRightSquare(-1);
+                this.cases[i].SetRightSquare(null);
         }
     }
 
