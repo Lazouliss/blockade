@@ -10,14 +10,24 @@ public class JcEMenu : MonoBehaviour
     public int levelValue;
     public string levelString;
 
-    // Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
     }
 
-    // Méthode qui set le nom du joueur
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le nom du joueur
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetPlayerName (string inputName)
     {
         try
@@ -41,7 +51,12 @@ public class JcEMenu : MonoBehaviour
         }
     }
 
-    // Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     private bool IsAlphaNumeric(string str)
     {
         foreach (char c in str)
@@ -54,7 +69,12 @@ public class JcEMenu : MonoBehaviour
         return true;
     }
 
-    // Méthode qui set le niveau de l'IA adverse
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le niveau de l'IA adverse
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setIALevel (int level)
     {
         switch(level)

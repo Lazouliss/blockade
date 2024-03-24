@@ -11,14 +11,24 @@ public class EcEMenu : MonoBehaviour
     public int levelValue2;
     public string levelString2;
 
-    // Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
     }
 
-    // Méthode qui set le niveau de l'IA 1
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le niveau de l'IA 1
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setIALevel1 (int level)
     {
         switch(level)
@@ -41,7 +51,12 @@ public class EcEMenu : MonoBehaviour
         Debug.Log(levelString1);
     }
 
-    // Méthode qui set le niveau de l'IA 2
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le niveau de l'IA 2
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setIALevel2 (int level)
     {
         switch(level)

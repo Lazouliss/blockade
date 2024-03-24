@@ -5,17 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Méthode qui quitte le jeu
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui quitte le jeu
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void QuitGame ()
     {
         Debug.Log("QUIT!");
         Application.Quit();
     }
-
-    /// <summary>
-    /// Appel� par la logique de jeu
-    /// Publique
-    /// Fonction pour recevoir les DTOs
-    /// </summary>
-    /// <param name="dto"></param>
 }

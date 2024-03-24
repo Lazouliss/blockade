@@ -18,7 +18,12 @@ public class JoinMenu : MonoBehaviour
     public GameObject waitScreenObject;
     public bool wait;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set les variables de départ pour l'écran d'attente
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     void Start()
     {
         points = "";
@@ -27,7 +32,12 @@ public class JoinMenu : MonoBehaviour
         wait = false;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui se lance toute les seconde pour azfficher l'écran d'attente
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     void Update()
     {
         // quand partie commence
@@ -46,8 +56,12 @@ public class JoinMenu : MonoBehaviour
         }
     }
 
-    
-    // Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void JoinGame ()
     {
         // TODO verifier si le code rentré est le meme que celui de la partie
@@ -58,7 +72,12 @@ public class JoinMenu : MonoBehaviour
         wait = true;
     }
 
-    // Méthode qui set le nom du joueur qui rejoint
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le nom du joueur qui rejoint
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetJoinerPlayerName(string inputName)
     {
         try
@@ -82,7 +101,12 @@ public class JoinMenu : MonoBehaviour
         }
     }
 
-    // Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     private bool IsAlphaNumeric(string str)
     {
         foreach (char c in str)
@@ -95,6 +119,12 @@ public class JoinMenu : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode Méthode qui set le code rentré par le joueur qui rejoint
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetJoinerCode (string inputCode)
     {
         try 

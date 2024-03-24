@@ -9,14 +9,24 @@ public class JcJMenu : MonoBehaviour
     public string Player1Name;
     public string Player2Name;
 
-    // Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui change de scène (en l'occurence la scène de jeu)
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void PlayGame ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // TODO envoi des variables a la scène d'apres (nom de joueur, type de partie etc...)
     }
 
-    // Méthode qui set le nom du joueur 1
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le nom du joueur 1
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetPlayer1Name (string inputName)
     {   
         try
@@ -40,7 +50,12 @@ public class JcJMenu : MonoBehaviour
         }
     }
 
-    // Méthode qui set le nom du joueur 2
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le nom du joueur 2
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetPlayer2Name (string inputName)
     {
         try
@@ -64,7 +79,12 @@ public class JcJMenu : MonoBehaviour
         }
     }
 
-    // Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     private bool IsAlphaNumeric(string str)
     {
         foreach (char c in str)

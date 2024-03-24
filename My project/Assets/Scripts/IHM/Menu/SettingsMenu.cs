@@ -10,7 +10,12 @@ public class SettingsMenu : MonoBehaviour
     public bool animationValue;
     public string languageValue;
 
-    // Méthode qui set le volume dans une variable change celui du AudioMixer
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le volume dans une variable change celui du AudioMixer
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setVolume (float volume)
     {
         audioMixer.SetFloat("volume", volume);
@@ -19,14 +24,24 @@ public class SettingsMenu : MonoBehaviour
         // TODO trouver une musique
     }
 
-    // Méthode qui set le booléen des animations
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le booléen des animations
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setAnimation (bool animation)
     {
         animationValue = animation;
         Debug.Log(animationValue);
     }
 
-    // Méthode qui set le langage des menus
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le langage des menus
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setLanguage (int language)
     {
         switch(language)
@@ -40,6 +55,6 @@ public class SettingsMenu : MonoBehaviour
         }
 
         Debug.Log(languageValue);
-        // TODO chnager le langage quand nécessaire
+        // TODO changer le langage quand nécessaire
     }
 }
