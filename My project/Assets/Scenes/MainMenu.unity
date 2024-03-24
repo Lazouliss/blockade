@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &44963809
 RectTransform:
   m_ObjectHideFlags: 0
@@ -398,12 +398,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 304541702}
-  - {fileID: 1718266175}
-  - {fileID: 909676198}
   - {fileID: 545867756}
   - {fileID: 91062861}
   - {fileID: 1098997738}
   - {fileID: 326891265}
+  - {fileID: 1718266175}
+  - {fileID: 909676198}
   m_Father: {fileID: 1668282206}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -424,10 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66cb3cb73299c04f81d09fc07b56a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelValue1: 0
-  levelString1: 
-  levelValue2: 0
-  levelString2: 
 --- !u!1 &57848873
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +932,7 @@ RectTransform:
   - {fileID: 543202103}
   - {fileID: 241525919}
   m_Father: {fileID: 44963809}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2047,8 +2043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaabf4be7cdc924dbb70228c4063dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Name: 
-  Player2Name: 
 --- !u!224 &214344775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3911,7 +3905,7 @@ RectTransform:
   - {fileID: 1557919402}
   - {fileID: 389587461}
   m_Father: {fileID: 44963809}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5405,9 +5399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4208c2c089746934e8b1f13500a1195b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: 
-  levelValue: 0
-  levelString: 
 --- !u!1 &472994504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,7 +6149,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 44963809}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7731,8 +7722,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 924224521}
-        m_TargetAssemblyTypeName: CreateMenu, Assembly-CSharp
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -7741,6 +7732,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: SetTypePartie
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ONLINE
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &674092204
@@ -8144,9 +8147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 681cb7c17136589429270d17a0150a80, type: 2}
-  volumeValue: 0
-  animationValue: 0
-  languageValue: 
 --- !u!1 &771678098
 GameObject:
   m_ObjectHideFlags: 0
@@ -9781,7 +9781,7 @@ RectTransform:
   m_Children:
   - {fileID: 68473320}
   m_Father: {fileID: 44963809}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10087,7 +10087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3242caad9f0a444a1a69a1a39b02a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreatorPlayerName: 
   CreatorCode: 0
   nbPlayer: 0
   CodeText: {fileID: 657799030}
@@ -11446,8 +11445,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469156786}
-        m_TargetAssemblyTypeName: JcEMenu, Assembly-CSharp
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -11456,6 +11455,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: SetTypePartie
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: JCE
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1064909697
@@ -11527,7 +11538,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 44963809}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12935,7 +12946,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -445, y: 244}
+  m_AnchoredPosition: {x: -421, y: 247}
   m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235383742
@@ -16431,8 +16442,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 214344774}
-        m_TargetAssemblyTypeName: JcJMenu, Assembly-CSharp
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -16441,6 +16452,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: SetTypePartie
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: JCJ
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1629213204
@@ -16628,6 +16651,7 @@ GameObject:
   - component: {fileID: 1668282205}
   - component: {fileID: 1668282204}
   - component: {fileID: 1668282203}
+  - component: {fileID: 1668282207}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -16728,6 +16752,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1668282207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668282202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d82e145d5c9924499ac00f73b09679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1689691598
 GameObject:
   m_ObjectHideFlags: 0
@@ -16925,7 +16961,7 @@ RectTransform:
   m_Children:
   - {fileID: 535994072}
   m_Father: {fileID: 44963809}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16976,8 +17012,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44963810}
-        m_TargetAssemblyTypeName: EcEMenu, Assembly-CSharp
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -16986,6 +17022,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: SetTypePartie
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ECE
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1718266177
@@ -18919,6 +18967,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1668282207}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: SetTypePartie
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ONLINE
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 1624417035}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -20248,7 +20308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2102034418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20283,11 +20343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb51125e47b90484bb585f0040a932f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoinerPlayerName: 
   JoinerCode: 0
   points: 
-  PointText: {fileID: 847745637}
   i: 0
+  wait: 0
+  PointText: {fileID: 847745637}
   menuObject: {fileID: 1624417035}
   waitScreenObject: {fileID: 1963641773}
-  wait: 0

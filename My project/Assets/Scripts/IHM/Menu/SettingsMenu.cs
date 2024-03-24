@@ -6,9 +6,9 @@ using UnityEngine.Audio;
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    public float volumeValue;
-    public bool animationValue;
-    public string languageValue;
+    public static float volumeValue;
+    public static bool animationValue;
+    public static string languageValue;
 
     /// <summary>
     /// Par Martin GADET
