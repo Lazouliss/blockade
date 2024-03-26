@@ -900,7 +900,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1516312754}
         m_TargetAssemblyTypeName: Overlay, Assembly-CSharp
-        m_MethodName: ClickSwitchCamera
+        m_MethodName: SwitchCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1314,6 +1314,7 @@ MonoBehaviour:
   playerCam: {fileID: 1501739677}
   boardCam: {fileID: 1504394689}
   btn_switchCamera: {fileID: 1202400632}
+  key_switchCamera: 99
 --- !u!1 &1648395803
 GameObject:
   m_ObjectHideFlags: 0

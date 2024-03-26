@@ -18,6 +18,7 @@ public class Overlay : MonoBehaviour
     public Camera playerCam;
     public Camera boardCam;
     public GameObject btn_switchCamera;
+    public KeyCode key_switchCamera;
 
     // tests not working
     /*
@@ -65,7 +66,11 @@ public class Overlay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(key_switchCamera))
+        {
+            Debug.Log("Switched camera with input key");
+            SwitchCamera();
+        }
     }
 
     /// <summary>
@@ -94,7 +99,7 @@ public class Overlay : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// Publique
     /// </summary>
-    public void ClickSwitchCamera()
+    public void SwitchCamera()
     {
         Debug.Log("Changed Camera");
 
