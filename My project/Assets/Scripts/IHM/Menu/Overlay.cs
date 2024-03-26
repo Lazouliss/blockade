@@ -5,14 +5,18 @@ using TMPro;
 
 public class Overlay : MonoBehaviour
 {
+    // Overlay pour les murs restants
     public GameObject remainingWalls;
+    public TextMeshProUGUI vertical;
+    public TextMeshProUGUI horizontal;
 
     // temporary variables
     private int vertical_walls_left;
     private int horizontal_walls_left;
 
-    public TextMeshProUGUI vertical;
-    public TextMeshProUGUI horizontal;
+    // Cameras
+    public Camera playerCam;
+    public Camera boardCam;
 
     // tests not working
     /*
@@ -27,6 +31,7 @@ public class Overlay : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // for tests
         vertical_walls_left = 10;
         horizontal_walls_left = 8;
 
@@ -45,7 +50,12 @@ public class Overlay : MonoBehaviour
         Debug.Log(horiz.transform.position);
         */
 
+        // for tests
         UpdateRemainingWalls("Vertical", 5);
+
+        // Inialise les cameras
+        playerCam.enabled = true;
+        boardCam.enabled = false;
     }
 
     // Update is called once per frame
@@ -72,5 +82,19 @@ public class Overlay : MonoBehaviour
         {
             horizontal.text = "Horizontaux : " + value;
         }
+    }
+
+    /// <summary>
+    /// Permet de passer d'une caméra à une autre en un clique
+    ///
+    /// Par Thomas MONTIGNY
+    /// Publique
+    /// </summary>
+    public void ClickSwitchCamera()
+    {
+        Debug.Log("Changed Camera");
+
+        playerCam.enabled = !playerCam.enabled;
+        boardCam.enabled = !boardCam.enabled;
     }
 }
