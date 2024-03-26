@@ -17,6 +17,7 @@ public class Overlay : MonoBehaviour
     // Cameras
     public Camera playerCam;
     public Camera boardCam;
+    public GameObject btn_switchCamera;
 
     // tests not working
     /*
@@ -56,6 +57,9 @@ public class Overlay : MonoBehaviour
         // Inialise les cameras
         playerCam.enabled = true;
         boardCam.enabled = false;
+
+        // Place le bouton dans le coin en haut à gauche
+        btn_switchCamera.transform.position = new Vector3(this.GetComponent<RectTransform>().rect.width - 32, this.GetComponent<RectTransform>().rect.height - 32, 0);
     }
 
     // Update is called once per frame

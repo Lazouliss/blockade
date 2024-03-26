@@ -1313,6 +1313,7 @@ MonoBehaviour:
   horizontal: {fileID: 251237706}
   playerCam: {fileID: 1501739677}
   boardCam: {fileID: 1504394689}
+  btn_switchCamera: {fileID: 1202400632}
 --- !u!1 &1648395803
 GameObject:
   m_ObjectHideFlags: 0
