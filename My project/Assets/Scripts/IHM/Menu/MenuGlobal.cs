@@ -35,12 +35,16 @@ public class MenuGlobal : MonoBehaviour
 
     /// <summary>
     /// Par Martin GADET
-    /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques
+    /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques ou si elle a plus de 15 caractères
     /// Publique
     /// </summary>
     /// <returns>Boolean (true/false)</returns>
-    public static bool IsAlphaNumeric(string str)
+    public static bool CheckPlayerName(string str)
     {
+        if (str.Length > 15)
+        {
+            return false;
+        }
         foreach (char c in str)
         {
             if (!char.IsLetter(c) || char.IsWhiteSpace(c) || char.IsPunctuation(c) || char.IsSymbol(c))
@@ -56,27 +60,21 @@ public class MenuGlobal : MonoBehaviour
     /// Méthode qui set le nom d'un joueur
     /// Publique
     /// </summary>
-    /// <returns></returns>
-    public static void SetPlayerName (string name, string inputName)
+    /// <returns>inputName (nom rentré par le joueur)</returns>
+    public static string SetPlayerName (string inputName)
     {
         try
         {
-            if (inputName.Length > 15)
+            if (!MenuGlobal.CheckPlayerName(inputName))
             {
-                throw new Exception("Le nom du joueur ne doit pas dépasser 15 caractères.");
+                throw new Exception("Le nom du joueur ne doit pas contenir de caractères spéciaux et ne doit pas dépasser 15 caractères.");
             }
-
-            if (!MenuGlobal.IsAlphaNumeric(inputName))
-            {
-                throw new Exception("Le nom du joueur ne doit pas contenir de caractères spéciaux.");
-            }
-
-            name = inputName;
-            Debug.Log(name);
+            return inputName;
         }
         catch (Exception e)
         {
             Debug.LogWarning("Erreur : " + e.Message);
+            return "0";
         }
     }
 
@@ -85,18 +83,21 @@ public class MenuGlobal : MonoBehaviour
     /// Méthode qui set le code rentré par un joueur
     /// Publique
     /// </summary>
-    /// <returns></returns>
-    public static void SetCode (int code, string inputCode)
+    /// <returns>code (code rentré par le joueur)</returns>
+    public static int SetCode (string inputCode)
     {
+        int code = 0;
+
         try 
         {
             code = Int32.Parse(inputCode);
+            return code;
         }
         catch (FormatException)
         {
             Debug.Log("Put a integer number as code");
+            return 0;
         }
-        Debug.Log(code);
     }
 
     /// <summary>
@@ -104,11 +105,11 @@ public class MenuGlobal : MonoBehaviour
     /// Méthode qui set le niveau de l'IA
     /// Publique
     /// </summary>
-    /// <returns></returns>
-    public static void setIALevel (int levelValue, string levelString, int level)
+    /// <returns>levelValue, levelString (numéro du niveau et string correspondante sélectionner par le joueur)</returns>
+    public static (int, string) setIALevel (int level)
     {
-        levelValue = 1;
-        levelString = "Facile";
+        int levelValue = 1;
+        string levelString = "Facile";
         switch(level)
         {
             case 0:
@@ -125,7 +126,6 @@ public class MenuGlobal : MonoBehaviour
                 break;
         }
 
-        Debug.Log(levelValue);
-        Debug.Log(levelString);
+        return (levelValue, levelString);
     }
 }

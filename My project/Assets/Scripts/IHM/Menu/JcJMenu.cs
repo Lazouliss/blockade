@@ -17,7 +17,11 @@ public class JcJMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayer1Name (string inputName)
     {   
-        MenuGlobal.SetPlayerName(Player1Name, inputName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            Player1Name = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("Player1 : " + Player1Name);
+        }
     }
 
     /// <summary>
@@ -28,6 +32,10 @@ public class JcJMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayer2Name (string inputName)
     {
-        MenuGlobal.SetPlayerName(Player2Name, inputName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            Player2Name = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("Player2 : " + Player2Name);
+        }
     }
 }

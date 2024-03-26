@@ -46,7 +46,11 @@ public class CreateMenu : MonoBehaviour
     /// <returns></returns>
     public void SetCreatorPlayerName (string inputName)
     {
-        MenuGlobal.SetPlayerName(CreatorPlayerName, inputName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            CreatorPlayerName = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("CreatorPLayer : " + CreatorPlayerName);
+        }
     }
 
     /// <summary>
@@ -55,11 +59,14 @@ public class CreateMenu : MonoBehaviour
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void DisplayCreatorCode (string code)
+    public void DisplayCreatorCode (string inputCode)
     {
-        MenuGlobal.SetCode(CreatorCode, code);
-        CodeText.SetText(CreatorCode.ToString());
-        Debug.Log(CreatorCode);
+        if(MenuGlobal.SetCode(inputCode) != 0)
+        {
+            CreatorCode = MenuGlobal.SetCode(inputCode);
+            CodeText.SetText(CreatorCode.ToString());
+            Debug.Log("CreatorCode : " + CreatorCode);
+        }
     }
 
     /// <summary>

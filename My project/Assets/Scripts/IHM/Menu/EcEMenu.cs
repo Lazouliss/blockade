@@ -19,7 +19,10 @@ public class EcEMenu : MonoBehaviour
     /// <returns></returns>
     public void setIALevel1 (int level)
     {
-        MenuGlobal.setIALevel(levelValue1, levelString1, level);
+        levelValue1 = MenuGlobal.setIALevel(level).Item1;
+        levelString1 = MenuGlobal.setIALevel(level).Item2;
+        Debug.Log("levelValue1 : " + levelValue1);
+        Debug.Log("levelString1 : " + levelString1);
     }
 
     /// <summary>
@@ -30,6 +33,9 @@ public class EcEMenu : MonoBehaviour
     /// <returns></returns>
     public void setIALevel2 (int level)
     {
-        MenuGlobal.setIALevel(levelValue2, levelString2, level);
+        levelValue2 = MenuGlobal.setIALevel(level).Item1;
+        levelString2 = MenuGlobal.setIALevel(level).Item2;
+        Debug.Log("levelValue2 : " + levelValue2);
+        Debug.Log("levelString2 : " + levelString2);
     }
 }

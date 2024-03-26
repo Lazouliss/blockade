@@ -83,7 +83,11 @@ public class JoinMenu : MonoBehaviour
     /// <returns></returns>
     public void SetJoinerPlayerName(string inputName)
     {
-        MenuGlobal.SetPlayerName(JoinerPlayerName, inputName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            JoinerPlayerName = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("JoinerPlayer : " + JoinerPlayerName);
+        }
     }
 
     /// <summary>
@@ -94,6 +98,10 @@ public class JoinMenu : MonoBehaviour
     /// <returns></returns>
     public void SetJoinerCode (string inputCode)
     {
-        MenuGlobal.SetCode(JoinerCode, inputCode);
+        if(MenuGlobal.SetCode(inputCode) != 0)
+        {
+            JoinerCode = MenuGlobal.SetCode(inputCode);
+            Debug.Log("JoinerCode : " + JoinerCode);
+        }
     }
 }

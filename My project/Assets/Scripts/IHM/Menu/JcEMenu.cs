@@ -18,7 +18,11 @@ public class JcEMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerName (string inputName)
     {
-        MenuGlobal.SetPlayerName(PlayerName, inputName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            PlayerName = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("Player : " + PlayerName);
+        }
     }
 
     /// <summary>
@@ -29,6 +33,9 @@ public class JcEMenu : MonoBehaviour
     /// <returns></returns>
     public void setIALevel (int level)
     {
-        MenuGlobal.setIALevel(levelValue, levelString, level);
+        levelValue = MenuGlobal.setIALevel(level).Item1;
+        levelString = MenuGlobal.setIALevel(level).Item2;
+        Debug.Log("levelValue : " + levelValue);
+        Debug.Log("levelString : " + levelString);
     }
 }
