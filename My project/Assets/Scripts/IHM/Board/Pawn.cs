@@ -61,7 +61,11 @@ public class Pawn : MonoBehaviour
         pawn.y = position.y; // attribution position y
 
         pawnObj.name = name; // attribution d'un nom à mon objet pawnObj
-
+        
+        pawnObj.AddComponent<CapsuleCollider>(); // ajout d'une CapsuleCollider pour mon pawn
+        PawnClickHandler PclickHandler = pawnObj.AddComponent<PawnClickHandler>(); // ajout de mon PawnClickHandler pour gestion des cliques
+        
+        
         return pawn;
     }
 

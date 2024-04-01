@@ -68,12 +68,13 @@ public class Plateau : MonoBehaviour
                 //creation de la case de position 
                 Vector3 position = new Vector3(x, 0f, y);
 
-                //intantiation du cube à la case correspondante dans la plateau
-                GameObject plateau = Instantiate(cube, position, Quaternion.identity);
-                plateau.transform.SetParent(transform);
+                //intantiation du cube à la case correspondante dans la case_plateau
+                GameObject case_plateau = Instantiate(cube, position, Quaternion.identity);
+                case_plateau.transform.SetParent(transform);
+                Destroy(cube);
 
-                CaseClickHandler clickHandler = plateau.AddComponent<CaseClickHandler>();//ajout d'un click handler pour les cases du plateau
-                clickHandler.plateau = this;//référence de du plateau à chaque CaseClickHandler
+                CaseClickHandler clickHandler = case_plateau.AddComponent<CaseClickHandler>();//ajout d'un click handler pour les cases du case_plateau
+                clickHandler.plateau = this;//référence du plateau à chaque CaseClickHandler
 
 
 
@@ -81,26 +82,22 @@ public class Plateau : MonoBehaviour
                 if (x == 3 && y == 3)
                 {
                     Pawn pawn1 = Pawn.createPawn(new Vector2Int(3, 3), "Joueur1_Pion1", this);
-                    //PawnClickHandler PclickHandler = pawn1.AddComponent<PawnClickHandler>();
-                    //PclickHandler.plateau = this;
+                    
                 }
                 else if (x == 7 && y == 3)
                 {
                     Pawn pawn2 = Pawn.createPawn(new Vector2Int(7, 3), "Joueur1_Pion2", this);
-                    //PawnClickHandler PclickHandler = pawn2.AddComponent<PawnClickHandler>();
-                    //PclickHandler.plateau = this;
+                    
                 }
                 else if (x == 3 && y == 10)
                 {
                     Pawn pawn3 = Pawn.createPawn(new Vector2Int(3, 10), "Joueur2_Pion1", this);
-                    //PawnClickHandler PclickHandler = pawn3.AddComponent<PawnClickHandler>();
-                    //PclickHandler.plateau = this;
+                   
                 }
                 else if (x == 7 && y == 10)
                 {
                     Pawn pawn4 = Pawn.createPawn(new Vector2Int(7, 10), "Joueur2_Pion2", this);
-                    //PawnClickHandler PclickHandler = pawn4.AddComponent<PawnClickHandler>();
-                    //PclickHandler.plateau = this;
+                    
                 }
             }
         }
