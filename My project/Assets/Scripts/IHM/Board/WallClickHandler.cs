@@ -24,9 +24,9 @@ public class WallClickHandler : MonoBehaviour
         wallRenderer.material.color = Color.magenta;
         lastClick = this;
 
-
     }
 
+    //fonction restauration couleur
     private void RestoreOriginalColor()
     {
 

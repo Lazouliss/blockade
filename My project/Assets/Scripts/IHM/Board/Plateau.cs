@@ -30,10 +30,7 @@ public class Plateau : MonoBehaviour
     public void Init_Plateau()
     {
 
-         //initialisation des murs du plateau droite & gauche
-        Init_Walls_Right();
-        Init_Walls_Left();
-        
+    
         //initialisation des pions de départ
         //pour le joueur 1
 
@@ -109,71 +106,6 @@ public class Plateau : MonoBehaviour
         }
     }
    
-    //Initialisation des murs côtés droits
-    public void Init_Walls_Right()
-    {
-        //murs verticaux à droite du plateau
-        for (int i = 0; i < 9; i++)
-        {
-            int x = width + 6; // Position X à côté de l'extrémité droite du plateau
-            int y = 2 * i + 2;
-            Vector3 position = new Vector3(x, 0.5f, y);
-            GameObject murVertical = Instantiate(murVerticalPrefab, position, Quaternion.identity, transform);
-            murVertical.name = "Joeur1_MurVertical_" + i;
-
-            WallClickHandler clickHandler = murVertical.AddComponent<WallClickHandler>();
-            clickHandler.plateau = this;
-
-        }
-        //murs horizontaux à droite du plateau
-
-        for (int i = 0; i < 9; i++)
-        {
-            int x = width + 4;
-            int y = 2 * i + 1;
-            Vector3 position = new Vector3(x, 0.5f, y);
-            GameObject murHorizontal = Instantiate(murHorizontalPrefab, position, Quaternion.identity, transform);
-            murHorizontal.name = "Joeur1_MurHorizontal_" + i;
-
-            WallClickHandler clickHandler = murHorizontal.AddComponent<WallClickHandler>();
-            clickHandler.plateau = this;
-        }
-
-
-    }
-    
-    //Initialisation des murs côtés gauches
-    public void Init_Walls_Left()
-    {
-        //murs verticaux à gauche du plateau
-        for (int i = 0; i < 9; i++)
-        {
-            int x = -2; // Position X à côté de l'extrémité droite du plateau
-            int y = 2 * i + 2;
-            Vector3 position = new Vector3(x, 0.5f, y);
-            GameObject murVertical = Instantiate(murVerticalPrefab, position, Quaternion.identity, transform);
-            murVertical.name = "Joeur2_MurVertical_" + i;
-
-            WallClickHandler clickHandler = murVertical.AddComponent<WallClickHandler>();
-            clickHandler.plateau = this;
-
-        }
-        //murs horizontaux à gauche du plateau
-
-        for (int i = 0; i < 9; i++)
-        {
-            int x = -3;
-            int y = 2 * i + 1;
-            Vector3 position = new Vector3(x, 0.5f, y);
-            GameObject murHorizontal = Instantiate(murHorizontalPrefab, position, Quaternion.identity, transform);
-            murHorizontal.name = "Joeur2_MurHorizontal_" + i;
-
-            WallClickHandler clickHandler = murHorizontal.AddComponent<WallClickHandler>();
-            clickHandler.plateau = this;
-        }
-
-
-    }
-}
+  }
 
 
