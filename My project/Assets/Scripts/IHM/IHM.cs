@@ -14,10 +14,23 @@ public class IHM : MonoBehaviour
 {
     public Board board;                 // plateau
 
+    // player id --> 1 or 2
+    private int playerNumber;
+
+    public GameObject cams;
+
     // Start is called before the first frame update
     void Start()
     {
+        sys.Random rand = new sys.Random();
+        playerNumber = rand.Next(2)+1;
 
+        if ( this.playerNumber == 1 )
+        {
+            Debug.Log("Setting cams for player 1");
+            Vector3 newRotation = new Vector3(0.0f, 180.0f, 0.0f);
+            cams.transform.eulerAngles = newRotation;
+        }
     }
 
     // Update is called once per frame
