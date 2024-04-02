@@ -22,15 +22,22 @@ public class IHM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // DEBUG : numéro de joueur aléatoire pour que la caméra ne soit jamais sur le même joueur au départ
+        /*
         sys.Random rand = new sys.Random();
         playerNumber = rand.Next(2)+1;
+        */
 
+        // Initialize the cam in function of player number
         if ( this.playerNumber == 1 )
         {
             Debug.Log("Setting cams for player 1");
             Vector3 newRotation = new Vector3(0.0f, 180.0f, 0.0f);
             cams.transform.eulerAngles = newRotation;
         }
+
+        // DEBUG : to test the spin animation on game end
+        // cams.GetComponent<Animator>().SetTrigger("trigger_spin");
     }
 
     // Update is called once per frame
