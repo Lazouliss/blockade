@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,40 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class JcEMenu : MonoBehaviour
 {
-    public string PlayerName;
-    public int levelValue;
-    public string levelString;
+    public static string PlayerName;
+    public static int levelValue;
+    public static string levelString;
 
-    public void PlayGame ()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le nom du joueur
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void SetPlayerName (string inputName)
     {
-        PlayerName = inputName;
-        Debug.Log(PlayerName);
+        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        {
+            PlayerName = MenuGlobal.SetPlayerName(inputName);
+            Debug.Log("Player : " + PlayerName);
+        }
     }
 
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le niveau de l'IA adverse
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
     public void setIALevel (int level)
     {
-        switch(level)
-        {
-            case 0:
-                levelValue = 1;
-                levelString = "Facile";
-                break;
-            case 1:
-                levelValue = 2;
-                levelString = "Moyen";
-                break;
-            case 2:
-                levelValue = 3;
-                levelString = "Difficile";
-                break;
-        }
-
-        Debug.Log(levelValue);
-        Debug.Log(levelString);
+        levelValue = MenuGlobal.setIALevel(level).Item1;
+        levelString = MenuGlobal.setIALevel(level).Item2;
+        Debug.Log("levelValue : " + levelValue);
+        Debug.Log("levelString : " + levelString);
     }
 }
