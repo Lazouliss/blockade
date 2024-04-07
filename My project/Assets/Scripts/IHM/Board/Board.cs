@@ -53,8 +53,12 @@ public class Board : MonoBehaviour
         
         Pawn p = this.selectedPawn;
 
-        p.mooves(dto.mooves.Item1);
-        p.mooves(dto.mooves.Item2);
+        for (int i = 0; i < dto.mooves.Count; i++) 
+        {
+            p.mooves(dto.mooves[i]);
+        }
+        //p.mooves(dto.mooves[0]);
+        //p.mooves(dto.mooves[1]);
 
         //selectedPawn = null;
 
@@ -63,7 +67,8 @@ public class Board : MonoBehaviour
     public void actionWall(Common.DTOWall dto)
     {
         Debug.Log("Début du actionWall");
-        if (dto.isAdd)
+        // test if dto.isAdd is initialized (if not, count as false) and if yes, check is value
+        if (dto.isAdd.HasValue && dto.isAdd.Value)
             addWall(dto);
         else
             removeWall();

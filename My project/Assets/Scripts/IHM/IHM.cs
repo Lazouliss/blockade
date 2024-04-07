@@ -104,7 +104,7 @@ public class IHM : MonoBehaviour
     /// <param name="dto"></param>
     private void applyDTOPawn(Common.DTOPawn dto)
     {
-        Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
+        Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
         board.moovePawn(dto);
     }
 
