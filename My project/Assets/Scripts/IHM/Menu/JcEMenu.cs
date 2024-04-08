@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class JcEMenu : MonoBehaviour
 {
@@ -10,19 +11,28 @@ public class JcEMenu : MonoBehaviour
     public static int levelValue;
     public static string levelString;
 
+    public TMP_Text PlayerNameText;
+
     /// <summary>
     /// Par Martin GADET
-    /// Méthode qui set le nom du joueur
+    /// Méthode Start qui récupère le nom du joueur et l'affiche
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void SetPlayerName (string inputName)
+    void Start()
     {
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
-        {
-            PlayerName = MenuGlobal.SetPlayerName(inputName);
-            Debug.Log("Player : " + PlayerName);
-        }
+        DisplayPlayerName(ConnnectionMenu.PlayerName);
+    }
+
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui affiche le nom du joueur
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
+    public void DisplayPlayerName(string name)
+    {
+        PlayerNameText.SetText(name);
     }
 
     /// <summary>

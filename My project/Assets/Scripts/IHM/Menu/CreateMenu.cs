@@ -14,10 +14,11 @@ public class CreateMenu : MonoBehaviour
     public int nbPlayer;
     public TMP_Text CodeText;
     public TMP_Text NumberText;
+    public TMP_Text PlayerNameText;
 
     /// <summary>
     /// Par Martin GADET
-    /// Méthode Start qui récupère le code de la partie et l'affiche
+    /// Méthode Start qui récupère le code de la partie et le nom du joueur et les affichent
     /// Publique
     /// </summary>
     /// <returns></returns>
@@ -25,6 +26,7 @@ public class CreateMenu : MonoBehaviour
     {
         string testcode = "1234";
         DisplayCreatorCode(testcode);
+        DisplayPlayerName(ConnnectionMenu.PlayerName);
     }
 
     /// <summary>
@@ -51,6 +53,17 @@ public class CreateMenu : MonoBehaviour
             CreatorPlayerName = MenuGlobal.SetPlayerName(inputName);
             Debug.Log("CreatorPLayer : " + CreatorPlayerName);
         }
+    }
+
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui affiche le nom du joueur
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
+    public void DisplayPlayerName(string name)
+    {
+        PlayerNameText.SetText(name);
     }
 
     /// <summary>
