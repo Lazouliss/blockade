@@ -19,7 +19,7 @@ public class JcJMenu : MonoBehaviour
     /// <returns></returns>
     void Start()
     {
-        DisplayPlayerName(ConnnectionMenu.PlayerName);
+        DisplayPlayerName(ConnectionMenu.PlayerName);
     }
 
     /// <summary>

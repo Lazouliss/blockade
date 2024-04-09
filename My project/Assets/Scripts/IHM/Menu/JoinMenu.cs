@@ -30,7 +30,7 @@ public class JoinMenu : MonoBehaviour
         points = "";
         i = 0;
         wait = false;
-        DisplayPlayerName(ConnnectionMenu.PlayerName);
+        DisplayPlayerName(ConnectionMenu.PlayerName);
     }
 
     /// <summary>

@@ -26,7 +26,7 @@ public class CreateMenu : MonoBehaviour
     {
         string testcode = "1234";
         DisplayCreatorCode(testcode);
-        DisplayPlayerName(ConnnectionMenu.PlayerName);
+        DisplayPlayerName(ConnectionMenu.PlayerName);
     }
 
     /// <summary>
