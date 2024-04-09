@@ -80,6 +80,44 @@ public class MenuGlobal : MonoBehaviour
 
     /// <summary>
     /// Par Martin GADET
+    /// Méthode pour vérifier si une chaîne est composée d'au moins 8 caractère
+    /// Publique
+    /// </summary>
+    /// <returns>Boolean (true/false)</returns>
+    public static bool CheckPlayerPassword(string str)
+    {
+        if (str.Length < 8)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui set le mot de passe d'un joueur
+    /// Publique
+    /// </summary>
+    /// <returns>inputPassword (nom rentré par le joueur)</returns>
+    public static string SetPlayerPassword (string inputPassword)
+    {
+        try
+        {
+            if (!MenuGlobal.CheckPlayerPassword(inputPassword))
+            {
+                throw new Exception("Le mot de passe doit contenir 8 caractères minimum.");
+            }
+            return inputPassword;
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("Erreur : " + e.Message);
+            return "0";
+        }
+    }
+
+    /// <summary>
+    /// Par Martin GADET
     /// Méthode qui set le code rentré par un joueur
     /// Publique
     /// </summary>

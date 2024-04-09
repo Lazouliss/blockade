@@ -8,9 +8,6 @@ using System.Threading;
 
 public class JoinMenu : MonoBehaviour
 {
-
-    public static string JoinerPlayerName;
-    
     public int JoinerCode;
 
     public string points;
@@ -20,6 +17,7 @@ public class JoinMenu : MonoBehaviour
 
     public GameObject menuObject;
     public GameObject waitScreenObject;
+    public TMP_Text PlayerNameText;
 
     /// <summary>
     /// Par Martin GADET
@@ -32,6 +30,7 @@ public class JoinMenu : MonoBehaviour
         points = "";
         i = 0;
         wait = false;
+        DisplayPlayerName(ConnectionMenu.PlayerName);
     }
 
     /// <summary>
@@ -77,17 +76,13 @@ public class JoinMenu : MonoBehaviour
 
     /// <summary>
     /// Par Martin GADET
-    /// Méthode qui set le nom du joueur qui rejoint
+    /// Méthode qui affiche le nom du joueur
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void SetJoinerPlayerName(string inputName)
+    public void DisplayPlayerName(string name)
     {
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
-        {
-            JoinerPlayerName = MenuGlobal.SetPlayerName(inputName);
-            Debug.Log("JoinerPlayer : " + JoinerPlayerName);
-        }
+        PlayerNameText.SetText(name);
     }
 
     /// <summary>

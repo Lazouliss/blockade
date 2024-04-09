@@ -3,25 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class JcJMenu : MonoBehaviour
 {
-    public static string Player1Name;
     public static string Player2Name;
+
+    public TMP_Text PlayerNameText;
 
     /// <summary>
     /// Par Martin GADET
-    /// Méthode qui set le nom du joueur 1
+    /// Méthode Start qui récupère le nom du joueur et l'affiche
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void SetPlayer1Name (string inputName)
-    {   
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
-        {
-            Player1Name = MenuGlobal.SetPlayerName(inputName);
-            Debug.Log("Player1 : " + Player1Name);
-        }
+    void Start()
+    {
+        DisplayPlayerName(ConnectionMenu.PlayerName);
+    }
+
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode qui affiche le nom du joueur
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
+    public void DisplayPlayerName(string name)
+    {
+        PlayerNameText.SetText(name);
     }
 
     /// <summary>
