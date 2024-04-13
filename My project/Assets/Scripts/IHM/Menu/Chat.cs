@@ -6,17 +6,25 @@ using TMPro;
 public class Chat : MonoBehaviour
 {
     public TMP_Text ChatContent;
-    public string inputMessage;
+
+    void Start()
+    {
+        StartCoroutine(test());
+    }
 
     /// <summary>
     /// Par Martin GADET
-    /// Méthode qui recupère l'input 
+    /// Méthode test pour test
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void setMessage(string input)
+    IEnumerator test()
     {
-        inputMessage = input;
+        while (true)
+        {
+            addMessage("marty", "blablabla");
+            yield return new WaitForSeconds(5f);
+        }
     }
 
     /// <summary>
@@ -25,10 +33,10 @@ public class Chat : MonoBehaviour
     /// Publique
     /// </summary>
     /// <returns>message</returns>
-    public string createMessage(string PlayerName, string message)
+    public string createMessageToSend(string PlayerName, string message)
     {
-        string messageToSend = PlayerName + ">" + message + "\n";
-        return messageToSend;
+        string textToSend = PlayerName + " > " + message + "\n";
+        return textToSend;
     }
 
     /// <summary>
@@ -37,8 +45,8 @@ public class Chat : MonoBehaviour
     /// Publique
     /// </summary>
     /// <returns></returns>
-    public void addMessage()
+    public void addMessage(string playerName, string message)
     {
-        ChatContent.text += createMessage(ConnectionMenu.PlayerName, inputMessage);
+        ChatContent.text += createMessageToSend(playerName, message);
     }
 }
