@@ -7,25 +7,31 @@ public class Chat : MonoBehaviour
 {
     public TMP_Text ChatContent;
 
-    void Start()
-    {
-        StartCoroutine(test());
-    }
-
     /// <summary>
     /// Par Martin GADET
-    /// Méthode test pour test
+    /// Méthode Start lancant le test
     /// Publique
     /// </summary>
     /// <returns></returns>
-    IEnumerator test()
-    {
-        while (true)
-        {
-            addMessage("marty", "blablabla");
-            yield return new WaitForSeconds(5f);
-        }
-    }
+    // void Start()
+    // {
+    //     StartCoroutine(test());
+    // }
+
+    /// <summary>
+    /// Par Martin GADET
+    /// Méthode test pour test d'affichage
+    /// Publique
+    /// </summary>
+    /// <returns></returns>
+    // IEnumerator test()
+    // {
+    //     while (true)
+    //     {
+    //         addMessage("marty", "blablabla");
+    //         yield return new WaitForSeconds(5f);
+    //     }
+    // }
 
     /// <summary>
     /// Par Martin GADET
