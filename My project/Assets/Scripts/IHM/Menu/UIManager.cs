@@ -18,7 +18,8 @@ public class MenuGlobal : MonoBehaviour
     /// <returns></returns>
     public static void PlayGame ()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("The game is starting");
     }
 
     /// <summary>
