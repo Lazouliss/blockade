@@ -7,8 +7,8 @@ using sys = System;
 /// <summary>
 /// Par Thomas MONTIGNY
 /// 
-/// Classe IHM global, s'occupe de l'envoi et de la réception des DTOs
-/// Gère la communication avec le pôle algorithmie (logique de jeu)
+/// Classe IHM global, s'occupe de l'envoi et de la rï¿½ception des DTOs
+/// Gï¿½re la communication avec le pï¿½le algorithmie (logique de jeu)
 /// </summary>
 public class IHM : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class IHM : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Appelé par la logique de jeu
+    /// Appelï¿½ par la logique de jeu
     /// Publique
     /// Fonction pour recevoir les DTOs
     /// </summary>
@@ -43,7 +43,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Pour appliquer un DTO
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTO(object dto)
@@ -66,7 +66,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO mur
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOWall(Common.DTOWall dto)
@@ -79,7 +79,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO pion
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOPawn(Common.DTOPawn dto)
@@ -91,9 +91,9 @@ public class IHM : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Applique un DTO état du jeu
-    /// Privée
-    /// TODO : changer de joueur / envoyer les infos à l'interface pour le nombre de murs restants ?
+    /// Applique un DTO ï¿½tat du jeu
+    /// Privï¿½e
+    /// TODO : changer de joueur / envoyer les infos ï¿½ l'interface pour le nombre de murs restants ?
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOGameState(Common.DTOGameState dto)
@@ -114,7 +114,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO erreur
-    /// Privée
+    /// Privï¿½e
     /// TODO : indiquer visuellement qu'il y a eu une erreur
     /// </summary>
     /// <param name="dto"></param>
@@ -126,12 +126,12 @@ public class IHM : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Envoie un DTO à la logique de jeu
+    /// Envoie un DTO ï¿½ la logique de jeu
     /// Publique
     /// </summary>
     /// <param name="dto"></param>
     public void sendDTOToLogic(object dto)
     {
-        // logic.sendDTO(dto);
+        //logic.sendDTO(dto);
     }
 }

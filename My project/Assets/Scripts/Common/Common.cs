@@ -25,8 +25,8 @@
 
         public struct DTOPawn
         {
-            public (uint, uint) startPos;
-            public (uint, uint) destPos;
+            public (float, float) startPos;
+            public (float, float) destPos;
             public (Direction, Direction) mooves;
         }
 

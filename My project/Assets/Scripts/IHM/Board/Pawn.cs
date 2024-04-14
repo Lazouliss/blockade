@@ -69,4 +69,11 @@ public class Pawn : MonoBehaviour
         return pawn;
     }
 
+    /*
+    //ABERKANE Doha
+    public static getPositionPawn(Pawn pawn){
+
+        return pawn.transform.position;
+    }*/
+
 }
