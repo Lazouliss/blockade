@@ -41,9 +41,9 @@ public class JcJMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayer2Name (string inputName)
     {
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        if(UIManager.SetPlayerName(inputName) != "0")
         {
-            Player2Name = MenuGlobal.SetPlayerName(inputName);
+            Player2Name = UIManager.SetPlayerName(inputName);
             Debug.Log("Player2 : " + Player2Name);
         }
     }

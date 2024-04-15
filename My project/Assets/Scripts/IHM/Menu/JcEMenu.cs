@@ -43,8 +43,8 @@ public class JcEMenu : MonoBehaviour
     /// <returns></returns>
     public void setIALevel (int level)
     {
-        levelValue = MenuGlobal.setIALevel(level).Item1;
-        levelString = MenuGlobal.setIALevel(level).Item2;
+        levelValue = UIManager.setIALevel(level).Item1;
+        levelString = UIManager.setIALevel(level).Item2;
         Debug.Log("levelValue : " + levelValue);
         Debug.Log("levelString : " + levelString);
     }

@@ -44,9 +44,9 @@ public class InscriptionMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerName (string inputName)
     {   
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        if(UIManager.SetPlayerName(inputName) != "0")
         {
-            PlayerName = MenuGlobal.SetPlayerName(inputName);
+            PlayerName = UIManager.SetPlayerName(inputName);
             Debug.Log("Pseudo : " + PlayerName);
         }
     }
@@ -59,9 +59,9 @@ public class InscriptionMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerPassword1 (string inputPassword)
     {   
-        if(MenuGlobal.SetPlayerPassword(inputPassword) != "0")
+        if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
-            PlayerPassword1 = MenuGlobal.SetPlayerPassword(inputPassword);
+            PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
             Debug.Log("Password1 : " + PlayerPassword1);
         }
     }
@@ -74,9 +74,9 @@ public class InscriptionMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerPassword2 (string inputPassword)
     {   
-        if(MenuGlobal.SetPlayerPassword(inputPassword) != "0")
+        if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
-            PlayerPassword2 = MenuGlobal.SetPlayerPassword(inputPassword);
+            PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
             Debug.Log("Password2 : " + PlayerPassword2);
         }
         try

@@ -42,7 +42,7 @@ public class JoinMenu : MonoBehaviour
     void Update()
     {
         // TODO récupérer l'info de lancement de partie
-        // si partie lancée alors appeler MenuGlobal.PlayGame()
+        // si partie lancée alors appeler UIManager.PlayGame()
         // sinon
         if(wait == true)
         {
@@ -93,9 +93,9 @@ public class JoinMenu : MonoBehaviour
     /// <returns></returns>
     public void SetJoinerCode (string inputCode)
     {
-        if(MenuGlobal.SetCode(inputCode) != 0)
+        if(UIManager.SetCode(inputCode) != 0)
         {
-            JoinerCode = MenuGlobal.SetCode(inputCode);
+            JoinerCode = UIManager.SetCode(inputCode);
             Debug.Log("JoinerCode : " + JoinerCode);
         }
     }

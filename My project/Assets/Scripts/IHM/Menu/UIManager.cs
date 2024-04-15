@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Threading;
 
-public class MenuGlobal : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public static string typePartie; // ONLINE, JCJ, JCE, ECE
 
@@ -66,7 +66,7 @@ public class MenuGlobal : MonoBehaviour
     {
         try
         {
-            if (!MenuGlobal.CheckPlayerName(inputName))
+            if (!UIManager.CheckPlayerName(inputName))
             {
                 throw new Exception("Le nom du joueur ne doit pas contenir de caractères spéciaux et ne doit pas dépasser 15 caractères.");
             }
@@ -104,7 +104,7 @@ public class MenuGlobal : MonoBehaviour
     {
         try
         {
-            if (!MenuGlobal.CheckPlayerPassword(inputPassword))
+            if (!UIManager.CheckPlayerPassword(inputPassword))
             {
                 throw new Exception("Le mot de passe doit contenir 8 caractères minimum.");
             }

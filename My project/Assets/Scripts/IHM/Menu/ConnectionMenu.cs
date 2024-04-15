@@ -43,9 +43,9 @@ public class ConnectionMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerName (string inputName)
     {   
-        if(MenuGlobal.SetPlayerName(inputName) != "0")
+        if(UIManager.SetPlayerName(inputName) != "0")
         {
-            PlayerName = MenuGlobal.SetPlayerName(inputName);
+            PlayerName = UIManager.SetPlayerName(inputName);
             Debug.Log("Pseudo : " + PlayerName);
         }
     }
@@ -58,9 +58,9 @@ public class ConnectionMenu : MonoBehaviour
     /// <returns></returns>
     public void SetPlayerPassword (string inputPassword)
     {   
-        if(MenuGlobal.SetPlayerPassword(inputPassword) != "0")
+        if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
-            PlayerPassword = MenuGlobal.SetPlayerPassword(inputPassword);
+            PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
             Debug.Log("Password : " + PlayerPassword);
         }
     }
