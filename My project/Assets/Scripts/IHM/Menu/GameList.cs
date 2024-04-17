@@ -9,8 +9,7 @@ public class GameList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject newGameResume = Instantiate(gameResumeTemplate, new Vector3(0, 0, 0), Quaternion.identity);
-        newGameResume.SetActive(true);
+        Instantiate(gameResumeTemplate, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
