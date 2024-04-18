@@ -24,7 +24,7 @@ public class PawnClickHandler : MonoBehaviour
         Debug.Log("Position du pion cliqué  " + transform.position);
 
         //créer startPos
-        dto.startPos = (transform.position.x, transform.position.z);
+        dto.startPos = ((uint)transform.position.x, (uint)transform.position.z);
         
         //envoi du dto 
         plateau.SendDTO(dto);

@@ -98,7 +98,7 @@ public class Plateau : MonoBehaviour
         //Vérifie si dtoPawn contient des valeurs de positions de type float
         if (dtoPawn.startPos != (0.0f, 0.0f) && dtoPawn.destPos != (0.0f, 0.0f))
         {
-            IHM.sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
+            //IHM.sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
         }
     }
 }

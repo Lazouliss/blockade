@@ -36,7 +36,7 @@ public class CaseClickHandler : MonoBehaviour
         lastCaseClick = this;
         
         //valeur destPos ajouté au dto 
-        dto.destPos= (transform.position.x, transform.position.z);
+        dto.destPos= ((uint)transform.position.x, (uint)transform.position.z);
                
         //envoi du dto 
         plateau.SendDTO(dto);
