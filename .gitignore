@@ -25,6 +25,10 @@
 
 # Visual Studio cache directory
 .vs/
+.vsconfig
+
+# Apple useless files
+.DS_Store
 
 # Gradle cache directory
 .gradle/
