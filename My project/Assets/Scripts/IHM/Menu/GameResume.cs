@@ -10,11 +10,20 @@ public class GameResume : MonoBehaviour
     public TMP_Text ScoreText;
     public TMP_Text DateText;
 
-    public GameResume(string result, string player, string score, string date)
+    public void Setup(string result, string player, string score, string date)
     {
         ResultText.text = result;
-        PlayerText.text = player;
-        ScoreText.text = score;
+        PlayerText.text = "contre : " + player;
+        ScoreText.text = "en : " + score + " coups";
         DateText.text = date;
+
+        if(result == "Victoire")
+        {
+            ResultText.color = Color.green;
+        }
+        else 
+        {
+            ResultText.color = Color.red;
+        }
     }
 }
