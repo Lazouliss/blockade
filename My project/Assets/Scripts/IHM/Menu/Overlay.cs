@@ -16,6 +16,11 @@ public class Overlay : MonoBehaviour
     public GameObject btn_switchCamera;
     public KeyCode key_switchCamera;
 
+   
+
+    
+
+    
     // tests not working
     /*
     private GameObject verti;
@@ -61,6 +66,7 @@ public class Overlay : MonoBehaviour
             Debug.Log("Switched camera with input key");
             this.SwitchCamera();
         }
+        
     }
 
     /// <summary>
@@ -100,4 +106,6 @@ public class Overlay : MonoBehaviour
         boardCam.enabled = !boardCam.enabled;
         boardCam.GetComponent<AudioListener>().enabled = !boardCam.GetComponent<AudioListener>().enabled;
     }
+
+     
 }

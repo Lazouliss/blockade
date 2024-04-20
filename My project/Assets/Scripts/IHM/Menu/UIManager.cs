@@ -22,6 +22,12 @@ public class UIManager : MonoBehaviour
         Debug.Log("The game is starting");
     }
 
+    //Arreter la partie (supprimer pions/mur reset complet de la partie)
+    public static void StopGame()
+    {
+        //TODO
+    }
+
     /// <summary>
     /// Par Martin GADET
     /// Méthode qui set le type de la partie
@@ -167,4 +173,6 @@ public class UIManager : MonoBehaviour
 
         return (levelValue, levelString);
     }
+
+
 }

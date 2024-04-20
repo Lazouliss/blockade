@@ -15,12 +15,12 @@ public class GameList : MonoBehaviour
     /// <returns></returns>
     void Start()
     {
-        // addGameResume("Victoire", "Player1", "100", "19/04/2024");
-        // addGameResume("Defaite", "Player5", "89", "19/04/2024");
-        // addGameResume("Defaite", "Player5", "87", "19/04/2024");
-        // addGameResume("Victoire", "Bot3", "105", "19/04/2024");
-        // addGameResume("Victoire", "Bot2", "57", "19/04/2024");
-        // addGameResume("Defaite", "Marty", "90", "19/04/2024");
+        addGameResume("Victoire", "Player1", "100", "19/04/2024");
+        addGameResume("Defaite", "Player5", "89", "19/04/2024");
+        addGameResume("Defaite", "Player5", "87", "19/04/2024");
+        addGameResume("Victoire", "Bot3", "105", "19/04/2024");
+        addGameResume("Victoire", "Bot2", "57", "19/04/2024");
+        addGameResume("Defaite", "Marty", "90", "19/04/2024");
     }
 
     /// <summary>
