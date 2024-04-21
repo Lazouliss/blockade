@@ -7,17 +7,37 @@ using sys = System;
 /// <summary>
 /// Par Thomas MONTIGNY
 /// 
-/// Classe IHM global, s'occupe de l'envoi et de la réception des DTOs
-/// Gère la communication avec le pôle algorithmie (logique de jeu)
+/// Classe IHM global, s'occupe de l'envoi et de la rï¿½ception des DTOs
+/// Gï¿½re la communication avec le pï¿½le algorithmie (logique de jeu)
 /// </summary>
 public class IHM : MonoBehaviour
 {
     public Board board;                 // plateau
 
+    // player id --> 1 or 2
+    private int playerNumber;
+
+    public GameObject cams;
+
     // Start is called before the first frame update
     void Start()
     {
+        // DEBUG : numéro de joueur aléatoire pour que la caméra ne soit jamais sur le même joueur au départ
+        /*
+        sys.Random rand = new sys.Random();
+        playerNumber = rand.Next(2)+1;
+        */
 
+        // Initialize the cam in function of player number
+        if ( this.playerNumber == 1 )
+        {
+            Debug.Log("Setting cams for player 1");
+            Vector3 newRotation = new Vector3(0.0f, 180.0f, 0.0f);
+            cams.transform.eulerAngles = newRotation;
+        }
+
+        // DEBUG : to test the spin animation on game end
+        // cams.GetComponent<Animator>().SetTrigger("trigger_spin");
     }
 
     // Update is called once per frame
@@ -29,7 +49,7 @@ public class IHM : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Appelé par la logique de jeu
+    /// Appelï¿½ par la logique de jeu
     /// Publique
     /// Fonction pour recevoir les DTOs
     /// </summary>
@@ -43,7 +63,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Pour appliquer un DTO
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTO(object dto)
@@ -66,7 +86,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO mur
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOWall(Common.DTOWall dto)
@@ -79,21 +99,21 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO pion
-    /// Privée
+    /// Privï¿½e
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOPawn(Common.DTOPawn dto)
     {
-        Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
+        Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
         board.moovePawn(dto);
     }
 
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Applique un DTO état du jeu
-    /// Privée
-    /// TODO : changer de joueur / envoyer les infos à l'interface pour le nombre de murs restants ?
+    /// Applique un DTO ï¿½tat du jeu
+    /// Privï¿½e
+    /// TODO : changer de joueur / envoyer les infos ï¿½ l'interface pour le nombre de murs restants ?
     /// </summary>
     /// <param name="dto"></param>
     private void applyDTOGameState(Common.DTOGameState dto)
@@ -114,7 +134,7 @@ public class IHM : MonoBehaviour
     /// Par Thomas MONTIGNY
     /// 
     /// Applique un DTO erreur
-    /// Privée
+    /// Privï¿½e
     /// TODO : indiquer visuellement qu'il y a eu une erreur
     /// </summary>
     /// <param name="dto"></param>
@@ -126,12 +146,12 @@ public class IHM : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Envoie un DTO à la logique de jeu
+    /// Envoie un DTO ï¿½ la logique de jeu
     /// Publique
     /// </summary>
     /// <param name="dto"></param>
     public void sendDTOToLogic(object dto)
     {
-        // logic.sendDTO(dto);
+        //logic.sendDTO(dto);
     }
 }
