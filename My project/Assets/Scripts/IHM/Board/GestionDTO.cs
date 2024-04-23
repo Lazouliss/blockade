@@ -60,33 +60,56 @@ public class GestionDTO : MonoBehaviour
 
     }
 
-    public void moovePawn(Common.DTOPawn dto)
+    /// <summary>
+    /// Par Wassim BOUKHARI
+    /// 
+    /// Deplace le pion en fonction du dto
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
+    public void movePawn(Common.DTOPawn dto)
     {
 
         Pawn p = this.selectedPawn;
 
         foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
         {
-            p.moove(direction);
+            p.move(direction);
         }
 
-        //selectedPawn = null;
+        selectedPawn = null;
 
     }
 
+    /// <summary>
+    /// Par Wassim BOUKHARI
+    /// 
+    /// Action du mur en fonction du dto
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
     public void actionWall(Common.DTOWall dto)
     {
 
-        if ((bool)(dto.isAdd))
+        Debug.Log("Debut du actionWall");
+        // test if dto.isAdd is initialized (if not, count as false) and if yes, check is value
+        if (dto.isAdd.HasValue && dto.isAdd.Value)
             addWall(dto);
         else
             removeWall();
 
     }
 
+    /// <summary>
+    /// Par Wassim BOUKHARI
+    /// 
+    /// Deplace le mur en fonction du dto
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
     void addWall(Common.DTOWall dto)
     {
-
+        Debug.Log("Debut du addWall");
         int angle;
         float x, z;
 
@@ -95,28 +118,33 @@ public class GestionDTO : MonoBehaviour
         {
 
             angle = 90;
-            x = Mathf.Min(dto.coord1.Item1, dto.coord2.Item1);
+            x = Mathf.Min(dto.coord1.Item1, dto.coord2.Item1) + 0.5f;
             if (dto.direction == Common.Direction.UP)
                 z = dto.coord1.Item2 + (LENGTH_TILE);
             else
                 z = dto.coord1.Item2;
+
+            // adjust position
+            z = z - 0.5f;
 
         }
         else
         {
 
             angle = 0;
-            z = Mathf.Min(dto.coord1.Item2, dto.coord2.Item2);
+            z = Mathf.Min(dto.coord1.Item2, dto.coord2.Item2) + 0.5f;
             if (dto.direction == Common.Direction.RIGHT)
                 x = dto.coord1.Item1 + (LENGTH_TILE);
             else
                 x = dto.coord1.Item1;
 
+            // adjust position
+            x = x - 0.5f;
         }
 
         Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
 
-
+        // Get the wall directly with the prefab -> TODO : Resources.Load<GameObject>("Wall")
         GameObject newObject = Instantiate(wall, new Vector3(x, 0.5f, z), rotation);
 
         Animator animator = newObject.GetComponent<Animator>();
@@ -124,14 +152,18 @@ public class GestionDTO : MonoBehaviour
         animator.SetTrigger("descendMur");
 
         stackWall.Push(newObject);
-
-
     }
 
+    /// <summary>
+    /// Par Wassim BOUKHARI
+    /// 
+    /// Supprime le mur
+    /// 
+    /// </summary>
     void removeWall()
     {
 
-        // Vérifiez d'abord si l'objet existe avant de le supprimer
+        // Verifie d'abord si l'objet existe avant de le supprimer
         if (stackWall.Count > 0)
         {
             GameObject wall = stackWall.Pop();
