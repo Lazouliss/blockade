@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using blockade.Blockade_common;
-using System.Linq;
-using UnityEngine.UI;
 using System.Collections.Generic;
 //ABERKANE Doha
 public class Plateau : MonoBehaviour
@@ -38,6 +35,7 @@ public class Plateau : MonoBehaviour
 
         //creation d'une couleur 
         Color couleurCase;
+        dtoPawn = InitDTOPawn();
 
         //boucle qui va créer les cases du plateau
         for (int x = 0; x < width; x++)
@@ -74,27 +72,25 @@ public class Plateau : MonoBehaviour
                 CaseClickHandler clickHandler = case_plateau.AddComponent<CaseClickHandler>();//ajout d'un click handler pour les cases du case_plateau
                 clickHandler.plateau = this;//référence du plateau à chaque CaseClickHandler
 
-
-
                 //initialisation des pions dans leurs cases de départ
                 if (x == 3 && y == 3)
                 {
-                    Pawn pawn1 = Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this);
+                    Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this, 1);
 
                 }
                 else if (x == 7 && y == 3)
                 {
-                    Pawn pawn2 = Pawn.createPawn(new Vector2Int(7, 3), "player1_Pion2", this);
+                    Pawn.createPawn(new Vector2Int(7, 3), "player1_Pion2", this, 1);
 
                 }
                 else if (x == 3 && y == 10)
                 {
-                    Pawn pawn3 = Pawn.createPawn(new Vector2Int(3, 10), "player2_Pion1", this);
+                    Pawn.createPawn(new Vector2Int(3, 10), "player2_Pion1", this, 2);
 
                 }
                 else if (x == 7 && y == 10)
                 {
-                    Pawn pawn4 = Pawn.createPawn(new Vector2Int(7, 10), "player2_Pion2", this);
+                    Pawn.createPawn(new Vector2Int(7, 10), "player2_Pion2", this, 2);
 
                 }
             }
@@ -105,7 +101,7 @@ public class Plateau : MonoBehaviour
     /// <summary>
     /// Par Thomas MONTIGNY
     ///
-    /// Création de tous les murs le long du plateau, pour les 2 joueurs (TODO)
+    /// Création de tous les murs le long du plateau, pour les 2 joueurs
     /// 
     /// Privée
     /// </summary>
@@ -157,17 +153,72 @@ public class Plateau : MonoBehaviour
         }
     }
         
-    //ABERKANE Doha
+    //ABERKANE Doha & Thomas MONTIGNY
     //fonction d'envoi des positions en dto
-    public void SendDTO(Common.DTOPawn dto)
+    public void SendDTO(Vector2 pos, bool isStartPos)
     {
-        dtoPawn = dto; //Màj du dto
+        //dtoPawn = dto; //Màj du dto
+
+        Debug.Log(pos + " " + (uint)pos[0] + " " + (uint)pos[1]);
+        if (isStartPos)
+        {
+            dtoPawn.startPos = ((uint)pos[0], (uint)pos[1]);
+        }
+        else
+        {
+            dtoPawn.destPos = ((uint)pos[0], (uint)pos[1]);
+        }
 
         //Vérifie si dtoPawn contient des valeurs de positions de type float
-        if (dtoPawn.startPos != (0.0f, 0.0f) && dtoPawn.destPos != (0.0f, 0.0f))
+        if (dtoPawn.startPos != (1000, 1000) && dtoPawn.destPos != (1000, 1000))
         {
+            // select the pawn on the board
+            ihm.GetComponent<IHM>().board.selectedPawn = selectedPawn;
+
+            // Test
+            dtoPawn.mooves.Add(Common.Direction.UP);
+            dtoPawn.mooves.Add(Common.Direction.UP);
+            ihm.GetComponent<IHM>().sendDTO(dtoPawn);
+
             //IHM.sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
+
+            // reset dto pawn
+            dtoPawn = InitDTOPawn();
+            // and remove selected pawn
+            selectedPawn = null;
         }
+    }
+
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    ///
+    /// Selectionne le pion
+    /// 
+    /// Publique
+    /// </summary>
+    /// <param name="pawn"></param>
+    public void SelectPawn(Pawn pawn)
+    {
+        this.selectedPawn = pawn;
+    }
+
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    ///
+    /// Initialise un dto pion
+    /// 
+    /// Privee
+    /// </summary>
+    /// <returns></returns>
+    private Common.DTOPawn InitDTOPawn()
+    {
+        Common.DTOPawn dto = new Common.DTOPawn();
+
+        dto.startPos = ((uint)1000, (uint)1000);
+        dto.destPos = ((uint)1000, (uint)1000);
+        dto.mooves = new List<Common.Direction>();
+
+        return dto;
     }
 }
 

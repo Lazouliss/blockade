@@ -40,12 +40,6 @@ public class Board : MonoBehaviour
 
         */
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void movePawn(Common.DTOPawn dto)
     {
@@ -59,8 +53,7 @@ public class Board : MonoBehaviour
         //p.mooves(dto.mooves[0]);
         //p.mooves(dto.mooves[1]);
 
-        //selectedPawn = null;
-
+        selectedPawn = null;
     }
 
     public void actionWall(Common.DTOWall dto)

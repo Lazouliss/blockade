@@ -7,28 +7,24 @@ using blockade.Blockade_common;
 public class PawnClickHandler : MonoBehaviour
 {
     public Plateau plateau;
-    public Common.DTOPawn dto;
-    
-    //ABERKANE Doha
-     public void Start()
-    {
-        //creation du dto
-        dto = new Common.DTOPawn();
-
-    }
 
     //ABERKANE Doha
     public void OnMouseDown()
     {
-        //afficher position
-        Debug.Log("Position du pion cliqué  " + transform.position);
+        if (this.GetComponent<Pawn>().GetID() == this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>().GetCurrentPlayer())
+        {
+            //afficher position
+            Debug.Log("Position du pion cliqué  " + transform.position);
 
-        //créer startPos
-        dto.startPos = ((uint)transform.position.x, (uint)transform.position.z);
-        
-        //envoi du dto 
-        plateau.SendDTO(dto);
+            //créer startPos
+            Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
 
+            // sélection du pion
+            plateau.SelectPawn(this.GetComponent<Pawn>());
+
+            //envoi du dto 
+            plateau.SendDTO(startPos, true);
+        }
     }
 
 }

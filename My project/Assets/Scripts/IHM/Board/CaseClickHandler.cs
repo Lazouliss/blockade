@@ -8,15 +8,11 @@ public class CaseClickHandler : MonoBehaviour
     public Plateau plateau;
     public Renderer caseRenderer;
     public  static CaseClickHandler lastCaseClick; //en mode static pour avoir la dernière référence
-    public Common.DTOPawn dto;
 
     //ABERKANE Doha
     void Start()
     {
         caseRenderer = GetComponent<Renderer>();
-        
-        //creation du dto
-        dto = new Common.DTOPawn();
     }
 
     //ABERKANE Doha
@@ -34,12 +30,12 @@ public class CaseClickHandler : MonoBehaviour
         caseRenderer.material.color = Color.green;
         //enregistrer la valeur de la case
         lastCaseClick = this;
-        
+
         //valeur destPos ajouté au dto 
-        dto.destPos= ((uint)transform.position.x, (uint)transform.position.z);
+        Vector2 destPos = new Vector2(transform.position.x, transform.position.z);
                
         //envoi du dto 
-        plateau.SendDTO(dto);
+        plateau.GetComponent<Plateau>().SendDTO(destPos, false);
 
     }
     //ABERKANE Doha
