@@ -76,22 +76,23 @@ public class Plateau : MonoBehaviour
                 if (x == 3 && y == 3)
                 {
                     Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this, 1);
+                    case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
 
                 }
                 else if (x == 7 && y == 3)
                 {
                     Pawn.createPawn(new Vector2Int(7, 3), "player1_Pion2", this, 1);
-
+                    case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                 }
                 else if (x == 3 && y == 10)
                 {
                     Pawn.createPawn(new Vector2Int(3, 10), "player2_Pion1", this, 2);
-
+                    case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                 }
                 else if (x == 7 && y == 10)
                 {
                     Pawn.createPawn(new Vector2Int(7, 10), "player2_Pion2", this, 2);
-
+                    case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                 }
             }
         }

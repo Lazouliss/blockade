@@ -51,8 +51,13 @@ public class Pawn : MonoBehaviour
     //creation d'un fonction qui va créer mon objet pion
     public static Pawn createPawn(Vector2Int position, string name, Plateau plateau, int id_player)
     {
+
+        string path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character";
+        if (id_player == 2) {
+            path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character_Red";
+        }
         //creation d'un objet pawnPrefab qui prendra le petit chevalier qui se trouve dans Resources
-        GameObject pawnPrefab = Resources.Load<GameObject>("ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character");
+        GameObject pawnPrefab = Resources.Load<GameObject>(path);
         
         GameObject pawnObj = GameObject.Instantiate(pawnPrefab); // instantiation du prefab 
         pawnObj.transform.position = new Vector3(position.x, 0.5f, position.y); // positionne le GameObject dans l'espace en fonction des positions x & y

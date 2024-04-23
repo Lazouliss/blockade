@@ -11,7 +11,9 @@ public class PawnClickHandler : MonoBehaviour
     //ABERKANE Doha
     public void OnMouseDown()
     {
-        if (this.GetComponent<Pawn>().GetID() == this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>().GetCurrentPlayer())
+        IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+
+        if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
         {
             //afficher position
             Debug.Log("Position du pion cliqué  " + transform.position);
@@ -28,4 +30,3 @@ public class PawnClickHandler : MonoBehaviour
     }
 
 }
-
