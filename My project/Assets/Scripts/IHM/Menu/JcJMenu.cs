@@ -1,50 +1,27 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class JcJMenu : MonoBehaviour
 {
-    public static string Player2Name;
+    public string Player1Name;
+    public string Player2Name;
 
-    public TMP_Text PlayerNameText;
-
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode Start qui récupère le nom du joueur et l'affiche
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
-    void Start()
+    public void PlayGame ()
     {
-        DisplayPlayerName(ConnectionMenu.PlayerName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode qui affiche le nom du joueur
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
-    public void DisplayPlayerName(string name)
+    public void SetPlayer1Name (string inputName)
     {
-        PlayerNameText.SetText(name);
+        Player1Name = inputName;
+        Debug.Log(Player1Name);
     }
 
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode qui set le nom du joueur 2
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
     public void SetPlayer2Name (string inputName)
     {
-        if(UIManager.SetPlayerName(inputName) != "0")
-        {
-            Player2Name = UIManager.SetPlayerName(inputName);
-            Debug.Log("Player2 : " + Player2Name);
-        }
+        Player2Name = inputName;
+        Debug.Log(Player2Name);
     }
 }

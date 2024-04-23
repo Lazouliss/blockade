@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
-using System.Linq;
 
 /// <summary>
 /// Par Thomas MONTIGNY
@@ -85,10 +84,11 @@ public class Click : MonoBehaviour
         Common.DTOPawn tempPawn = new Common.DTOPawn();
         tempPawn.startPos = (0, 0);
         tempPawn.destPos = (0, 0);
-        // create the list of mooves
-        tempPawn.mooves = new List<Common.Direction>();
-        tempPawn.mooves.Add(getRandomDirection());
-        tempPawn.mooves.Add(getRandomDirection());
+
+        List<Common.Direction> listMoove = new List<Common.Direction>();
+        listMoove.Add(getRandomDirection());
+        listMoove.Add(getRandomDirection());
+        tempPawn.mooves = listMoove;
 
         return tempPawn;
     }
