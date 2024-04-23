@@ -1,4 +1,5 @@
-﻿using blockade.AI.Bots;
+﻿using UnityEngine;
+using blockade.AI.Bots;
 using blockade.AI.Structure;
 using static blockade.Blockade_common.Common;
 
@@ -16,7 +17,7 @@ namespace blockade.AI
         ///////////////////////////
         //The private methods are utilitary methods to convert data structures to and from DTO more easily
 
-        public Board _board; //to be changed back to private TODO
+        public AIBoard _board; //to be changed back to private TODO
 
         private DTOPawn get_dto(Move move)
         {
@@ -29,24 +30,22 @@ namespace blockade.AI
             
         private DTOWall get_dto(Wall wall)
         {
-            DTOWall.Direction direction;
+            Direction direction = Direction.UP;
 
             switch (wall.orientation)
             {
                 case Wall.Orientation.UP:
-                    direction = DTOWall.Direction.UP;
+                    direction = Direction.UP;
                     break;
                 case Wall.Orientation.DOWN:
-                    direction = DTOWall.Direction.DOWN;
+                    direction = Direction.DOWN;
                     break;
                 case Wall.Orientation.LEFT:
-                    direction = DTOWall.Direction.LEFT;
+                    direction = Direction.LEFT;
                     break;
                 case Wall.Orientation.RIGHT:
-                    direction = DTOWall.Direction.RIGHT;
+                    direction = Direction.RIGHT;
                     break;
-                default:
-                    throw new ArgumentException("Invalid wall orientation");
             }
 
             return new DTOWall()
@@ -68,24 +67,22 @@ namespace blockade.AI
 
         private Wall get_wall(DTOWall dtoWall)
         {
-            Wall.Orientation orientation;
+            Wall.Orientation orientation = Wall.Orientation.UP;
 
             switch (dtoWall.direction)
             {
-                case DTOWall.Direction.UP:
+                case Direction.UP:
                     orientation = Wall.Orientation.UP;
                     break;
-                case DTOWall.Direction.DOWN:
+                case Direction.DOWN:
                     orientation = Wall.Orientation.DOWN;
                     break;
-                case DTOWall.Direction.LEFT:
+                case Direction.LEFT:
                     orientation = Wall.Orientation.LEFT;
                     break;
-                case DTOWall.Direction.RIGHT:
+                case Direction.RIGHT:
                     orientation = Wall.Orientation.RIGHT;
                     break;
-                default:
-                    throw new ArgumentException("Invalid wall direction");
             }
             BoardPos bpos1 = new BoardPos((int)dtoWall.coord1.Item1, (int)dtoWall.coord1.Item2);
             BoardPos bpos2 = new BoardPos((int)dtoWall.coord2.Item1, (int)dtoWall.coord2.Item2);
@@ -110,10 +107,10 @@ namespace blockade.AI
         }
         public BotAPI() 
         {
-            _board = new Board();
+            _board = new AIBoard();
         }
 
-        public BotAPI(Board board) //temporary for testing, will not be in final version TODO
+        public BotAPI(AIBoard board) //temporary for testing, will not be in final version TODO
         {
             _board = board;
         }

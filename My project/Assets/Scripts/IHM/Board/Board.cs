@@ -4,6 +4,9 @@ using System.Threading;
 using UnityEngine;
 using blockade.Blockade_common;
 
+    /// <summary>
+    /// This class represents the game board
+    /// </summary>
 public class Board : MonoBehaviour
 {
 
@@ -62,7 +65,7 @@ public class Board : MonoBehaviour
 
     public void actionWall(Common.DTOWall dto)
     {
-        Debug.Log("Début du actionWall");
+        Debug.Log("Dï¿½but du actionWall");
         if (dto.isAdd)
             addWall(dto);
         else
@@ -72,7 +75,7 @@ public class Board : MonoBehaviour
 
     void addWall(Common.DTOWall dto)
     {
-        Debug.Log("Début du addWall");
+        Debug.Log("Dï¿½but du addWall");
         int angle; 
         float x, z;
 
@@ -111,12 +114,12 @@ public class Board : MonoBehaviour
     void removeWall()
     {
 
-        // Vérifiez d'abord si l'objet existe avant de le supprimer
+        // Vï¿½rifiez d'abord si l'objet existe avant de le supprimer
         if (stackWall.Count > 0)
             Destroy(stackWall.Pop());
         else
         {
-            Debug.LogWarning("La pile est vide, plus de mur à retirer");
+            Debug.LogWarning("La pile est vide, plus de mur ï¿½ retirer");
         }
 
         

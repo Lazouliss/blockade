@@ -16,13 +16,13 @@ namespace blockade.AI.Tests
     /// </summary>
     public class TestFramework
     {
-        private Board _board;
+        private AIBoard _board;
         private IBlockadeBot yellow;
         private IBlockadeBot red;
         private FileStream file;
         //Framework contructor
         // by Guillaume(s)
-        public TestFramework(Board board)
+        public TestFramework(AIBoard board)
         {
             _board = board;
             this.yellow = null;
@@ -86,11 +86,7 @@ namespace blockade.AI.Tests
                     _board.makeTurn(red.getBestTurn(_board));
                 }
                 turnwatch.Stop();
-                Console.WriteLine("tour " + i.ToString() + " : " + turnwatch.Elapsed.TotalSeconds.ToString() + " secondes");
-                Console.WriteLine(_board.checkVictory().ToString());
-                _board.show_current_board();
                 turnwatch.Reset();
-                Thread.Sleep(think_time); // simulate delay
             }
             wholewatch.Stop();
             //Console.WriteLine("winner : " + turn + " (" + ((turn == "red") ? red.GetType() : yellow.GetType()) + ") en " + i.ToString() + " tours et " + wholewatch.Elapsed.TotalMilliseconds.ToString() + " secondes");
@@ -98,12 +94,12 @@ namespace blockade.AI.Tests
             this.file.Write(info, 0, info.Length);
             this.file.Close();
             if (nb_tries > 1)
-                RestartBoard(new Board(), nb_tries - 1);
+                RestartBoard(new AIBoard(), nb_tries - 1);
         }
 
         // fonction to restart from a board
         // by Guillaume(s)
-        private void RestartBoard(Board board, int nb_tries = 1)
+        private void RestartBoard(AIBoard board, int nb_tries = 1)
         {
             _board = board;
             LaunchFramework(10, nb_tries, false);

@@ -24,7 +24,7 @@ namespace blockade.AI.Bots
         public NaiveBot() { }
 
         /// By Matteo Cellarius
-        public List<int> GetShortestPathPawn(Board board)
+        public List<int> GetShortestPathPawn(AIBoard board)
         {
             List<int> Bestpath = new List<int>();
 
@@ -89,7 +89,7 @@ namespace blockade.AI.Bots
             return Bestpath;
         }
 
-        public (List<int>, List<int>) GetShortestPathWall(Board board)
+        public (List<int>, List<int>) GetShortestPathWall(AIBoard board)
         {
             List<int> Bestpath = new List<int>();
             List<int> Bestpath1 = new List<int>();
@@ -184,7 +184,7 @@ namespace blockade.AI.Bots
         }
 
         /// By Matteo Cellarius
-        private int GetOpponentShortestPathLength(Board board)
+        private int GetOpponentShortestPathLength(AIBoard board)
         {
             List<int> shortestPath = GetShortestPathPawn(board);
             int count = 0;
@@ -203,7 +203,7 @@ namespace blockade.AI.Bots
         }
 
         /// By Matteo Cellarius
-        private int GetOpponentShortestPathLengthWall(Board board)
+        private int GetOpponentShortestPathLengthWall(AIBoard board)
         {
             (List<int> shortestPath,List<int> shortestPath1) = GetShortestPathWall(board);
             int countMin = 0;
@@ -214,7 +214,7 @@ namespace blockade.AI.Bots
         }
 
         /// By Matteo Cellarius
-        public Wall FindBestWallPlacement(Board board)
+        public Wall FindBestWallPlacement(AIBoard board)
         {
             List<Wall> legalWalls = board.getLegalWalls();
             List<Wall> filteredWalls = new List<Wall>(legalWalls);
@@ -224,7 +224,7 @@ namespace blockade.AI.Bots
             //Clear legalWalls
             foreach (Wall boardWall in board.walls)
             {
-                foreach (Wall wall in legalWalls.ToList())
+                foreach (Wall wall in legalWalls)
                 {
                     if (wall == boardWall)
                     {
@@ -235,7 +235,7 @@ namespace blockade.AI.Bots
 
             foreach (Wall wall in filteredWalls)
             {
-                Board tempboard = new Board(board);
+                AIBoard tempboard = new AIBoard(board);
                 tempboard.placeWall(wall); // Temp Wall
                 int opponentShortestPathLength = GetOpponentShortestPathLengthWall(tempboard);
 
@@ -253,7 +253,7 @@ namespace blockade.AI.Bots
         }
 
         /// By Matteo Cellarius
-        public Turn getBestTurn(Board board)
+        public Turn getBestTurn(AIBoard board)
         {
             isyellow = board.isYellowToPlay;
 

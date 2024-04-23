@@ -9,7 +9,7 @@ namespace blockade.AI.Bots
     /// </summary>
     internal interface IBlockadeBot
     {
-        public Turn getBestTurn(Board board);
+        public Turn getBestTurn(AIBoard board);
         public string getBotName();
     }
 }

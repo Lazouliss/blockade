@@ -11,7 +11,7 @@ namespace blockade.AI.Bots
     {
         public MinMaxBot() { }
 
-        public Turn getBestTurn(Board board)
+        public Turn getBestTurn(AIBoard board)
         {
             return new Turn();
         }

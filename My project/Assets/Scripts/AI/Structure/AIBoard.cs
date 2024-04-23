@@ -17,7 +17,7 @@ namespace blockade.AI.Structure
     /// 
     /// By Gabin Maury (except some functions signed by other people)
     /// </summary>
-    public class Board //temporarily public, to be changed to internal
+    public class AIBoard //temporarily public, to be changed to internal
     {
         public Square[] squares;
         public (BoardPos, BoardPos) redPawns;
@@ -33,7 +33,7 @@ namespace blockade.AI.Structure
         /// Copy constructor (deep copy)
         /// by gabin maury
         /// </summary>
-        public Board(Board other)
+        public AIBoard(AIBoard other)
         {
             this.squares = new Square[other.squares.Length];
             for (int i = 0; i < other.squares.Length; i++)
@@ -61,7 +61,7 @@ namespace blockade.AI.Structure
         /// <summary>
         /// By Gabin Maury
         /// </summary>
-        public Board()
+        public AIBoard()
         {
             walls = new List<Wall>();
             squares = new Square[Common.MAP_HEIGHT * Common.MAP_WIDTH];
@@ -703,7 +703,7 @@ namespace blockade.AI.Structure
                     //Console.WriteLine("Potentially blocking. Testing...");
 
 
-                    Board tempBoard = new Board(this);
+                    AIBoard tempBoard = new AIBoard(this);
                     tempBoard.placeWall(wall);
                     bool is_yellow_pawn_blocked = !(tempBoard.isWinAccessible(yellowPawns.Item1.position, true) && (tempBoard.isWinAccessible(yellowPawns.Item2.position, true)));
                     bool is_red_pawn_blocked = !(tempBoard.isWinAccessible(redPawns.Item1.position, false) && (tempBoard.isWinAccessible(redPawns.Item2.position, false)));

@@ -52,13 +52,13 @@ namespace blockade.AI.Bots
         {
             public SearchNode? parent;
             public List<SearchNode> children;
-            public Board boardState;
+            public AIBoard boardState;
             public Turn turnMade;
             public int visits;
             public double score;
             public int depth;
 
-            public SearchNode(SearchNode? parent, Board board, Turn turnMade)
+            public SearchNode(SearchNode? parent, AIBoard board, Turn turnMade)
             {
                 this.depth = parent != null ? parent.depth + 1 : 0;
                 children = new List<SearchNode>();
@@ -73,10 +73,10 @@ namespace blockade.AI.Bots
             {
                 if (boardState == null)
                 {
-                    Board parentBoardState = null;
+                    AIBoard parentBoardState = null;
                     if (parent != null) { parentBoardState = parent.boardState; }
-                    if (parentBoardState != null) { boardState = new Board(parentBoardState); }
-                    else { boardState = new Board(); }
+                    if (parentBoardState != null) { boardState = new AIBoard(parentBoardState); }
+                    else { boardState = new AIBoard(); }
 
                     boardState.makeTurn(turnMade);
                 }
@@ -86,7 +86,7 @@ namespace blockade.AI.Bots
 
         
 
-        public Turn getBestTurn(Board board)
+        public Turn getBestTurn(AIBoard board)
         {
             treeRoot = new SearchNode(null, board, new Turn() { });
 
@@ -254,7 +254,7 @@ namespace blockade.AI.Bots
 
         private double simulate(SearchNode node)
         {
-            Board simulationBoard = new Board(node.boardState);
+            AIBoard simulationBoard = new AIBoard(node.boardState);
             float time_taken_getting_walls = 0f;
             float time_taken_getting_moves = 0f;
             int turn_count = 0;

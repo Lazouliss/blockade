@@ -13,7 +13,7 @@ namespace blockade.AI.Bots
     {
 
 
-        public Turn getBestTurn(Board board)
+        public Turn getBestTurn(AIBoard board)
         {
             //return random value
             List<Turn> legal_turns = board.getLegalTurns();
