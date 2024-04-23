@@ -39,7 +39,7 @@ public class Wall : MonoBehaviour
         // Create wall using prefab and instantiate it on the right position
         GameObject wallPrefab = Resources.Load<GameObject>("Wall");
         GameObject wall = Instantiate(wallPrefab);
-        wall.transform.position = new Vector3(pos.x, 1f, pos.y);
+        wall.transform.position = new Vector3(pos.x, 0.5f, pos.y);
         if(!isVerti)
         {
             wall.transform.rotation = Quaternion.Euler(0f, 90, 0f);

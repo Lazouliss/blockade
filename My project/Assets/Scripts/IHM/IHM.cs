@@ -16,15 +16,11 @@ using UnityEngine.UIElements;
 public class IHM : MonoBehaviour
 {
     public Board board;                 // plateau
-
-    // player id --> 1 or 2
-    private int current_player;           // changer pour current_player
+    private int current_player;
 
     public GameObject cams;
     public GameObject cams2;
     private GameObject overlay;
-
-    private object last_DTO;
 
     // Variables de partie
     private string typePartie;
