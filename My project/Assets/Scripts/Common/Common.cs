@@ -17,17 +17,16 @@
 
         public struct DTOWall
         {
-            public (uint, uint) coord1;
-            public (uint, uint) coord2;
+            public (int, int) coord1;
+            public (int, int) coord2;
             public Direction direction;
             public bool isAdd;
         }
 
         public struct DTOPawn
         {
-            public (uint, uint) startPos;
-            public (uint, uint) destPos;
-            public (Direction, Direction) mooves;
+            public (int, int) startPos;
+            public (int, int) destPos;
         }
 
         public struct DTOGameState
