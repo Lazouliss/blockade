@@ -9,7 +9,6 @@ public class Board : MonoBehaviour
 
     public const float LENGTH_TILE = 1;
     public Pawn selectedPawn;
-    public GameObject wall;
     private Stack<GameObject> stackWall;
 
     // Start is called before the first frame update
@@ -48,7 +47,7 @@ public class Board : MonoBehaviour
         
     }
     
-    public void moovePawn(Common.DTOPawn dto)
+    public void movePawn(Common.DTOPawn dto)
     {
         
         Pawn p = this.selectedPawn;
@@ -66,7 +65,7 @@ public class Board : MonoBehaviour
 
     public void actionWall(Common.DTOWall dto)
     {
-        Debug.Log("Début du actionWall");
+        Debug.Log("Dï¿½but du actionWall");
         // test if dto.isAdd is initialized (if not, count as false) and if yes, check is value
         if (dto.isAdd.HasValue && dto.isAdd.Value)
             addWall(dto);
@@ -77,7 +76,7 @@ public class Board : MonoBehaviour
 
     void addWall(Common.DTOWall dto)
     {
-        Debug.Log("Début du addWall");
+        Debug.Log("Dï¿½but du addWall");
         int angle; 
         float x, z;
 
@@ -85,43 +84,47 @@ public class Board : MonoBehaviour
         if(dto.direction == Common.Direction.UP || dto.direction == Common.Direction.DOWN) { 
 
             angle = 90;
-            x = Mathf.Min(dto.coord1.Item1, dto.coord2.Item1);
+            x = Mathf.Min(dto.coord1.Item1, dto.coord2.Item1) + 0.5f;
             if (dto.direction == Common.Direction.UP)
                 z = dto.coord1.Item2 + (LENGTH_TILE);
             else
                 z = dto.coord1.Item2;
+
+            // adjust position
+            z = z - 0.5f;
 
         }
         else
         {
 
             angle = 0;
-            z = Mathf.Min(dto.coord1.Item2, dto.coord2.Item2);
+            z = Mathf.Min(dto.coord1.Item2, dto.coord2.Item2) + 0.5f;
             if (dto.direction == Common.Direction.RIGHT)
                 x = dto.coord1.Item1 + (LENGTH_TILE);
             else
                 x = dto.coord1.Item1;
 
+            // adjust position
+            x = x - 0.5f;
         }
 
         Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
 
-        GameObject newObject = Instantiate(wall, new Vector3(x, 0.5f, z), rotation);
+        // Get the wall directly with the prefab
+        GameObject newObject = Instantiate(Resources.Load<GameObject>("Wall"), new Vector3(x, 1f, z), rotation);
 
         stackWall.Push( newObject );
-
-
     }
 
     void removeWall()
     {
 
-        // Vérifiez d'abord si l'objet existe avant de le supprimer
+        // Vï¿½rifiez d'abord si l'objet existe avant de le supprimer
         if (stackWall.Count > 0)
             Destroy(stackWall.Pop());
         else
         {
-            Debug.LogWarning("La pile est vide, plus de mur à retirer");
+            Debug.LogWarning("La pile est vide, plus de mur ï¿½ retirer");
         }
 
         

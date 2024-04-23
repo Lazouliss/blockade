@@ -65,6 +65,8 @@ public class Pawn : MonoBehaviour
         pawnObj.AddComponent<CapsuleCollider>(); // ajout d'une CapsuleCollider pour mon pawn
         PawnClickHandler PclickHandler = pawnObj.AddComponent<PawnClickHandler>(); // ajout de mon PawnClickHandler pour gestion des cliques
         
+        // change de parent pour prendre le plateau
+        pawnObj.transform.SetParent(plateau.transform, false);
         
         return pawn;
     }

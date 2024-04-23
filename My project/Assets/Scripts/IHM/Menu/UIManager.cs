@@ -20,12 +20,7 @@ public class UIManager : MonoBehaviour
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("The game is starting");
-    }
-
-    //Arreter la partie (supprimer pions/mur reset complet de la partie)
-    public static void StopGame()
-    {
-        //TODO
+        GameObject.Find("Game").GetComponent<IHM>().PlayGame(typePartie);
     }
 
     /// <summary>
@@ -173,6 +168,4 @@ public class UIManager : MonoBehaviour
 
         return (levelValue, levelString);
     }
-
-
 }

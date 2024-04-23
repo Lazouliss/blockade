@@ -9,21 +9,31 @@ public class Plateau : MonoBehaviour
 {
     //Board
     private GameObject case_plateau;
-    public int width = 11;
-    public int height = 14;
+    private const int width = Common.MAP_WIDTH;
+    private const int height = Common.MAP_HEIGHT;
 
+    public IHM ihm;
 
     private Pawn selectedPawn;
     private Common.DTOPawn dtoPawn;
-    //ABERKANE Doha
 
-    void Start()
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
+    /// Appelé par l'IHM au lancement de la partie, crée le plateau automatiquement
+    /// 
+    /// Publique
+    /// </summary>
+    /// <param name="nbWalls"></param>
+    public void StartGame(int nbWalls)
     {
         Init_Plateau();
+        Init_Walls(nbWalls);
     }
+
     //ABERKANE Doha
     //Initialisation du plateau
-    public void Init_Plateau()
+    private void Init_Plateau()
     {
 
         //creation d'une couleur 
@@ -36,6 +46,9 @@ public class Plateau : MonoBehaviour
             {
                 //creation du cube 
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                // TEST !!!!!!!!!!!!!!!!
+                cube.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
 
                 //afficher les coordonnées sur le nom des cubes
                 cube.name = (x, y).ToString();
@@ -89,6 +102,61 @@ public class Plateau : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    ///
+    /// Création de tous les murs le long du plateau, pour les 2 joueurs (TODO)
+    /// 
+    /// Privée
+    /// </summary>
+    private void Init_Walls(int nb_walls)
+    {
+        Debug.Log("Creating walls");
+
+        // pour que les murs ne soient pas tous collés en un bloc
+        float spaceBetweenWalls = 0.5f;
+
+        // TODO : RENDRE TOUT CELA PLUS PROPRE !!!!!!!!!!
+
+        // Position de départ pour les murs placés verticalement
+        Vector2 startPos = new Vector2(12, 0);
+        Vector2 currentPos = startPos;
+        // Position de départ pour les murs placés horizontalement
+        Vector2 startPosHoriz = new Vector2(11, nb_walls*spaceBetweenWalls+1);
+        Vector2 currentPosHoriz = startPosHoriz;
+
+        // Pareil pour le joueur 2
+        // Position de départ pour les murs placés verticalement
+        Vector2 startPosP2 = new Vector2(-2, 13);
+        Vector2 currentPosP2 = startPosP2;
+        // Position de départ pour les murs placés horizontalement
+        Vector2 startPosHorizP2 = new Vector2(-1, 13 - (nb_walls * spaceBetweenWalls + 1));
+        Vector2 currentPosHorizP2 = startPosHorizP2;
+
+        for (int i=0; i<nb_walls; i++)
+        {
+            // Player 1
+            // Création d'un mur horizontal, aligné verticalement le long du plateau
+            Wall.createWall(currentPos, 1, false, this);
+            // Création d'un mur vertical, aligné horizontalement le long du plateau
+            Wall.createWall(currentPosHoriz, 1, true, this);
+
+            // Mise à jour des positions pour les prochains murs
+            currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
+            currentPosHoriz = new Vector2(currentPosHoriz.x + spaceBetweenWalls, currentPosHoriz.y);
+
+            // Same for player 2 ???
+            // Création d'un mur horizontal, aligné verticalement le long du plateau
+            Wall.createWall(currentPosP2, 2, false, this);
+            // Création d'un mur vertical, aligné horizontalement le long du plateau
+            Wall.createWall(currentPosHorizP2, 2, true, this);
+
+            // Mise à jour des positions pour les prochains murs
+            currentPosP2 = new Vector2(currentPosP2.x, currentPosP2.y - spaceBetweenWalls);
+            currentPosHorizP2 = new Vector2(currentPosHorizP2.x - spaceBetweenWalls, currentPosHorizP2.y);
+        }
+    }
+        
     //ABERKANE Doha
     //fonction d'envoi des positions en dto
     public void SendDTO(Common.DTOPawn dto)
