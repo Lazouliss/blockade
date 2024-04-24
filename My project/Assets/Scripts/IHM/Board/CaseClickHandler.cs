@@ -19,24 +19,28 @@ public class CaseClickHandler : MonoBehaviour
     public void OnMouseDown()
     {
         Debug.Log("Case cliquée " + name);
-        
-        //check si la case n est pas null et si la case n'est pas égale à elle même 
-        //alors on restaure la couleur original de la case
-        if (lastCaseClick != null && lastCaseClick != this)
+
+        IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+
+        if (!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
         {
-            lastCaseClick.RestoreOriginalColor();
+            //check si la case n est pas null et si la case n'est pas égale à elle même 
+            //alors on restaure la couleur original de la case
+            if (lastCaseClick != null && lastCaseClick != this)
+            {
+                lastCaseClick.RestoreOriginalColor();
+            }
+            //couleur de la case cliquée
+            caseRenderer.material.color = Color.green;
+            //enregistrer la valeur de la case
+            lastCaseClick = this;
+
+            //valeur destPos ajouté au dto 
+            Vector2 destPos = new Vector2(transform.position.x, transform.position.z);
+
+            //envoi du dto 
+            plateau.GetComponent<Plateau>().SendDTO(destPos, false);
         }
-        //couleur de la case cliquée
-        caseRenderer.material.color = Color.green;
-        //enregistrer la valeur de la case
-        lastCaseClick = this;
-
-        //valeur destPos ajouté au dto 
-        Vector2 destPos = new Vector2(transform.position.x, transform.position.z);
-               
-        //envoi du dto 
-        plateau.GetComponent<Plateau>().SendDTO(destPos, false);
-
     }
     //ABERKANE Doha
     //restauration des couleurs des cases du départ
