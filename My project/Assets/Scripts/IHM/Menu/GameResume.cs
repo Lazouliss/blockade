@@ -3,33 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameResume : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public TMP_Text ResultText;
-    public TMP_Text PlayerText;
-    public TMP_Text ScoreText;
-    public TMP_Text DateText;
-
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode Setup qui set le text des TMP du prefab GameResume
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
-    public void Setup(string result, string player, string score, string date)
+    public class GameResume : MonoBehaviour
     {
-        ResultText.text = result;
-        PlayerText.text = "contre : " + player;
-        ScoreText.text = "en : " + score + " coups";
-        DateText.text = date;
+        public TMP_Text ResultText;
+        public TMP_Text PlayerText;
+        public TMP_Text ScoreText;
+        public TMP_Text DateText;
 
-        if(result == "Victoire")
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode Setup qui set le text des TMP du prefab GameResume
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public void Setup(string result, string player, string score, string date)
         {
-            ResultText.color = Color.green;
-        }
-        else 
-        {
-            ResultText.color = Color.red;
+            ResultText.text = result;
+            PlayerText.text = "contre : " + player;
+            ScoreText.text = "en : " + score + " coups";
+            DateText.text = date;
+
+            if (result == "Victoire")
+            {
+                ResultText.color = Color.green;
+            }
+            else
+            {
+                ResultText.color = Color.red;
+            }
         }
     }
 }

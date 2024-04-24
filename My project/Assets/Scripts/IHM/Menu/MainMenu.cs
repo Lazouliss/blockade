@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode qui quitte le jeu
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
-    public void QuitGame ()
+    public class MainMenu : MonoBehaviour
     {
-        Debug.Log("QUIT!");
-        Application.Quit();
-    }
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode qui quitte le jeu
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public void QuitGame()
+        {
+            Debug.Log("QUIT!");
+            Application.Quit();
+        }
 
-    
+
+    }
 }

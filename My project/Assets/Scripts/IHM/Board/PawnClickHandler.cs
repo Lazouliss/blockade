@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 
-//ABERKANE Doha
-public class PawnClickHandler : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public Plateau plateau;
-
     //ABERKANE Doha
-    public void OnMouseDown()
+    public class PawnClickHandler : MonoBehaviour
     {
-        IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+        public Plateau plateau;
 
-        if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
+        //ABERKANE Doha
+        public void OnMouseDown()
         {
-            //afficher position
-            Debug.Log("Position du pion cliqué  " + transform.position);
+            IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
 
-            //créer startPos
-            Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
+            if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
+            {
+                //afficher position
+                Debug.Log("Position du pion cliqué  " + transform.position);
 
-            // sélection du pion
-            plateau.SelectPawn(this.GetComponent<Pawn>());
+                //créer startPos
+                Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
 
-            //envoi du dto 
-            plateau.SendDTO(startPos, true);
+                // sélection du pion
+                plateau.SelectPawn(this.GetComponent<Pawn>());
+
+                //envoi du dto 
+                plateau.SendDTO(startPos, true);
+            }
         }
-    }
 
+    }
 }

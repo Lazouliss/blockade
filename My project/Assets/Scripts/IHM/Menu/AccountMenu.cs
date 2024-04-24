@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AccountMenu : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public GameObject Chat;
-
-    /// <summary>
-    /// Par Martin GADET
-    /// Méthode Start qui cache le chat textuel
-    /// Publique
-    /// </summary>
-    /// <returns></returns>
-    void Start()
+    public class AccountMenu : MonoBehaviour
     {
-        Chat.SetActive(false);
+        public GameObject Chat;
+
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode Start qui cache le chat textuel
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        void Start()
+        {
+            Chat.SetActive(false);
+        }
     }
 }
