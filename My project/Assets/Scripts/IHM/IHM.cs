@@ -6,6 +6,7 @@ using sys = System;
 using Unity.VisualScripting;
 using System;
 using UnityEngine.UIElements;
+using static blockade.Blockade_common.Common;
 
 namespace blockade.Blockade_IHM
 {
@@ -17,8 +18,8 @@ namespace blockade.Blockade_IHM
     /// </summary>
     public class IHM : MonoBehaviour
     {
-        public GestionDTO gestionDTO;                 // plateau
-        private int current_player;
+        public ApplyDTO gestionDTO;
+        private DTOLogic dtoLogic;
 
         public GameObject cams;
         public GameObject cams2;
@@ -27,6 +28,9 @@ namespace blockade.Blockade_IHM
         // Variables de partie
         private string typePartie;
         private const int BASE_NBWALLS = Common.MAX_WALLS;
+
+        // Players informations
+        private int current_player;
         private Player p1, p2;          // yellow, red
 
         // STOCKER LES JOUEURS COMME DANS LE COMMON.CS --> en "dto" et mettre � jour � chaque GameState re�u
@@ -36,6 +40,43 @@ namespace blockade.Blockade_IHM
             public bool isPlaying;
             public bool isPlacingWall;              // TODO : autoriser seulement le déplacement des murs si vrai, sinon seulement le déplacement des pions
         }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            // DEBUG : num�ro de joueur al�atoire pour que la cam�ra ne soit jamais sur le m�me joueur au d�part
+            /*
+            sys.Random rand = new sys.Random();
+            current_player = rand.Next(2)+1;
+            */
+            // Create DTOLogic
+            dtoLogic = new DTOLogic(this);
+
+            // R�cup�ration de l'overlay
+            overlay = GameObject.Find("Overlay");
+
+            // Init cams
+            cams.SetActive(true);
+            cams2.SetActive(false);
+
+            /*
+            // For tests
+            PlayGame("JCJ");
+
+            // Tests
+            current_player = 1;
+            p1.isPlacingWall = true;
+
+            // Initialize the cam in function of player number
+            SwitchPlayerCamera(current_player);
+            */
+            // DEBUG : to test the spin animation on game end
+            //cams.GetComponent<Animator>().SetTrigger("trigger_spin");
+        }
+
+        // =================
+        // Getters & Setters
+        // =================
 
         /// <summary>
         /// Par Thomas MONTIGNY
@@ -67,35 +108,59 @@ namespace blockade.Blockade_IHM
             return current_player;
         }
 
-        // Start is called before the first frame update
-        void Start()
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Change de joueur courant
+        /// 
+        /// Publique
+        /// </summary>
+        /// <param name="id_player"></param>
+        public void SetCurrentPlayer(int id_player) { current_player = id_player; }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Change l'etat du placement de mur du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        /// <param name="id_player"></param>
+        /// <param name="new_state"></param>
+        public void SetPlayerPlacingWall(int id_player, bool new_state)
         {
-            // DEBUG : num�ro de joueur al�atoire pour que la cam�ra ne soit jamais sur le m�me joueur au d�part
-            /*
-            sys.Random rand = new sys.Random();
-            current_player = rand.Next(2)+1;
-            */
+            if (id_player == 1)
+            {
+                p1.isPlacingWall = new_state;
+            }
+            else
+            {
+                p2.isPlacingWall = new_state;
+            }
+        }
 
-            // R�cup�ration de l'overlay
-            overlay = GameObject.Find("Overlay");
-
-            // Init cams
-            cams.SetActive(true);
-            cams2.SetActive(false);
-
-            /*
-            // For tests
-            PlayGame("JCJ");
-
-            // Tests
-            current_player = 1;
-            p1.isPlacingWall = true;
-
-            // Initialize the cam in function of player number
-            SwitchPlayerCamera(current_player);
-            */
-            // DEBUG : to test the spin animation on game end
-            //cams.GetComponent<Animator>().SetTrigger("trigger_spin");
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Change le nombre de murs d'un joueur
+        /// 
+        /// Publique
+        /// </summary>
+        /// <param name="id_player"></param>
+        /// <param name="verticalWalls"></param>
+        /// <param name="horizontalWalls"></param>
+        public void SetPlayerWalls(int id_player, int verticalWalls, int horizontalWalls)
+        {
+            if (id_player == 1)
+            {
+                p1.horizontalWalls = horizontalWalls;
+                p1.verticalWalls = verticalWalls;
+            }
+            else
+            {
+                p2.horizontalWalls = horizontalWalls;
+                p2.verticalWalls = verticalWalls;
+            }
         }
 
         /// <summary>
@@ -104,7 +169,7 @@ namespace blockade.Blockade_IHM
         /// Permet de changer la camera de cote (en fonction du numero de joueur)
         /// </summary>
         /// <param name="current_player"></param>
-        private void SwitchPlayerCamera(int current_player)
+        public void SwitchPlayerCamera(int current_player)
         {
             if (current_player == 2)
             {
@@ -139,7 +204,55 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Lance la fonction de cr�ation du plateau
+        /// Met a jour le nombre de murs restants du joueur dans l'Overlay
+        /// 
+        /// Publique
+        /// </summary>
+        /// <param name="p">Player</param>
+        public void UpdateRemainingWalls(Player p)
+        {
+            overlay.GetComponent<Overlay>().UpdateRemainingWalls("Vertical", p.verticalWalls);
+            overlay.GetComponent<Overlay>().UpdateRemainingWalls("Horizontal", p.horizontalWalls);
+        }
+
+        // ===============================
+        // Logique de transmission des DTO
+        // ===============================
+        // Sert d'intermediaire entre la logique des dtos et le reste des scripts de l'IHM
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Fonction pour recevoir les DTOs, appele par la logique de jeu
+        /// Publique
+        /// </summary>
+        /// <param name="dto"></param>
+        public void sendDTO(object dto)
+        {
+            dtoLogic.sendDTO(dto);
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Envoie un DTO a la logique de jeu
+        /// Publique
+        /// </summary>
+        /// <param name="dto"></param>
+        public void sendDTOToLogic(object dto)
+        {
+            dtoLogic.sendDTOToLogic(dto);
+        }
+
+
+        // =================================
+        // Logique de lancement d'une partie
+        // =================================
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Lance la partie
         /// Publique
         /// </summary>
         public void PlayGame(string typePartie)
@@ -212,169 +325,6 @@ namespace blockade.Blockade_IHM
         private void StartECEGame()
         {
             // TODO
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Met a jour le nombre de murs restants du joueur dans l'Overlay
-        /// 
-        /// Privee
-        /// </summary>
-        /// <param name="p">Player</param>
-        private void UpdateRemainingWalls(Player p)
-        {
-            overlay.GetComponent<Overlay>().UpdateRemainingWalls("Vertical", p.verticalWalls);
-            overlay.GetComponent<Overlay>().UpdateRemainingWalls("Horizontal", p.horizontalWalls);
-        }
-
-        // =============================================
-        //      Fonctions DTOs (a changer de script)
-        // =============================================
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Fonction pour recevoir les DTOs, appele par la logique de jeu
-        /// Publique
-        /// </summary>
-        /// <param name="dto"></param>
-        public void sendDTO(object dto)
-        {
-            applyDTO(dto);
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Pour appliquer un DTO
-        /// Privee
-        /// </summary>
-        /// <param name="dto"></param>
-        private void applyDTO(object dto)
-        {
-            switch (dto)
-            {
-                case Common.DTOWall dtoWall: applyDTOWall(dtoWall); break;
-
-                case Common.DTOPawn dtoPawn: applyDTOPawn(dtoPawn); break;
-
-                case Common.DTOGameState dtoGameState: applyDTOGameState(dtoGameState); break;
-
-                case Common.DTOError dtoError: applyDTOError(dtoError); break;
-
-                default: Debug.Log("error during applying dto"); break;
-            }
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Applique un DTO mur
-        /// Privee
-        /// </summary>
-        /// <param name="dto"></param>
-        private void applyDTOWall(Common.DTOWall dto)
-        {
-            Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
-            gestionDTO.actionWall(dto);
-
-            // Le joueur viens de déplacer un mur donc sa prochaine action est de déplacer un pion
-            if (current_player == 1)
-            {
-                p1.isPlacingWall = false;
-            }
-            else
-            {
-                p2.isPlacingWall = false;
-            }
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Applique un DTO pion
-        /// Privee
-        /// </summary>
-        /// <param name="dto"></param>
-        private void applyDTOPawn(Common.DTOPawn dto)
-        {
-            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
-            gestionDTO.movePawn(dto);
-
-            // Le joueur viens de déplacer un pion donc sa prochaine action est de déplacer un mur
-            if (current_player == 1 && p1.verticalWalls > 0 && p1.horizontalWalls > 0)
-            {
-                p1.isPlacingWall = true;
-            }
-            else if (current_player == 2 && p2.verticalWalls > 0 && p2.horizontalWalls > 0)
-            {
-                p2.isPlacingWall = true;
-            }
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Applique un DTO etat du jeu
-        /// Privee
-        /// </summary>
-        /// <param name="dto"></param>
-        private void applyDTOGameState(Common.DTOGameState dto)
-        {
-            // Met le nombre de murs restants selon le joueur
-            if (dto.yellowPlayer.isPlaying)
-            {
-                Debug.Log("applyDTOGameState, yellowPlayer.verticalWalls = " + dto.yellowPlayer.verticalWalls + ", yellowPlayer.horizontalWalls = " + dto.yellowPlayer.horizontalWalls);
-                p1.horizontalWalls = (int)dto.yellowPlayer.horizontalWalls;
-                p1.verticalWalls = (int)dto.yellowPlayer.verticalWalls;
-            }
-            else
-            {
-                Debug.Log("applyDTOGameState, redPlayer.verticalWalls = " + dto.redPlayer.verticalWalls + ", redPlayer.horizontalWalls = " + dto.redPlayer.horizontalWalls);
-                p2.horizontalWalls = (int)dto.redPlayer.horizontalWalls;
-                p2.verticalWalls = (int)dto.redPlayer.verticalWalls;
-            }
-
-            // Change current player and update Overlay
-            if (dto.yellowPlayer.isPlaying && current_player == 2)
-            {
-                current_player = 1;
-                UpdateRemainingWalls(p1);
-            }
-            else if (dto.redPlayer.isPlaying && current_player == 1)
-            {
-                current_player = 2;
-                UpdateRemainingWalls(p2);
-            }
-
-            // Tourne la camera si besoin
-            SwitchPlayerCamera(current_player);
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Applique un DTO erreur
-        /// Privee
-        /// TODO : indiquer visuellement qu'il y a eu une erreur
-        /// </summary>
-        /// <param name="dto"></param>
-        private void applyDTOError(Common.DTOError dto)
-        {
-            Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Envoie un DTO a la logique de jeu
-        /// Publique
-        /// </summary>
-        /// <param name="dto"></param>
-        public void sendDTOToLogic(object dto)
-        {
-            //logic.sendDTO(dto);
         }
     }
 }

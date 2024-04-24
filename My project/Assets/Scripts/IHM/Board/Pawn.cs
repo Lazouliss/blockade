@@ -22,7 +22,7 @@ namespace blockade.Blockade_IHM
         public void move(Common.Direction direction)
         {
 
-            float length = GestionDTO.LENGTH_TILE;
+            float length = ApplyDTO.LENGTH_TILE;
 
             Vector3 movement;
             switch (direction)

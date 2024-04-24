@@ -6,7 +6,7 @@ using blockade.Blockade_common;
 
 namespace blockade.Blockade_IHM
 {
-    public class GestionDTO : MonoBehaviour
+    public class ApplyDTO : MonoBehaviour
     {
 
         public const float LENGTH_TILE = 1;
@@ -54,12 +54,13 @@ namespace blockade.Blockade_IHM
         // Update is called once per frame
         void Update()
         {
-
+            // For tests
+            /*
             if (Input.GetKeyDown(KeyCode.C))
             {
                 removeWall();
             }
-
+            */
         }
 
         /// <summary>
