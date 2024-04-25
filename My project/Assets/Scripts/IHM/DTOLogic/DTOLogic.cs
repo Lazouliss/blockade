@@ -1,6 +1,4 @@
 using blockade.Blockade_common;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace blockade.Blockade_IHM
