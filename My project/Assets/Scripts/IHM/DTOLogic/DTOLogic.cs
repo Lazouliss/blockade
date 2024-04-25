@@ -5,7 +5,12 @@ using UnityEngine;
 
 namespace blockade.Blockade_IHM
 {
-    public class DTOLogic : MonoBehaviour
+    /// <summary>
+    /// Par Thomas MONTIGNY
+    /// 
+    /// Classe qui gere toutes la logique des DTOs de la partie IHM
+    /// </summary>
+    public class DTOLogic
     {
         private IHM ihm;
 

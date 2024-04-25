@@ -7,7 +7,7 @@ namespace blockade.Blockade_IHM
     {
         private int id_player;
         private bool isVerti;
-        private Plateau board;
+        private Board board;
 
         /// <summary>
         /// Par Thomas MONTIGNY
@@ -19,7 +19,7 @@ namespace blockade.Blockade_IHM
         /// <param name="id_player">Identifiant du joueur propriétaire du mur</param>
         /// <param name="isVerti">Si le mur est vertical (vrai ou faux)</param>
         /// <param name="board">Lien vers le plateau</param>
-        private void CreateWall(int id_player, bool isVerti, Plateau board)
+        private void CreateWall(int id_player, bool isVerti, Board board)
         {
             this.id_player = id_player;
             this.isVerti = isVerti;
@@ -29,14 +29,14 @@ namespace blockade.Blockade_IHM
         // Getters
         public int GetId() { return id_player; }
         public bool IsVerti() { return isVerti; }
-        public Plateau GetBoard() { return board; }
+        public Board GetBoard() { return board; }
 
         /// <summary>
         /// Par Thomas MONTIGNY
         ///
         /// Création d'un mur, cliquable seulement par un joueur (playerID, TODO), aux positions en argument
         /// </summary>
-        public static void createWall(Vector2 pos, int id_player, bool isVerti, Plateau board)
+        public static void createWall(Vector2 pos, int id_player, bool isVerti, Board board)
         {
             // Create wall using prefab and instantiate it on the right position
             GameObject wallPrefab = Resources.Load<GameObject>("Wall");

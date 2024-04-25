@@ -51,7 +51,7 @@ namespace blockade.Blockade_IHM
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)
         //creation d'un fonction qui va créer mon objet pion
-        public static Pawn createPawn(Vector2Int position, string name, Plateau plateau, int id_player)
+        public static Pawn createPawn(Vector2Int position, string name, Board plateau, int id_player)
         {
 
             string path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character";

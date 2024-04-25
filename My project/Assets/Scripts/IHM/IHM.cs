@@ -263,7 +263,7 @@ namespace blockade.Blockade_IHM
             Debug.Log(typePartie);
 
             // Cr�ation du plateau
-            gestionDTO.GetComponent<Plateau>().StartGame(BASE_NBWALLS);
+            gestionDTO.GetComponent<Board>().StartGame(BASE_NBWALLS);
 
             switch (typePartie)
             {

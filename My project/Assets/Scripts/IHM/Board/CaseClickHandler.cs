@@ -7,7 +7,7 @@ namespace blockade.Blockade_IHM
 {
     public class CaseClickHandler : MonoBehaviour
     {
-        public Plateau plateau;
+        public Board plateau;
         public Renderer caseRenderer;
         public static CaseClickHandler lastCaseClick; //en mode static pour avoir la dernière référence
 
@@ -22,7 +22,7 @@ namespace blockade.Blockade_IHM
         {
             Debug.Log("Case cliquée " + name);
 
-            IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+            IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
             if (!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
             {
@@ -41,7 +41,7 @@ namespace blockade.Blockade_IHM
                 Vector2 destPos = new Vector2(transform.position.x, transform.position.z);
 
                 //envoi du dto 
-                plateau.GetComponent<Plateau>().SendDTO(destPos, false);
+                plateau.GetComponent<Board>().SendDTO(destPos, false);
             }
         }
         //ABERKANE Doha

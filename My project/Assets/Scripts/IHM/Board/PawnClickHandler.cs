@@ -8,12 +8,12 @@ namespace blockade.Blockade_IHM
     //ABERKANE Doha
     public class PawnClickHandler : MonoBehaviour
     {
-        public Plateau plateau;
+        public Board plateau;
 
         //ABERKANE Doha
         public void OnMouseDown()
         {
-            IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+            IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
             if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
             {

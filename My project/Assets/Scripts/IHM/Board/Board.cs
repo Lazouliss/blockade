@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace blockade.Blockade_IHM
 {
     //ABERKANE Doha
-    public class Plateau : MonoBehaviour
+    public class Board : MonoBehaviour
     {
         //Board
         private GameObject case_plateau;
