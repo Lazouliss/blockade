@@ -36,12 +36,22 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Implémentation de la fonction OnMouseDown()
+        /// Deplacement du contenu de la fonction OnMouseDown() dans une ActionWall pour qu'elle 
+        /// puisse etre appelee par une autre partie (pour par exemple jouer un coup par une IA)
+        /// </summary>
+        public void OnMouseDown()
+        {
+            ActionWall();
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
         /// Sélectionne le mur à déplacé si ce n'est pas déjà fait ou envoie un DTO pour essayer de le placer sinon.
         /// 
         /// Publique
         /// </summary>
-        public void OnMouseDown()
+        public void ActionWall()
         {
             // if no walls are selected
             if (selectedObject == null)
@@ -90,6 +100,8 @@ namespace blockade.Blockade_IHM
                 Debug.Log("WorldPosition : " + worldPosition);
                 // FAIRE LA PARTIE EN CAS DE PLACEMENT REFUSE POUR GARDER LE MUR
                 selectedObject.GetComponent<Wall>().sendDTOWall(worldPosition);
+
+                // TOUT CELA DOIT ETRE EFFECTUE SEULEMENT SI LE MUR EST BIEN PLACE
                 Destroy(selectedObject);
 
                 // Déselectionne l'objet et fait réapparaitre le curseur

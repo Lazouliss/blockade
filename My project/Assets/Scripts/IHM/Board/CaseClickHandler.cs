@@ -14,8 +14,19 @@ namespace blockade.Blockade_IHM
             caseRenderer = GetComponent<Renderer>();
         }
 
-        //ABERKANE Doha
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Deplacement du contenu de la fonction OnMouseDown() dans une ActionCase pour qu'elle 
+        /// puisse etre appelee par une autre partie (pour par exemple jouer un coup par une IA)
+        /// </summary>
         public void OnMouseDown()
+        {
+            ActionCase();
+        }
+
+        //ABERKANE Doha
+        public void ActionCase()
         {
             Debug.Log("Case cliquée " + name);
 
@@ -41,6 +52,7 @@ namespace blockade.Blockade_IHM
                 plateau.GetComponent<Board>().SendDTO(destPos, false);
             }
         }
+
         //ABERKANE Doha
         //restauration des couleurs des cases du départ
         //lorsqu'on clique sur une autre case ça permettra de supp

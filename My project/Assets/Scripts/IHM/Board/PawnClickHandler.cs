@@ -7,8 +7,20 @@ namespace blockade.Blockade_IHM
     {
         public Board plateau;
 
-        //ABERKANE Doha
+        
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Deplacement du contenu de la fonction OnMouseDown() dans une ActionPawn pour qu'elle 
+        /// puisse etre appelee par une autre partie (pour par exemple jouer un coup par une IA)
+        /// </summary>
         public void OnMouseDown()
+        {
+            ActionPawn();
+        }
+        
+        //ABERKANE Doha
+        public void ActionPawn()
         {
             IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
@@ -27,6 +39,5 @@ namespace blockade.Blockade_IHM
                 plateau.SendDTO(startPos, true);
             }
         }
-
     }
 }
