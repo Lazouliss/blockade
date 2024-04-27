@@ -97,6 +97,8 @@ MonoBehaviour:
   horizontal: {fileID: 565444782041665056}
   playerCam: {fileID: 0}
   boardCam: {fileID: 0}
+  player2Cam: {fileID: 0}
+  board2Cam: {fileID: 0}
   btn_switchCamera: {fileID: 6790632235122004681}
   key_switchCamera: 99
 --- !u!1 &178438589872786266
@@ -2011,18 +2013,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530756066762835838}
         m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: SetTypePartie
         m_Mode: 5
         m_Arguments:
@@ -2031,6 +2021,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: ONLINE
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1530756066762835838}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756065582070294
@@ -4850,18 +4852,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530756066762835838}
         m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: SetTypePartie
         m_Mode: 5
         m_Arguments:
@@ -4907,6 +4897,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1530756066762835838}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756065778597120
 GameObject:
@@ -16537,18 +16539,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530756066762835838}
         m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: SetTypePartie
         m_Mode: 5
         m_Arguments:
@@ -16594,6 +16584,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1530756066762835838}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756066679040299
 GameObject:
@@ -17723,18 +17725,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530756066762835838}
         m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
         m_MethodName: SetTypePartie
         m_Mode: 5
         m_Arguments:
@@ -17780,6 +17770,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1530756066762835838}
+        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756066861240272
 GameObject:
