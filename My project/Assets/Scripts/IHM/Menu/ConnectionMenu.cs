@@ -2,14 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class ConnectionMenu : MonoBehaviour
 {
     public static string PlayerName;
     public static string PlayerPassword;
 
-    public GameObject ConnectionButton;
+    public TMP_InputField inputPassword;
+    public Button ConnectionButton;
 
+    void Start() 
+    {
+        inputPassword.contentType = TMP_InputField.ContentType.Password;
+        ConnectionButton.interactable = false;
+    }
+    
     /// <summary>
     /// Par Martin GADET
     /// Méthode Update vérifie si les variable PlayerName et PlayerPassword sont rempli
@@ -31,7 +40,7 @@ public class ConnectionMenu : MonoBehaviour
     {   
         if(PlayerName != null && PlayerPassword != null)
         {
-            ConnectionButton.SetActive(true);
+            ConnectionButton.interactable = true;
         }
     }
 
@@ -61,7 +70,7 @@ public class ConnectionMenu : MonoBehaviour
         if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
             PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
-            Debug.Log("Password : " + PlayerPassword);
+            // Debug.Log("Password : " + PlayerPassword);
         }
     }
 }

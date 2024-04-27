@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class InscriptionMenu : MonoBehaviour
 {
@@ -10,7 +12,16 @@ public class InscriptionMenu : MonoBehaviour
     public static string PlayerPassword1;
     public static string PlayerPassword2;
 
-    public GameObject InscriptionButton;
+    public TMP_InputField inputPassword1;
+    public TMP_InputField inputPassword2;
+    public Button InscriptionButton;
+
+    void Start() 
+    {
+        inputPassword1.contentType = TMP_InputField.ContentType.Password;
+        inputPassword2.contentType = TMP_InputField.ContentType.Password;
+        InscriptionButton.interactable = false;
+    }
 
     /// <summary>
     /// Par Martin GADET
@@ -33,7 +44,7 @@ public class InscriptionMenu : MonoBehaviour
     {   
         if(PlayerName != null && PlayerPassword1 != null && PlayerPassword2 != null)
         {
-            InscriptionButton.SetActive(true);
+            InscriptionButton.interactable = true;
         }
     }
     /// <summary>
@@ -62,7 +73,7 @@ public class InscriptionMenu : MonoBehaviour
         if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
             PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
-            Debug.Log("Password1 : " + PlayerPassword1);
+            // Debug.Log("Password1 : " + PlayerPassword1);
         }
     }
 
@@ -77,7 +88,7 @@ public class InscriptionMenu : MonoBehaviour
         if(UIManager.SetPlayerPassword(inputPassword) != "0")
         {
             PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
-            Debug.Log("Password2 : " + PlayerPassword2);
+            // Debug.Log("Password2 : " + PlayerPassword2);
         }
         try
         {
