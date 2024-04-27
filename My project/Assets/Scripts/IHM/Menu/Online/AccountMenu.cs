@@ -2,20 +2,19 @@ using UnityEngine;
 
 namespace blockade.Blockade_IHM
 {
-    public class MainMenu : MonoBehaviour
+    public class AccountMenu : MonoBehaviour
     {
+        public GameObject Chat;
+
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui quitte le jeu
+        /// Méthode Start qui cache le chat textuel
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void QuitGame()
+        void Start()
         {
-            Debug.Log("QUIT!");
-            Application.Quit();
+            Chat.SetActive(false);
         }
-
-
     }
 }

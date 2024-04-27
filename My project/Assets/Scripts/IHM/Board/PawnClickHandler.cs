@@ -1,32 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using blockade.Blockade_common;
 
-//ABERKANE Doha
-public class PawnClickHandler : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public Plateau plateau;
-
     //ABERKANE Doha
-    public void OnMouseDown()
+    public class PawnClickHandler : MonoBehaviour
     {
-        IHM ihm = this.plateau.GetComponent<Plateau>().ihm.GetComponent<IHM>();
+        public Board plateau;
 
-        if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
+        
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Deplacement du contenu de la fonction OnMouseDown() dans une ActionPawn pour qu'elle 
+        /// puisse etre appelee par une autre partie (pour par exemple jouer un coup par une IA)
+        /// </summary>
+        public void OnMouseDown()
         {
-            //afficher position
-            Debug.Log("Position du pion cliqué  " + transform.position);
+            ActionPawn();
+        }
+        
+        //ABERKANE Doha
+        public void ActionPawn()
+        {
+            IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
-            //créer startPos
-            Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
+            if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
+            {
+                //afficher position
+                Debug.Log("Position du pion cliqué  " + transform.position);
 
-            // sélection du pion
-            plateau.SelectPawn(this.GetComponent<Pawn>());
+                //créer startPos
+                Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
 
-            //envoi du dto 
-            plateau.SendDTO(startPos, true);
+                // sélection du pion
+                plateau.SelectPawn(this.GetComponent<Pawn>());
+
+                //envoi du dto 
+                plateau.SendDTO(startPos, true);
+            }
         }
     }
-
 }
