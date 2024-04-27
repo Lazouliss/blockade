@@ -23,31 +23,6 @@ public class DTOHandler
         
     }
 
-    public void test() {
-        Player playerY = new Player("Babime", 1);
-        Player playerR = new Player("Ashlad", 2);
-        AlgoBoard Board = new AlgoBoard(playerY, playerR);
-        Board.initBoard();
-        (uint, uint) startPos = (0,2);
-        (uint, uint) endPos = (0,9);
-        Common.DTOPawn Alo = (Common.DTOPawn) simulateCreateDTO("Pawn", startPos, endPos);
-        Debug.Log(Alo.GetType());
-        var (pawnMovePossible, start, moovesList) = Board.IsPathPossible(Alo);
-        Debug.Log(pawnMovePossible + " " + moovesList);
-        if (pawnMovePossible) {
-            Common.DTOPawn testPawn = createPawnDTO(start, moovesList);
-            Debug.Log(testPawn.startPos + " " + testPawn.mooves);
-        } else {
-            Common.DTOError testError1 = createErrorDTO(1);
-        }
-        (uint, uint) firstCoord = (0,2);
-        (uint, uint) secondCoord = (0,3);
-        // future vérification de si la création du mur est possible
-        Common.DTOWall testWall = createWallDTO(firstCoord, secondCoord, Common.Direction.RIGHT, true);
-        Common.DTOError testError2 = createErrorDTO(0);
-        Common.DTOGameState testGameState = createGameStateDTO(playerY, playerR, 0, "Yellow");
-    }
-
     public object simulateCreateDTO(string DTOType, (uint, uint)? posPawn = null, (uint, uint)? newPosPawn = null, (uint, uint)? firstPosWall = null, (uint, uint)? secondPosWall = null, Common.Direction? directionWall = null) {
         if (DTOType == "Pawn") {
             // Checking if the wall needed values are null
