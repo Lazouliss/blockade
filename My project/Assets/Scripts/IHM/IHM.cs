@@ -44,7 +44,7 @@ namespace blockade.Blockade_IHM
             current_player = rand.Next(2)+1;
             */
             // Create DTOLogic
-            dtoLogic = new DTOLogic(this);
+            dtoLogic = new DTOLogic(this, GetComponent<GameManager>());
 
             // R�cup�ration de l'overlay
             overlay = GameObject.Find("Overlay");
