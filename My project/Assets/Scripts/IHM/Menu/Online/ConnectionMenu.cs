@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
@@ -37,7 +39,7 @@ namespace blockade.Blockade_IHM
         {
             if (PlayerName != null && PlayerPassword != null)
             {
-                ConnectionButton.SetActive(true);
+                ConnectionButton.interactable = true;
             }
         }
 
