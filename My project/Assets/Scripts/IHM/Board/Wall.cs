@@ -53,14 +53,13 @@ namespace blockade.Blockade_IHM
                 wall.GetComponent<MeshRenderer>().material.color = Resources.Load<Material>("WallMaterial_player2").color;
             }
 
-            // Add DragHandler
+            // Add DragHandler and asign the board to it
             wall.AddComponent<WallDragHandler>();
+            wall.GetComponent<WallDragHandler>().board = board;
 
             // Add script to wall
             wall.AddComponent<Wall>();
             wall.GetComponent<Wall>().CreateWall(id_player, isVerti, board);
-
-            //Debug.Log(wall.GetComponent<Wall>().GetId_Player());
 
             // Add tag
             wall.tag = "drag";
@@ -114,10 +113,10 @@ namespace blockade.Blockade_IHM
             }
 
             // for tests --> apply dto without checking if its legal
-            /*
+            /**/
             wall.isAdd = true;
             board.ihm.sendDTO(wall);
-            */
+
             // Send DTO to game logic
             board.ihm.sendDTOToLogic(wall);
         }

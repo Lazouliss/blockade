@@ -1817,6 +1817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestionDTO: {fileID: 114772716}
+  board: {fileID: 114772714}
   cams: {fileID: 1329981973}
   cams2: {fileID: 852465201}
 --- !u!114 &1896252179

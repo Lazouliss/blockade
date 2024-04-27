@@ -1,6 +1,7 @@
 using UnityEngine;
 using blockade.Blockade_common;
 using System.Collections.Generic;
+using System;
 
 namespace blockade.Blockade_IHM
 {
@@ -17,6 +18,8 @@ namespace blockade.Blockade_IHM
         private Pawn selectedPawn;
         private Common.DTOPawn dtoPawn;
 
+        public GameObject selectedWall;
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -30,6 +33,17 @@ namespace blockade.Blockade_IHM
             Init_Plateau();
             Init_Walls(nbWalls);
         }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Getter et Setter pour selectedWall
+        /// 
+        /// Publiques
+        /// </summary>
+        /// <returns></returns>
+        public GameObject GetSelectedWall() { return selectedWall; }
+        public void SelectWall(GameObject wall) { selectedWall = wall; }
 
         //ABERKANE Doha
         //Initialisation du plateau
@@ -47,8 +61,6 @@ namespace blockade.Blockade_IHM
                 {
                     //creation du cube 
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-                    // TEST !!!!!!!!!!!!!!!!
                     cube.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
 
                     //afficher les coordonnées sur le nom des cubes
@@ -145,7 +157,7 @@ namespace blockade.Blockade_IHM
                 currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
                 currentPosHoriz = new Vector2(currentPosHoriz.x + spaceBetweenWalls, currentPosHoriz.y);
 
-                // Same for player 2 ???
+                // Player 2
                 // Création d'un mur horizontal, aligné verticalement le long du plateau
                 Wall.createWall(currentPosP2, 2, false, this);
                 // Création d'un mur vertical, aligné horizontalement le long du plateau
