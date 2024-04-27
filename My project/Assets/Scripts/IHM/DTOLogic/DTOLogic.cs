@@ -63,6 +63,10 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOWall(Common.DTOWall dto)
         {
+            // Fait disparaitre le mur que le joueur avait de selectionne
+            this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
+
+            // Puis applique le nouveau mur
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
             ihm.gestionDTO.actionWall(dto);
 

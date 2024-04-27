@@ -1,5 +1,7 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
@@ -9,7 +11,16 @@ namespace blockade.Blockade_IHM
         public static string PlayerPassword1;
         public static string PlayerPassword2;
 
-        public GameObject InscriptionButton;
+        public TMP_InputField inputPassword1;
+        public TMP_InputField inputPassword2;
+        public Button InscriptionButton;
+
+        void Start() 
+        {
+            inputPassword1.contentType = TMP_InputField.ContentType.Password;
+            inputPassword2.contentType = TMP_InputField.ContentType.Password;
+            InscriptionButton.interactable = false;
+        }
 
         /// <summary>
         /// Par Martin GADET
@@ -29,10 +40,10 @@ namespace blockade.Blockade_IHM
         /// </summary>
         /// <returns></returns>
         public void SetActiveButton()
-        {
-            if (PlayerName != null && PlayerPassword1 != null && PlayerPassword2 != null)
+        {   
+            if(PlayerName != null && PlayerPassword1 != null && PlayerPassword2 != null)
             {
-                InscriptionButton.SetActive(true);
+                InscriptionButton.interactable = true;
             }
         }
         /// <summary>
@@ -41,9 +52,9 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerName(string inputName)
-        {
-            if (UIManager.SetPlayerName(inputName) != "0")
+        public void SetPlayerName (string inputName)
+        {   
+            if(UIManager.SetPlayerName(inputName) != "0")
             {
                 PlayerName = UIManager.SetPlayerName(inputName);
                 Debug.Log("Pseudo : " + PlayerName);
@@ -56,12 +67,12 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerPassword1(string inputPassword)
-        {
-            if (UIManager.SetPlayerPassword(inputPassword) != "0")
+        public void SetPlayerPassword1 (string inputPassword)
+        {   
+            if(UIManager.SetPlayerPassword(inputPassword) != "0")
             {
                 PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
-                Debug.Log("Password1 : " + PlayerPassword1);
+                // Debug.Log("Password1 : " + PlayerPassword1);
             }
         }
 
@@ -71,16 +82,16 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerPassword2(string inputPassword)
-        {
-            if (UIManager.SetPlayerPassword(inputPassword) != "0")
+        public void SetPlayerPassword2 (string inputPassword)
+        {   
+            if(UIManager.SetPlayerPassword(inputPassword) != "0")
             {
                 PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
-                Debug.Log("Password2 : " + PlayerPassword2);
+                // Debug.Log("Password2 : " + PlayerPassword2);
             }
             try
             {
-                if (!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
+                if(!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
                 {
                     throw new Exception("Les mots de passe sont différents.");
                 }
@@ -97,9 +108,9 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns>Boolean (true/false)</returns>
-        public bool CheckEqualityPassword(string p1, string p2)
-        {
-            if (p1 != p2)
+        public bool CheckEqualityPassword (string p1, string p2)
+        {   
+            if(p1 != p2)
             {
                 return false;
             }

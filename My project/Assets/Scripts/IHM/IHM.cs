@@ -13,6 +13,7 @@ namespace blockade.Blockade_IHM
     public class IHM : MonoBehaviour
     {
         public ApplyDTO gestionDTO;
+        public Board board;
         private DTOLogic dtoLogic;
 
         public GameObject cams;
@@ -27,12 +28,12 @@ namespace blockade.Blockade_IHM
         private int current_player;
         private Player p1, p2;          // yellow, red
 
-        // STOCKER LES JOUEURS COMME DANS LE COMMON.CS --> en "dto" et mettre � jour � chaque GameState re�u
+        // Structure d'un joueur
         public struct Player
         {
             public int verticalWalls, horizontalWalls;
             public bool isPlaying;
-            public bool isPlacingWall;              // TODO : autoriser seulement le déplacement des murs si vrai, sinon seulement le déplacement des pions
+            public bool isPlacingWall;
         }
 
         // Start is called before the first frame update
@@ -45,9 +46,6 @@ namespace blockade.Blockade_IHM
             */
             // Create DTOLogic
             dtoLogic = new DTOLogic(this, GetComponent<GameManager>());
-
-            // R�cup�ration de l'overlay
-            overlay = GameObject.Find("Overlay");
 
             // Init cams
             cams.SetActive(true);
@@ -256,8 +254,8 @@ namespace blockade.Blockade_IHM
 
             Debug.Log(typePartie);
 
-            // Cr�ation du plateau
-            gestionDTO.GetComponent<Board>().StartGame(BASE_NBWALLS);
+            // Creation du plateau
+            board.StartGame(BASE_NBWALLS);
 
             switch (typePartie)
             {

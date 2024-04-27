@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
@@ -7,7 +9,14 @@ namespace blockade.Blockade_IHM
         public static string PlayerName;
         public static string PlayerPassword;
 
-        public GameObject ConnectionButton;
+        public TMP_InputField inputPassword;
+        public Button ConnectionButton;
+
+        void Start() 
+        {
+            inputPassword.contentType = TMP_InputField.ContentType.Password;
+            ConnectionButton.interactable = false;
+        }
 
         /// <summary>
         /// Par Martin GADET
@@ -30,7 +39,7 @@ namespace blockade.Blockade_IHM
         {
             if (PlayerName != null && PlayerPassword != null)
             {
-                ConnectionButton.SetActive(true);
+                ConnectionButton.interactable = true;
             }
         }
 
@@ -60,7 +69,7 @@ namespace blockade.Blockade_IHM
             if (UIManager.SetPlayerPassword(inputPassword) != "0")
             {
                 PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
-                Debug.Log("Password : " + PlayerPassword);
+                // Debug.Log("Password : " + PlayerPassword);
             }
         }
     }
