@@ -8,7 +8,7 @@ namespace blockade.Blockade_IHM
     /// <summary>
     /// Par Thomas MONTIGNY
     /// 
-    /// Fonction de clique de test, pour jouer un DTO aléatoire et tester la réception des DTOs
+    /// Fonction de clique de test, pour jouer un DTO alï¿½atoire et tester la rï¿½ception des DTOs
     /// </summary>
     public class Click : MonoBehaviour
     {
@@ -25,7 +25,7 @@ namespace blockade.Blockade_IHM
         /// Par Thomas MONTIGNY
         /// 
         /// A destination de l'IHM et seulement pour les tests
-        /// Crée un DTO aléatoire : pion, mur ou erreur
+        /// Crï¿½e un DTO alï¿½atoire : pion, mur ou erreur
         /// Publique
         /// </summary>
         public void ClickRandomAction()
@@ -57,8 +57,8 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Retourne une direction aléatoire
-        /// Privée
+        /// Retourne une direction alï¿½atoire
+        /// Privï¿½e
         /// </summary>
         /// <returns></returns>
         private Common.Direction getRandomDirection()
@@ -76,8 +76,8 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Génère un DTO pion aléatoire
-        /// Privée
+        /// Gï¿½nï¿½re un DTO pion alï¿½atoire
+        /// Privï¿½e
         /// </summary>
         /// <returns></returns>
         private Common.DTOPawn getRandomDTOPawn()
@@ -97,8 +97,8 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Génère un DTO mur aléatoire
-        /// Privée
+        /// Gï¿½nï¿½re un DTO mur alï¿½atoire
+        /// Privï¿½e
         /// </summary>
         /// <returns></returns>
         private Common.DTOWall getRandomDTOWall()
@@ -128,8 +128,8 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Génère un DTO état du jeu aléatoire
-        /// Privée
+        /// Gï¿½nï¿½re un DTO ï¿½tat du jeu alï¿½atoire
+        /// Privï¿½e
         /// </summary>
         /// <returns></returns>
         private Common.DTOGameState getRandomDTOGameState()
