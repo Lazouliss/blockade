@@ -114,11 +114,12 @@ namespace blockade.Blockade_IHM
             }
 
             // for tests --> apply dto without checking if its legal
+            /*
             wall.isAdd = true;
             board.ihm.sendDTO(wall);
-
+            */
             // Send DTO to game logic
-            //board.ihm.sendDTOToLogic(wall);
+            board.ihm.sendDTOToLogic(wall);
         }
     }
 }

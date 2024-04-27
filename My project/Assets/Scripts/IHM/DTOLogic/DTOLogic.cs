@@ -148,6 +148,7 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         public void sendDTOToLogic(object dto)
         {
+            Debug.Log("Sending DTO to GameLogic");
             //gamelogic.sendDTO(dto);
         }
     }

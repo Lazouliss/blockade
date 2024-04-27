@@ -180,11 +180,12 @@ namespace blockade.Blockade_IHM
                 ihm.GetComponent<IHM>().gestionDTO.selectedPawn = selectedPawn;
 
                 // Test
+                /*
                 dtoPawn.mooves.Add(Common.Direction.UP);
                 dtoPawn.mooves.Add(Common.Direction.UP);
                 ihm.GetComponent<IHM>().sendDTO(dtoPawn);
-
-                //IHM.sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
+                */
+                ihm.GetComponent<IHM>().sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
 
                 // reset dto pawn
                 dtoPawn = InitDTOPawn();
