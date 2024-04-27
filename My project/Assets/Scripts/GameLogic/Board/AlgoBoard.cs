@@ -529,6 +529,14 @@ public class AlgoBoard
                 {
                     return true;
                 }
+                Square pionSquareSquare = getSquareById(pionSquare);
+                if ((pionSquareSquare.getUpperSquare() != null && pionSquareSquare.getUpperSquare().getIdCase() == winningSquare) ||
+                    (pionSquareSquare.getLowerSquare() != null && pionSquareSquare.getLowerSquare().getIdCase() == winningSquare) ||
+                    (pionSquareSquare.getRightSquare() != null && pionSquareSquare.getRightSquare().getIdCase() == winningSquare) ||
+                    (pionSquareSquare.getLeftSquare() != null && pionSquareSquare.getLeftSquare().getIdCase() == winningSquare))
+                {
+                    return true;
+                }
             }
         }
         return false;
