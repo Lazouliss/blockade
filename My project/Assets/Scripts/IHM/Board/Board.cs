@@ -185,6 +185,7 @@ namespace blockade.Blockade_IHM
                 dtoPawn.mooves.Add(Common.Direction.UP);
                 ihm.GetComponent<IHM>().sendDTO(dtoPawn);
                 */
+
                 ihm.GetComponent<IHM>().sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
 
                 // reset dto pawn

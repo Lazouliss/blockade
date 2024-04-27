@@ -25,14 +25,11 @@
 
 # Visual Studio cache directory
 .vs/
-<<<<<<< HEAD
-=======
 .vsconfig
 .vscode/
 
 # Apple useless files
 .DS_Store
->>>>>>> a417f6fe1913f8f11c1b3cb888a86d028ff7056c
 
 # Gradle cache directory
 .gradle/
