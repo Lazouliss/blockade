@@ -1471,6 +1471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896252177}
   - component: {fileID: 1896252178}
+  - component: {fileID: 1896252179}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1514,3 +1515,15 @@ MonoBehaviour:
   gestionDTO: {fileID: 114772716}
   cams: {fileID: 1329981973}
   cams2: {fileID: 852465201}
+--- !u!114 &1896252179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896252176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7fe34ab0605c64b8ca52a37a085e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
