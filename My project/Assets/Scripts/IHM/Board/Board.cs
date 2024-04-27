@@ -180,7 +180,7 @@ namespace blockade.Blockade_IHM
             {
                 dtoPawn.startPos = ((uint)pos[0], (uint)pos[1]);
             }
-            else
+            else if (dtoPawn.startPos != (1000, 1000))
             {
                 dtoPawn.destPos = ((uint)pos[0], (uint)pos[1]);
             }
