@@ -238,5 +238,16 @@ namespace blockade.Blockade_IHM
 
             return dto;
         }
+
+        public void ClearBoard()
+        {
+            // Test clear board -> crashing unity
+            /*
+            while (this.gameObject.transform.childCount != 0)
+            {
+                Destroy(this.gameObject.transform.GetChild(0).gameObject);
+            }
+            */
+        }
     }
 }

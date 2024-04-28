@@ -3,6 +3,7 @@ using blockade.Blockade_common;
 using sys = System;
 using System.Threading;
 using System.Reflection;
+using System;
 
 namespace blockade.Blockade_IHM
 {
@@ -255,6 +256,9 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void PlayGame(string typePartie)
         {
+            // Fully clean the board to create a new one
+            ClearBoard();
+            
             this.typePartie = typePartie;
             overlay = GameObject.Find("Overlay");
 
@@ -289,6 +293,11 @@ namespace blockade.Blockade_IHM
             }
 
             SwitchPlayerCamera(current_player);
+        }
+
+        private void ClearBoard()
+        {
+            board.ClearBoard();
         }
 
         private void StartOnlineGame()

@@ -68,7 +68,7 @@ namespace blockade.Blockade_IHM
 
             // Puis applique le nouveau mur
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
-            ihm.gestionDTO.actionWall(dto);
+            ihm.gestionDTO.actionWall(dto, ihm.board);
 
             // Le joueur viens de déplacer un mur donc sa prochaine action est de déplacer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
