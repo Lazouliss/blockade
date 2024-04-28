@@ -2,6 +2,7 @@ using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
 using System.Threading;
+using System.Reflection;
 
 namespace blockade.Blockade_IHM
 {
@@ -20,7 +21,6 @@ namespace blockade.Blockade_IHM
         public GameObject cams;
         public GameObject cams2;
         private GameObject overlay;
-        [SerializeField] private GameObject endGameMenu;
 
         // Variables de partie
         private string typePartie;
@@ -29,6 +29,10 @@ namespace blockade.Blockade_IHM
         // Players informations
         private int current_player;
         private Player p1, p2;          // yellow, red
+        
+        // Only for GameEnd
+        [SerializeField] private GameObject endGameMenu;
+        private int winner;
 
         // Structure d'un joueur
         public struct Player
@@ -332,6 +336,9 @@ namespace blockade.Blockade_IHM
         /// <param name="winner"></param>
         internal void endGame(uint winner)
         {
+            // Set the winner
+            this.winner = (int)winner;
+
             // Stop playing for all players
             p1.isPlaying = false;
             p2.isPlaying = false;
@@ -345,11 +352,14 @@ namespace blockade.Blockade_IHM
             {
                 cams2.GetComponent<Animator>().SetTrigger("trigger_spin");
             }
+        }
 
+        internal void ShowEndGameMenu()
+        {
             // And show the menu
             overlay.SetActive(false);
             endGameMenu.SetActive(true);
-            endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == winner);
+            endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == this.winner);
         }
     }
 }

@@ -1247,6 +1247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852465202}
   - component: {fileID: 852465203}
+  - component: {fileID: 852465204}
   m_Layer: 0
   m_Name: Player2_Cams
   m_TagString: Untagged
@@ -1292,6 +1293,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &852465204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852465201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20da587ed85131e43b12bc9044d6f954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ihm: {fileID: 1896252178}
 --- !u!1 &946178388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1329981974}
   - component: {fileID: 1329981975}
+  - component: {fileID: 1329981976}
   m_Layer: 0
   m_Name: Player_Cams
   m_TagString: Untagged
@@ -1598,6 +1613,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1329981976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329981973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20da587ed85131e43b12bc9044d6f954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ihm: {fileID: 1896252178}
 --- !u!1 &1501739675
 GameObject:
   m_ObjectHideFlags: 0
