@@ -20,7 +20,7 @@ namespace blockade.Blockade_IHM
         /// Par Wassim BOUKHARI
         ///  
         /// Déplace le pion selon la 
-        /// direction en argumen
+        /// direction en argument
         /// 
         /// </summary>
         /// <param name="dto"></param>

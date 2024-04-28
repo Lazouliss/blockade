@@ -17,9 +17,9 @@ namespace blockade.Blockade_IHM
         // Start is called before the first frame update
         void Start()
         {
-
+            
             stackWall = new Stack<GameObject>();
-
+            /*
             Common.DTOPawn dto = new Common.DTOPawn();
             dto.startPos = (0, 0);
             dto.destPos = (1000, 1000);
@@ -33,7 +33,7 @@ namespace blockade.Blockade_IHM
 
 
             StartCoroutine(this.movePawn(dto));
-
+            */
 
             /*Common.DTOWall dtoWall = new Common.DTOWall();
             dtoWall.coord1 = (0,0);
