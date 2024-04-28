@@ -1,5 +1,6 @@
 using UnityEngine;
 using blockade.Blockade_common;
+using System.Collections;
 
 namespace blockade.Blockade_IHM
 {
@@ -15,34 +16,60 @@ namespace blockade.Blockade_IHM
             this.y = y;
         }
 
-
-        public void move(Common.Direction direction)
+        /// <summary>
+        /// Par Wassim BOUKHARI
+        ///  
+        /// Déplace le pion selon la 
+        /// direction en argumen
+        /// 
+        /// </summary>
+        /// <param name="dto"></param>
+        public IEnumerator move(Common.Direction direction)
         {
 
             float length = ApplyDTO.LENGTH_TILE;
 
-            Vector3 movement;
+            float speed = 1.0f; // Vitesse de déplacement
+            float time = 0;
+
+            Vector3 start = transform.position;
+
+            Vector3 target = start;
             switch (direction)
             {
                 case Common.Direction.UP:
-                    movement = new Vector3(0, 0, length);
+                    target += new Vector3(0, 0, length);
                     break;
                 case Common.Direction.DOWN:
-                    movement = new Vector3(0, 0, -length);
+                    target += new Vector3(0, 0, -length);
                     break;
                 case Common.Direction.LEFT:
-                    movement = new Vector3(-length, 0, 0);
+                    target += new Vector3(-length, 0, 0);
                     break;
                 case Common.Direction.RIGHT:
-                    movement = new Vector3(length, 0, 0);
+                    target += new Vector3(length, 0, 0);
                     break;
                 default:
-                    movement = new Vector3(0, 0, 0);
+                    target += new Vector3(0, 0, 0);
                     break;
 
             }
 
-            transform.position += movement;
+
+            while (time < 1.0f)
+            {
+                // Augmenter le temps de lerp basé sur le temps écoulé multiplié par la vitesse
+                time += Time.deltaTime * speed;
+
+                // Effectuer le lerp
+                transform.position = Vector3.Lerp(start, target, time);
+
+                // Attendre la fin de la frame avant de continuer
+                yield return null;
+            }
+
+            // Assurez-vous que la position finale est exactement la position cible
+            transform.position = target;
 
         }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
+using System.Collections;
 
 namespace blockade.Blockade_IHM
 {
@@ -19,17 +20,19 @@ namespace blockade.Blockade_IHM
 
             stackWall = new Stack<GameObject>();
 
-            /*Common.DTOPawn dto = new Common.DTOPawn();
+            Common.DTOPawn dto = new Common.DTOPawn();
             dto.startPos = (0, 0);
             dto.destPos = (1000, 1000);
 
             List<Common.Direction> listMoove = new List<Common.Direction>();
             listMoove.Add(Common.Direction.UP);
             listMoove.Add(Common.Direction.RIGHT);
+            listMoove.Add(Common.Direction.DOWN);
+            listMoove.Add(Common.Direction.LEFT);
             dto.mooves = listMoove;
 
 
-            this.moovePawn(dto);*/
+            StartCoroutine(this.movePawn(dto));
 
 
             /*Common.DTOWall dtoWall = new Common.DTOWall();
@@ -64,18 +67,19 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Wassim BOUKHARI
         /// 
-        /// Deplace le pion en fonction du dto
+        /// Lance une coroutine qui déplace le pion 
+        /// pour chaque direction
         /// 
         /// </summary>
         /// <param name="dto"></param>
-        public void movePawn(Common.DTOPawn dto)
+        public IEnumerator movePawn(Common.DTOPawn dto)
         {
 
             Pawn p = this.selectedPawn;
 
             foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
             {
-                p.move(direction);
+                yield return StartCoroutine(p.move(direction));
             }
 
             selectedPawn = null;
