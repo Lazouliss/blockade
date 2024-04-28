@@ -4,7 +4,7 @@ namespace blockade.Blockade_IHM
 {
     public class EndMenu : MonoBehaviour
     {
-        public static bool GameIsWin = false;
+        //public static bool GameIsWin = false;
 
         public GameObject medaille_victoire;
         public GameObject medaille_defaite;
@@ -15,9 +15,9 @@ namespace blockade.Blockade_IHM
         /// 
         /// Fonction qui permet à l'affichage de  choisir la bonne medaille en fonction du résultat de la partie
         /// </summary>
-        void Start()
+        public void SelectWinner(bool gameIsWin)
         {
-            if (GameIsWin)
+            if (gameIsWin)
             {
                 medaille_defaite.gameObject.SetActive(false);
                 medaille_victoire.gameObject.SetActive(true);

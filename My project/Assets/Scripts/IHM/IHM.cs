@@ -1,6 +1,7 @@
 using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
+using System.Threading;
 
 namespace blockade.Blockade_IHM
 {
@@ -19,6 +20,7 @@ namespace blockade.Blockade_IHM
         public GameObject cams;
         public GameObject cams2;
         private GameObject overlay;
+        [SerializeField] private GameObject endGameMenu;
 
         // Variables de partie
         private string typePartie;
@@ -237,9 +239,9 @@ namespace blockade.Blockade_IHM
         }
 
 
-        // =================================
-        // Logique de lancement d'une partie
-        // =================================
+        // ======================================
+        // Logique de fonctionnement d'une partie
+        // ======================================
 
         /// <summary>
         /// Par Thomas MONTIGNY
@@ -317,6 +319,37 @@ namespace blockade.Blockade_IHM
         private void StartECEGame()
         {
             // TODO
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Fonction de fin de partie :
+        /// - Desactive les inputs des joueurs sur le plateau
+        /// - Fait le tour du plateau via une animation
+        /// - Affiche le menu de fin de partie
+        /// </summary>
+        /// <param name="winner"></param>
+        internal void endGame(uint winner)
+        {
+            // Stop playing for all players
+            p1.isPlaying = false;
+            p2.isPlaying = false;
+
+            // Spin the cam around the board
+            if (current_player == 1)
+            {
+                cams.GetComponent<Animator>().SetTrigger("trigger_spin");
+            } 
+            else
+            {
+                cams2.GetComponent<Animator>().SetTrigger("trigger_spin");
+            }
+
+            // And show the menu
+            overlay.SetActive(false);
+            endGameMenu.SetActive(true);
+            endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == winner);
         }
     }
 }

@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ihm: {fileID: 1896252178}
+  selectedWall: {fileID: 0}
 --- !u!4 &114772715
 Transform:
   m_ObjectHideFlags: 0
@@ -189,6 +190,11 @@ MonoBehaviour:
   selectedPawn: {fileID: 0}
   speed: 0.5
   wall: {fileID: 5004004555727497794, guid: a84c657d2f66b7e4cb39ffda4bb3c25c, type: 3}
+--- !u!1 &252233363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2518820710422889362, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
+  m_PrefabInstance: {fileID: 795819441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &257921019 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6398064748202849304, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
@@ -1820,6 +1826,7 @@ MonoBehaviour:
   board: {fileID: 114772714}
   cams: {fileID: 1329981973}
   cams2: {fileID: 852465201}
+  endGameMenu: {fileID: 252233363}
 --- !u!114 &1896252179
 MonoBehaviour:
   m_ObjectHideFlags: 0

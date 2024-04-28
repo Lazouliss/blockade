@@ -103,6 +103,16 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOGameState(Common.DTOGameState dto)
         {
+            // Test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //dto.winner = 1;
+            // Check if there is a winner
+            if (dto.winner > 0)
+            {
+                ihm.endGame(dto.winner);
+                // and finish without applying the new GameState
+                return;
+            }
+
             // Met le nombre de murs restants selon le joueur
             if (dto.yellowPlayer.isPlaying)
             {
