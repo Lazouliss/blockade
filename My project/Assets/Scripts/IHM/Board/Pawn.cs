@@ -16,7 +16,14 @@ namespace blockade.Blockade_IHM
             this.y = y;
         }
 
-
+        /// <summary>
+        /// Par Wassim BOUKHARI
+        ///  
+        /// Déplace le pion selon la 
+        /// direction en argumen
+        /// 
+        /// </summary>
+        /// <param name="dto"></param>
         public IEnumerator move(Common.Direction direction)
         {
 

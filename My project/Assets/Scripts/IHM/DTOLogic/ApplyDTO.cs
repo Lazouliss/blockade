@@ -67,7 +67,8 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Wassim BOUKHARI
         /// 
-        /// Deplace le pion en fonction du dto
+        /// Lance une coroutine qui déplace le pion 
+        /// pour chaque direction
         /// 
         /// </summary>
         /// <param name="dto"></param>
