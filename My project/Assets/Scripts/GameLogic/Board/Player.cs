@@ -50,6 +50,38 @@ public class Player
     {
         return this.verticalWalls;
     }
+    public void retirerWallHorizontal()
+    {
+        this.horizontalWalls--;
+    }
+    public void retirerWallVertical()
+    {
+        this.verticalWalls--;
+    }
+
+    public void setWinningSquaresPosition(uint[] casesGagnantes)
+    {
+        this.casesGagnantes = casesGagnantes;
+    }
+
+    public void setPositionsPions(uint[] positionsPions)
+    {
+        this.positionsPions = positionsPions;
+    }
+
+    public void deplacerPion(uint casePionDepart, uint casePionArrivee)
+    {
+        Debug.Log("Pion moving from " + casePionDepart + " to " + casePionArrivee);
+        for (int i = 0; i < this.positionsPions.Length; i++)
+        {
+            Debug.Log("Pion " + i + " is on case " + this.positionsPions[i]);
+            if (this.positionsPions[i] == casePionDepart)
+            {
+                this.positionsPions[i] = casePionArrivee;
+                Debug.Log("Pion moved from " + casePionDepart + " to " + casePionArrivee);
+            }
+        }
+    }
     void Start()
     {
         
