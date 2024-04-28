@@ -26,10 +26,11 @@ namespace blockade.Blockade_IHM
         }
 
         //ABERKANE Doha
+        //adding asset 
         public void ActionCase()
         {
             Debug.Log("Case cliquée " + name);
-
+            string path = "Assets/Assets/Graveyard/kenney_graveyard-kit/Models/FBX format/road.fbx";
             IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
             if (!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)

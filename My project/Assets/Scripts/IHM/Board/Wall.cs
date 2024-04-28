@@ -39,9 +39,14 @@ namespace blockade.Blockade_IHM
         public static void createWall(Vector2 pos, int id_player, bool isVerti, Board board)
         {
             // Create wall using prefab and instantiate it on the right position
+            //string path = "Graveyard/kenney_graveyard-kit/Models/FBX format/brick-wall";
+            
+            //GameObject wallPrefab = Resources.Load<GameObject>(path);
             GameObject wallPrefab = Resources.Load<GameObject>("Wall");
             GameObject wall = Instantiate(wallPrefab);
             wall.transform.position = new Vector3(pos.x, 0.5f, pos.y);
+            //wall.transform.localScale = new Vector3(1.5f, 1f, 2f);
+
             if (!isVerti)
             {
                 wall.transform.rotation = Quaternion.Euler(0f, 90, 0f);
