@@ -65,6 +65,19 @@ namespace blockade.Blockade_IHM
         }
 
         /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Encapsuler le lancement de Coroutine pour etre appeler par un autre script
+        /// 
+        /// Publique
+        /// </summary>
+        /// <param name="dto"></param>
+        public void moveDTOPawn(Common.DTOPawn dto)
+        {
+            StartCoroutine(movePawn(dto));
+        }
+
+        /// <summary>
         /// Par Wassim BOUKHARI
         /// 
         /// Lance une coroutine qui déplace le pion 
@@ -72,7 +85,7 @@ namespace blockade.Blockade_IHM
         /// 
         /// </summary>
         /// <param name="dto"></param>
-        public IEnumerator movePawn(Common.DTOPawn dto)
+        private IEnumerator movePawn(Common.DTOPawn dto)
         {
 
             Pawn p = this.selectedPawn;
