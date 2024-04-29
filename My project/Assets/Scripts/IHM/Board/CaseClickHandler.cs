@@ -30,7 +30,6 @@ namespace blockade.Blockade_IHM
         public void ActionCase()
         {
             Debug.Log("Case cliquée " + name);
-            string path = "Assets/Assets/Graveyard/kenney_graveyard-kit/Models/FBX format/road.fbx";
             IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
             if (!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
@@ -42,7 +41,7 @@ namespace blockade.Blockade_IHM
                     lastCaseClick.RestoreOriginalColor();
                 }
                 //couleur de la case cliquée
-                caseRenderer.material.color = Color.green;
+                caseRenderer.material.color = Color.grey;
                 //enregistrer la valeur de la case
                 lastCaseClick = this;
 
@@ -61,14 +60,18 @@ namespace blockade.Blockade_IHM
         public void RestoreOriginalColor()
         {
             CaseClickHandler[] allCases = GetComponentsInChildren<CaseClickHandler>();
-
+            
+            string path = "Mini-dungeon/kenney_mini-dungeon/Models/FBX format/rocks";
+            GameObject casePrefab = Resources.Load<GameObject>(path);
+            Renderer casePrefabRenderer = casePrefab.GetComponent<Renderer>();            
+            
             foreach (CaseClickHandler caseObj in allCases)
             {
-                Renderer caseRenderer = caseObj.gameObject.GetComponent<Renderer>();
+                Material originalMaterial = casePrefabRenderer.sharedMaterial;
+                //Renderer caseRenderer = caseObj.gameObject.GetComponent<Renderer>();
                 if (caseRenderer != null)
-                {
-
-                    caseRenderer.material.color = Color.black;
+                { 
+                    caseRenderer.sharedMaterial = originalMaterial;
                 }
             }
         }
