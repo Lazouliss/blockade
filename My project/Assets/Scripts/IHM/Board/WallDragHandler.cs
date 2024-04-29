@@ -97,7 +97,7 @@ namespace blockade.Blockade_IHM
                 board.SelectWall(selectedWall);
 
                 // Affichage de la position du mur puis appel de la fonction d'envoie de DTO
-                Debug.Log("WorldPosition : " + worldPosition);
+                Debug.Log("Wall current worldPosition : " + worldPosition);
                 selectedWall.GetComponent<Wall>().sendDTOWall(worldPosition);
             }
         }

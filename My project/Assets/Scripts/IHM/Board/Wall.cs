@@ -1,5 +1,6 @@
 using blockade.Blockade_common;
 using UnityEngine;
+using static blockade.Blockade_common.Common;
 
 namespace blockade.Blockade_IHM
 {
@@ -95,7 +96,7 @@ namespace blockade.Blockade_IHM
 
             // Création du DTO
             Common.DTOWall wall = new Common.DTOWall();
-
+            
             // Si le mur est vertical initialisation des positions en ajoutant 1 au z de la seconde coordonnée
             if (this.isVerti)
             {
@@ -110,6 +111,13 @@ namespace blockade.Blockade_IHM
                 wall.coord1 = ((uint)worldPos.x, (uint)worldPos.z);
                 wall.coord2 = ((uint)worldPos.x + 1, (uint)worldPos.z);
                 wall.direction = Common.Direction.UP;
+            }
+
+            // Check if the wall is trying to be placed outside the board
+            if (wall.coord1.Item1 > 10 || wall.coord1.Item2 > 14 || wall.coord2.Item1 > 10 || wall.coord2.Item2 > 14 || wall.coord1.Item1 < 0 || wall.coord1.Item2 < 0 || wall.coord2.Item1 < 0 || wall.coord2.Item2 < 0)
+            {
+                Debug.Log("Trying to place a wall outside the board !");
+                return;
             }
 
             // for tests --> apply dto without checking if its legal

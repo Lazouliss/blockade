@@ -13,8 +13,6 @@ namespace blockade.Blockade_IHM
         // Cameras
         [SerializeField] private Camera playerCam;
         [SerializeField] private Camera boardCam;
-        [SerializeField] private Camera player2Cam;         // NORMALEMENT INUTILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        [SerializeField] private Camera board2Cam;          // NORMALEMENT INUTILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         [SerializeField] private GameObject btn_switchCamera;
         [SerializeField] private KeyCode key_switchCamera;
 
@@ -56,8 +54,6 @@ namespace blockade.Blockade_IHM
             // Initialise les cameras
             playerCam.enabled = true;
             boardCam.enabled = false;
-            player2Cam.enabled = true;      // NORMALEMENT INUTILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            board2Cam.enabled = false;      // NORMALEMENT INUTILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             // Move the switch camera button to the top right corner
             //btn_switchCamera.transform.position = new Vector3(this.GetComponent<RectTransform>().rect.width - 32, this.GetComponent<RectTransform>().rect.height - 32, 0);
@@ -71,6 +67,19 @@ namespace blockade.Blockade_IHM
                 Debug.Log("Switched camera with input key");
                 this.SwitchCamera();
             }
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        ///
+        /// Renvoie l'etat de la camera joueur (pour permettre a l'ihm de tester la condition de fin)
+        ///
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public bool GetPlayerCamState()
+        {
+            return playerCam.enabled;
         }
 
         /// <summary>
@@ -102,49 +111,24 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void SwitchCamera()
         {
-            // RE-RENDRE GENERIQUE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             Debug.Log("Changing Camera");
-            if (ihm.GetCurrentPlayer() == 1)
+            playerCam.enabled = !playerCam.enabled;
+            playerCam.GetComponent<AudioListener>().enabled = !playerCam.GetComponent<AudioListener>().enabled;
+
+            boardCam.enabled = !boardCam.enabled;
+            boardCam.GetComponent<AudioListener>().enabled = !boardCam.GetComponent<AudioListener>().enabled;
+
+            if (playerCam.enabled)
             {
-                playerCam.enabled = !playerCam.enabled;
-                playerCam.GetComponent<AudioListener>().enabled = !playerCam.GetComponent<AudioListener>().enabled;
-
-                boardCam.enabled = !boardCam.enabled;
-                boardCam.GetComponent<AudioListener>().enabled = !boardCam.GetComponent<AudioListener>().enabled;
-
-                if (playerCam.enabled)
-                {
-                    playerCam.tag = "MainCamera";
-                    boardCam.tag = "Untagged";
-                }
-                else
-                {
-                    playerCam.tag = "Untagged";
-                    boardCam.tag = "MainCamera";
-                }
-                Debug.Log("PlayerCam Tag : " + playerCam.tag + ", BoardCam Tag : " + boardCam.tag);
+                playerCam.tag = "MainCamera";
+                boardCam.tag = "Untagged";
             }
             else
             {
-                player2Cam.enabled = !player2Cam.enabled;
-                player2Cam.GetComponent<AudioListener>().enabled = !player2Cam.GetComponent<AudioListener>().enabled;
-
-                board2Cam.enabled = !board2Cam.enabled;
-                board2Cam.GetComponent<AudioListener>().enabled = !board2Cam.GetComponent<AudioListener>().enabled;
-
-                if (player2Cam.enabled)
-                {
-                    player2Cam.tag = "MainCamera";
-                    board2Cam.tag = "Untagged";
-                }
-                else
-                {
-                    player2Cam.tag = "Untagged";
-                    board2Cam.tag = "MainCamera";
-                }
-                Debug.Log("Player2Cam Tag : " + player2Cam.tag + ", Board2Cam Tag : " + board2Cam.tag);
+                playerCam.tag = "Untagged";
+                boardCam.tag = "MainCamera";
             }
-
+            Debug.Log("PlayerCam Tag : " + playerCam.tag + ", BoardCam Tag : " + boardCam.tag);
         }
     }
 }

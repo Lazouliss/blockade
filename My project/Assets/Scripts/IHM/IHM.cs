@@ -1,6 +1,9 @@
 using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
+using System.Threading;
+using System.Reflection;
+using System;
 
 namespace blockade.Blockade_IHM
 {
@@ -17,7 +20,6 @@ namespace blockade.Blockade_IHM
         private DTOLogic dtoLogic;
 
         public GameObject cams;
-        public GameObject cams2;
         private GameObject overlay;
 
         // Variables de partie
@@ -27,6 +29,10 @@ namespace blockade.Blockade_IHM
         // Players informations
         private int current_player;
         private Player p1, p2;          // yellow, red
+        
+        // Only for GameEnd
+        [SerializeField] private GameObject endGameMenu;
+        private int winner;
 
         // Structure d'un joueur
         public struct Player
@@ -49,7 +55,6 @@ namespace blockade.Blockade_IHM
 
             // Init cams
             cams.SetActive(true);
-            cams2.SetActive(false);
 
             /*
             // For tests
@@ -161,36 +166,10 @@ namespace blockade.Blockade_IHM
         /// Permet de changer la camera de cote (en fonction du numero de joueur)
         /// </summary>
         /// <param name="current_player"></param>
-        public void SwitchPlayerCamera(int current_player)
+        public void SwitchPlayerCamera()
         {
-            if (current_player == 2)
-            {
-                cams.SetActive(false);
-                cams2.SetActive(true);
-            }
-            else
-            {
-                cams.SetActive(true);
-                cams2.SetActive(false);
-            }
-
-            // NOT WORKING ANYMORE
-            /*
-            if (current_player == 2)
-            {
-                Debug.Log("Setting cams for player 2 "+ cams.transform.eulerAngles);
-                Vector3 newRotation = new Vector3(0.0f, 180.0f, 0.0f);
-                cams.transform.eulerAngles = newRotation;
-                //cams.transform.Rotate(0, 180, 0, Space.Self);
-                Debug.Log("Setting cams for player 2 " + cams.transform.eulerAngles);
-            } 
-            else
-            {
-                Debug.Log("Setting cams for player 1");
-                Vector3 newRotation = new Vector3(0.0f, 0.0f, 0.0f);
-                cams.transform.eulerAngles = newRotation;
-            }
-            */
+            Debug.Log("Rotating camera");
+            cams.transform.Rotate(0, 180, 0, Space.Self);
         }
 
         /// <summary>
@@ -237,9 +216,9 @@ namespace blockade.Blockade_IHM
         }
 
 
-        // =================================
-        // Logique de lancement d'une partie
-        // =================================
+        // ======================================
+        // Logique de fonctionnement d'une partie
+        // ======================================
 
         /// <summary>
         /// Par Thomas MONTIGNY
@@ -249,6 +228,9 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void PlayGame(string typePartie)
         {
+            // Fully clean the board to create a new one
+            ClearBoard();
+            
             this.typePartie = typePartie;
             overlay = GameObject.Find("Overlay");
 
@@ -281,8 +263,11 @@ namespace blockade.Blockade_IHM
 
                 default: Debug.Log("Something is broken..."); break;
             }
+        }
 
-            SwitchPlayerCamera(current_player);
+        private void ClearBoard()
+        {
+            board.ClearBoard();
         }
 
         private void StartOnlineGame()
@@ -317,6 +302,40 @@ namespace blockade.Blockade_IHM
         private void StartECEGame()
         {
             // TODO
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Fonction de fin de partie :
+        /// - Desactive les inputs des joueurs sur le plateau
+        /// - Fait le tour du plateau via une animation
+        /// - Affiche le menu de fin de partie
+        /// </summary>
+        /// <param name="winner"></param>
+        internal void endGame(uint winner)
+        {
+            // Set the winner
+            this.winner = (int)winner;
+
+            // Stop playing for all players
+            p1.isPlaying = false;
+            p2.isPlaying = false;
+
+            // Set the camera to player camera if needed
+            if (!overlay.GetComponent<Overlay>().GetPlayerCamState()) { overlay.GetComponent<Overlay>().SwitchCamera(); }
+
+            // Spin the cam around the board
+            cams.gameObject.GetComponent<Animator>().enabled = true;
+            cams.GetComponent<Animator>().SetTrigger("trigger_spin");
+        }
+
+        internal void ShowEndGameMenu()
+        {
+            // And show the menu
+            overlay.SetActive(false);
+            endGameMenu.SetActive(true);
+            endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == this.winner);
         }
     }
 }

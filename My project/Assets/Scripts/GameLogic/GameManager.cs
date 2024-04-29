@@ -37,11 +37,13 @@ public class GameManager : MonoBehaviour
     public void sendDTO(object dto){
         switch (dto)
             {
-                case Common.DTOWall dtoWall: 
-                if (wallPlaced){
+                case Common.DTOWall dtoWall:
+                if (wallPlaced || dtoWall.coord1.Item1 > 10 || dtoWall.coord1.Item2 > 14 || dtoWall.coord2.Item1 > 10 || dtoWall.coord2.Item2 > 14 || dtoWall.coord1.Item1 < 0 || dtoWall.coord1.Item2 < 0 || dtoWall.coord2.Item1 < 0 || dtoWall.coord2.Item2 < 0){
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
+                    Debug.Log("Wall impossible to place");
                     break;
                 }
+                
                 bool canPlaceWall = (algoBoard.IsWallplaceable(dtoWall, players[0]) && algoBoard.IsWallplaceable(dtoWall, players[1]));
                 if (canPlaceWall){
                     algoBoard.addWall(dtoWall.coord1, dtoWall.coord2, dtoWall.direction);
