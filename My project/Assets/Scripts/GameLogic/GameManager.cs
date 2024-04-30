@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
                     break;
                 }
                 pawnMoved = true;
+                check_winning();
                 break;
 
                 default: Debug.Log("error during applying dto"); break;
@@ -109,7 +110,13 @@ public class GameManager : MonoBehaviour
      {
          players.Add(player);
      }
-
+    public void check_winning()
+    {
+        if (algoBoard.checkWin(playingPlayer))
+        {
+            ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], playingPlayer.getPlayerID(), ""));
+        }
+    }
     public void StartGame()
         {
             //TESTINGS
