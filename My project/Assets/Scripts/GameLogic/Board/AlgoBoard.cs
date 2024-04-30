@@ -12,6 +12,7 @@ public class AlgoBoard
     private uint CASE_GAGNANTE_playerJaune_2 = 40;
     private uint CASE_GAGNANTE_playerRouge_1 = 113;
     private uint CASE_GAGNANTE_playerRouge_2 = 117;
+    private List<uint> CASES_GAGNANTES;
     private Square[] cases = new Square[154];
     private Player playerJaune;
     private Player playerRouge;
@@ -30,6 +31,7 @@ public class AlgoBoard
         this.playerRouge = _playerRouge;
         this.playerRouge.setWinningSquaresPosition(new uint[] { CASE_GAGNANTE_playerJaune_1, CASE_GAGNANTE_playerJaune_2 });
         this.playerRouge.setPositionsPions(new uint[] { CASE_GAGNANTE_playerRouge_1, CASE_GAGNANTE_playerRouge_2 });
+        CASES_GAGNANTES = new List<uint> { CASE_GAGNANTE_playerJaune_1, CASE_GAGNANTE_playerJaune_2, CASE_GAGNANTE_playerRouge_1, CASE_GAGNANTE_playerRouge_2};
         AssignNeighbors();
     }
     private void AssignNeighbors()
@@ -142,12 +144,17 @@ public class AlgoBoard
         //Debug.Log("Current: " + current.getIdCase() + " Destination: " + destination.getIdCase() + " Moves: " + moves + " IsJumping: " + isJumping);
         List<Square> path = new List<Square>(currentPath) { current };
 
-        if (current.getIdCase() == destination.getIdCase())
+        uint max = 2;
+        if (CASES_GAGNANTES.Contains(destination.getIdCase()))
+        {
+            max = 1;
+        }
+
+        if (current.getIdCase() == destination.getIdCase() && moves == max)
         {
             return (true, path, moves);
         }
-
-        if (moves >= 2)
+        if (moves >= max)
         {
             return (false, new List<Square>(), moves);
         }
@@ -176,7 +183,7 @@ public class AlgoBoard
                 }
 
                 var (found, resultPath, resultMoves) = getCheminRecursive(next, destination, path, nextIsJumping, moves + newMoves);
-                if (found)
+                if (found )
                 {
                     return (true, resultPath, resultMoves);
                 }
@@ -526,14 +533,6 @@ public class AlgoBoard
             foreach (uint pionSquare in player.getPositionsPions())
             {
                 if (winningSquare == pionSquare)
-                {
-                    return true;
-                }
-                Square pionSquareSquare = getSquareById(pionSquare);
-                if ((pionSquareSquare.getUpperSquare() != null && pionSquareSquare.getUpperSquare().getIdCase() == winningSquare) ||
-                    (pionSquareSquare.getLowerSquare() != null && pionSquareSquare.getLowerSquare().getIdCase() == winningSquare) ||
-                    (pionSquareSquare.getRightSquare() != null && pionSquareSquare.getRightSquare().getIdCase() == winningSquare) ||
-                    (pionSquareSquare.getLeftSquare() != null && pionSquareSquare.getLeftSquare().getIdCase() == winningSquare))
                 {
                     return true;
                 }
