@@ -68,7 +68,7 @@ namespace blockade.Blockade_IHM
 
             // Puis applique le nouveau mur
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
-            ihm.gestionDTO.actionWall(dto);
+            ihm.gestionDTO.actionWall(dto, ihm.board);
 
             // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
@@ -84,6 +84,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOPawn(Common.DTOPawn dto)
         {
             //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
+            ihm.board.ForgetSelectedPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
             // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
@@ -103,8 +104,6 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOGameState(Common.DTOGameState dto)
         {
-            // Test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //dto.winner = 1;
             // Check if there is a winner
             if (dto.winner > 0)
             {
@@ -139,7 +138,7 @@ namespace blockade.Blockade_IHM
             }
 
             // Tourne la camera si besoin
-            ihm.SwitchPlayerCamera(ihm.GetCurrentPlayer());
+            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>

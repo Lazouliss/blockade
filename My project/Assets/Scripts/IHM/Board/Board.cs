@@ -59,30 +59,28 @@ namespace blockade.Blockade_IHM
             {
                 for (int y = 0; y < height; y++)
                 {
-                    //creation du cube 
-                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    cube.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-
-                    //afficher les coordonnées sur le nom des cubes
-                    cube.name = (x, y).ToString();
+                    //creation des cases 
+                    
+                    //modélisation de la case
+                    string path = "Mini-dungeon/kenney_mini-dungeon/Models/FBX format/rocks";
+                   
+                    GameObject casePrefab = Resources.Load<GameObject>(path);
+                    GameObject caseObj = GameObject.Instantiate(casePrefab); // instantiation du prefab 
+                    
+                    caseObj.transform.localScale = new Vector3(0.95f, 0.9f, 1f);
+                    //afficher les coordonnées sur le nom des cases
+                    caseObj.name = (x, y).ToString();
 
                     //affectation d'un collider pour qu'il puisse être clickable
-                    cube.AddComponent<BoxCollider>();
-
-                    //affection d'une texture
-                    var cubeRenderer = cube.GetComponent<Renderer>();
-
-                    //couleur de la case mise en noir
-                    couleurCase = Color.black;
-                    cubeRenderer.material.SetColor("_Color", couleurCase);
+                    caseObj.AddComponent<BoxCollider>();
 
                     //creation de la case de position 
                     Vector3 position = new Vector3(x, 0f, y);
 
-                    //intantiation du cube à la case correspondante dans la case_plateau
-                    GameObject case_plateau = Instantiate(cube, position, Quaternion.identity);
+                    //intantiation de la case à la case correspondante dans la case_plateau
+                    GameObject case_plateau = Instantiate(caseObj, position, Quaternion.identity);
                     case_plateau.transform.SetParent(transform);
-                    Destroy(cube);
+                    Destroy(caseObj);
 
                     CaseClickHandler clickHandler = case_plateau.AddComponent<CaseClickHandler>();//ajout d'un click handler pour les cases du case_plateau
                     clickHandler.plateau = this;//référence du plateau à chaque CaseClickHandler
@@ -199,11 +197,6 @@ namespace blockade.Blockade_IHM
                 */
 
                 ihm.GetComponent<IHM>().sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
-
-                // reset dto pawn
-                dtoPawn = InitDTOPawn();
-                // and remove selected pawn
-                selectedPawn = null;
             }
         }
 
@@ -218,6 +211,14 @@ namespace blockade.Blockade_IHM
         public void SelectPawn(Pawn pawn)
         {
             this.selectedPawn = pawn;
+        }
+
+        public void ForgetSelectedPawn()
+        {
+            // reset dto pawn
+            dtoPawn = InitDTOPawn();
+            // and remove selected pawn
+            selectedPawn = null;
         }
 
         /// <summary>
@@ -237,6 +238,17 @@ namespace blockade.Blockade_IHM
             dto.mooves = new List<Common.Direction>();
 
             return dto;
+        }
+
+        public void ClearBoard()
+        {
+            // Test clear board -> crashing unity
+            /*
+            while (this.gameObject.transform.childCount != 0)
+            {
+                Destroy(this.gameObject.transform.GetChild(0).gameObject);
+            }
+            */
         }
 
         public void ChangeCaseTexture(List<(uint, uint)> values)

@@ -106,13 +106,13 @@ namespace blockade.Blockade_IHM
         /// 
         /// </summary>
         /// <param name="dto"></param>
-        public void actionWall(Common.DTOWall dto)
+        public void actionWall(Common.DTOWall dto, Board board)
         {
 
             Debug.Log("Debut du actionWall");
             // test if dto.isAdd is initialized (if not, count as false) and if yes, check is value
             if (dto.isAdd.HasValue && dto.isAdd.Value)
-                addWall(dto);
+                addWall(dto, board);
             else
                 removeWall();
 
@@ -125,7 +125,7 @@ namespace blockade.Blockade_IHM
         /// 
         /// </summary>
         /// <param name="dto"></param>
-        void addWall(Common.DTOWall dto)
+        void addWall(Common.DTOWall dto, Board b)
         {
             Debug.Log("Debut du addWall");
             int angle;
@@ -164,6 +164,7 @@ namespace blockade.Blockade_IHM
 
             // Get the wall directly with the prefab -> TODO : Resources.Load<GameObject>("Wall")
             GameObject newObject = Instantiate(wall, new Vector3(x, 0.5f, z), rotation);
+            newObject.transform.SetParent(b.transform, false);
 
             Animator animator = newObject.GetComponent<Animator>();
 
