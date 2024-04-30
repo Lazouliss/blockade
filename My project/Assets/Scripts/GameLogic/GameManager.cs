@@ -90,12 +90,14 @@ public class GameManager : MonoBehaviour
                 default: Debug.Log("error during applying dto"); break;
             }
             if (wallPlaced && pawnMoved){
+                uint playingPlayerID = playingPlayer.getPlayerID();
+                bool playerWon = algoBoard.checkWin(playingPlayer);
                 togglePlayingPlayer();
                 wallPlaced = false;
                 pawnMoved = false;
                 string playingPlayerString = playingPlayer.getPlayerID() == 1 ? "Yellow" : "Red";
-                if (algoBoard.checkWin(playingPlayer)){
-                    ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], playingPlayer.getPlayerID(), playingPlayerString));
+                if (playerWon){
+                    ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], playingPlayerID, playingPlayerString));
                 } else {
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
                 }
