@@ -199,11 +199,6 @@ namespace blockade.Blockade_IHM
                 */
 
                 ihm.GetComponent<IHM>().sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
-
-                // reset dto pawn
-                dtoPawn = InitDTOPawn();
-                // and remove selected pawn
-                selectedPawn = null;
             }
         }
 
@@ -218,6 +213,14 @@ namespace blockade.Blockade_IHM
         public void SelectPawn(Pawn pawn)
         {
             this.selectedPawn = pawn;
+        }
+
+        public void ForgetSelectedPawn()
+        {
+            // reset dto pawn
+            dtoPawn = InitDTOPawn();
+            // and remove selected pawn
+            selectedPawn = null;
         }
 
         /// <summary>

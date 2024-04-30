@@ -84,6 +84,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOPawn(Common.DTOPawn dto)
         {
             //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
+            ihm.board.ForgetSelectedPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
             // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
