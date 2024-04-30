@@ -275,6 +275,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1530756066369172369, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
   m_PrefabInstance: {fileID: 795819441}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &449766639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2518820710422889362, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
+  m_PrefabInstance: {fileID: 795819441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &467858090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1530756067373266557, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
@@ -1830,7 +1835,7 @@ MonoBehaviour:
   gestionDTO: {fileID: 114772716}
   board: {fileID: 114772714}
   cams: {fileID: 1329981973}
-  endGameMenu: {fileID: 252233363}
+  endGameMenu: {fileID: 449766639}
 --- !u!114 &1896252179
 MonoBehaviour:
   m_ObjectHideFlags: 0
