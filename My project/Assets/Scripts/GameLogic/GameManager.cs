@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
                 } else {
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
                 }
+                ihm.board.ChangeCaseTexture(algoBoard.GetValidPawnMoves(playingPlayer));
             }
     }
 
@@ -110,6 +111,8 @@ public class GameManager : MonoBehaviour
      {
          players.Add(player);
      }
+
+
     public void check_winning()
     {
         if (algoBoard.checkWin(playingPlayer))

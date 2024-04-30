@@ -253,19 +253,32 @@ namespace blockade.Blockade_IHM
 
         public void ChangeCaseTexture(List<(uint, uint)> values)
         {
+            GameObject[] dots = GameObject.FindGameObjectsWithTag("Dot");
+            foreach (GameObject dot in dots)
+            {
+                Destroy(dot);
+            }
+
             foreach ((uint, uint) value in values)
             {
-                uint x = value.Item1;
-                uint y = value.Item2;
-
-                int roundedX = (int)x;
-                int roundedY = (int)y;
+                int roundedX = (int)value.Item1;
+                int roundedY = (int)value.Item2;
 
                 GameObject caseObject = GameObject.Find("(" + roundedX + ", " + roundedY + ")" + "(Clone)");
                 if (caseObject != null)
                 {
-                    Renderer caseRenderer = caseObject.GetComponent<Renderer>();
-                    caseRenderer.material.SetColor("_Color", Color.yellow);
+                    GameObject dot = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    dot.transform.SetParent(caseObject.transform, false);
+                    dot.transform.position = caseObject.transform.position + new Vector3(0f, 0.5f, 0f); 
+                    dot.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                    dot.tag = "Dot";
+                    Renderer dotRenderer = dot.GetComponent<Renderer>();
+                    dotRenderer.material = new Material(Shader.Find("Standard"));
+                    dotRenderer.material.SetColor("_Color", new Color(1f, 1f, 0f, 0.5f));
+                    Collider collider = dot.GetComponent<Collider>();
+                    if (collider != null) {
+                        collider.enabled = false;
+                    }
                 }
             }
         }
