@@ -70,7 +70,7 @@ namespace blockade.Blockade_IHM
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
             ihm.gestionDTO.actionWall(dto);
 
-            // Le joueur viens de déplacer un mur donc sa prochaine action est de déplacer un pion
+            // Le joueur viens de dï¿½placer un mur donc sa prochaine action est de dï¿½placer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
         }
 
@@ -86,7 +86,7 @@ namespace blockade.Blockade_IHM
             Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
             ihm.gestionDTO.moveDTOPawn(dto);
 
-            // Le joueur viens de déplacer un pion donc sa prochaine action est de déplacer un mur
+            // Le joueur viens de dï¿½placer un pion donc sa prochaine action est de dï¿½placer un mur
             int current_player = ihm.GetCurrentPlayer();
             if (ihm.GetPlayer(current_player).verticalWalls > 0 || ihm.GetPlayer(current_player).horizontalWalls > 0)
             {
