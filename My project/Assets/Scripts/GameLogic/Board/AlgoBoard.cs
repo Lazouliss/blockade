@@ -161,7 +161,7 @@ public class AlgoBoard
 
         foreach (Square next in nextSquares)
         {
-            if (next != null)
+            if (next != null && next != path[0])
             {
                 bool nextIsJumping = next.HasPlayer();
                 int newMoves = 0;
