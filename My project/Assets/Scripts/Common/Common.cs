@@ -63,6 +63,9 @@ namespace blockade.Blockade_common
             }
             public Player yellowPlayer, redPlayer;
             public uint winner; // 0 = no winner yet, 1 = yellow player, 2 = red player
+            
+            public List<(uint, uint)>? emplacementsPossiblePion1;
+            public List<(uint, uint)>? emplacementsPossiblePion2;
         }
 
         /// <summary>

@@ -592,4 +592,24 @@ public class AlgoBoard
         }
         return true;
     }
+
+    public List<(uint, uint)> GetValidPawnMoves(Player player)
+    {
+        List<(uint, uint)> validMoves = new List<(uint, uint)>();
+
+        foreach (uint pawnPosition in player.getPositionsPions())
+        {
+            Square pawnSquare = getSquareById(pawnPosition);
+            (uint pawnX, uint pawnY) = getCoordinates(pawnPosition);
+
+            foreach (Square square in cases){
+            if (getChemin((pawnX, pawnY), getCoordinates(square.getIdCase())).Item1)
+                {
+                    validMoves.Add((pawnX, pawnY));
+                }
+            }       
+        }
+
+        return validMoves;
+    }
 }

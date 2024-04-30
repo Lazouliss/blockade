@@ -238,5 +238,24 @@ namespace blockade.Blockade_IHM
 
             return dto;
         }
+
+        public void ChangeCaseTexture(List<(uint, uint)> values)
+        {
+            foreach ((uint, uint) value in values)
+            {
+                uint x = value.Item1;
+                uint y = value.Item2;
+
+                int roundedX = (int)x;
+                int roundedY = (int)y;
+
+                GameObject caseObject = GameObject.Find("(" + roundedX + ", " + roundedY + ")" + "(Clone)");
+                if (caseObject != null)
+                {
+                    Renderer caseRenderer = caseObject.GetComponent<Renderer>();
+                    caseRenderer.material.SetColor("_Color", Color.yellow);
+                }
+            }
+        }
     }
 }
