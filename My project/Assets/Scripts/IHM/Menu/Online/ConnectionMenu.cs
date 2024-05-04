@@ -12,6 +12,11 @@ namespace blockade.Blockade_IHM
         public TMP_InputField inputPassword;
         public Button ConnectionButton;
 
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject connectionMenu;
+        [SerializeField] private GameObject mainMenu;
+        [SerializeField] private GameObject chat;
+
         void Start() 
         {
             inputPassword.contentType = TMP_InputField.ContentType.Password;
@@ -71,6 +76,23 @@ namespace blockade.Blockade_IHM
                 PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
                 // Debug.Log("Password : " + PlayerPassword);
             }
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Appelle la fonction de connexion du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            Debug.Log("Connecting player "+PlayerName);
+            // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+
+            this.connectionMenu.SetActive(false);
+            this.mainMenu.SetActive(true);
+            this.chat.SetActive(true);
         }
     }
 }
