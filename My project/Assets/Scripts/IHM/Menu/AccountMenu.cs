@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
     public class AccountMenu : MonoBehaviour
     {
-        public GameObject Chat;
+        public GameObject chat;
 
         /// <summary>
         /// Par Martin GADET
@@ -14,7 +15,7 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         void Start()
         {
-            Chat.SetActive(false);
+            this.chat.SetActive(false);
         }
     }
 }

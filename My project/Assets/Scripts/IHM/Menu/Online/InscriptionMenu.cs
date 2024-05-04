@@ -13,7 +13,13 @@ namespace blockade.Blockade_IHM
 
         public TMP_InputField inputPassword1;
         public TMP_InputField inputPassword2;
+
         public Button InscriptionButton;
+
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject inscriptionMenu;
+        [SerializeField] private GameObject connectionMenu;
+        [SerializeField] private GameObject chat;
 
         void Start() 
         {
@@ -115,6 +121,23 @@ namespace blockade.Blockade_IHM
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// 
+        /// Appelle la fonction de création de compte du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            Debug.Log("Sign out player " + PlayerName);
+            // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+
+            this.inscriptionMenu.SetActive(false);
+            this.connectionMenu.SetActive(true);
+            this.chat.SetActive(false);
         }
     }
 }

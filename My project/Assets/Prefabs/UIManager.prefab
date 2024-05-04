@@ -4363,7 +4363,7 @@ MonoBehaviour:
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756066861240274}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JoinMenu, Assembly-CSharp
         m_MethodName: SetJoinerCode
         m_Mode: 0
@@ -8098,6 +8098,10 @@ MonoBehaviour:
   inputPassword1: {fileID: 1530756066346601408}
   inputPassword2: {fileID: 1530756066986107721}
   InscriptionButton: {fileID: 1530756067048694542}
+  game: {fileID: 0}
+  inscriptionMenu: {fileID: 1530756065949594689}
+  connectionMenu: {fileID: 1530756067004399891}
+  chat: {fileID: 1530756066375346087}
 --- !u!1 &1530756065949654866
 GameObject:
   m_ObjectHideFlags: 0
@@ -8755,7 +8759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1699b25416395cf4dbb50f62da24c84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Chat: {fileID: 1530756066375346087}
+  chat: {fileID: 1530756066375346087}
 --- !u!1 &1530756065979201728
 GameObject:
   m_ObjectHideFlags: 0
@@ -18844,14 +18848,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1530756066861240275}
-  - component: {fileID: 1530756066861240274}
+  - component: {fileID: 2842400576590937644}
   m_Layer: 5
   m_Name: JoinMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1530756066861240275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18874,7 +18878,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1530756066861240274
+--- !u!114 &2842400576590937644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18894,6 +18898,11 @@ MonoBehaviour:
   menuObject: {fileID: 1530756066786218794}
   waitScreenObject: {fileID: 1530756066999630732}
   PlayerNameText: {fileID: 1530756066546945875}
+  JoinButton: {fileID: 1530756067061834182}
+  game: {fileID: 0}
+  menu: {fileID: 1530756066786218794}
+  waitScreen: {fileID: 1530756066999630732}
+  chat: {fileID: 1530756066375346087}
 --- !u!1 &1530756066898864561
 GameObject:
   m_ObjectHideFlags: 0
@@ -20801,22 +20810,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756065949594689}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756067004399891}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1530756065949594691}
+        m_TargetAssemblyTypeName: blockade.Blockade_IHM.InscriptionMenu, Assembly-CSharp
+        m_MethodName: ClickButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -21050,33 +21047,9 @@ MonoBehaviour:
           m_StringArgument: ONLINE
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1530756066786218794}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066999630732}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066861240274}
-        m_TargetAssemblyTypeName: JoinMenu, Assembly-CSharp
-        m_MethodName: JoinGame
+      - m_Target: {fileID: 2842400576590937644}
+        m_TargetAssemblyTypeName: blockade.Blockade_IHM.JoinMenu, Assembly-CSharp
+        m_MethodName: ClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21085,18 +21058,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066375346087}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756067064550492
 GameObject:
@@ -22478,18 +22439,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756065949594689}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 1530756065976664857}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -22501,6 +22450,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1530756065949594689}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1530756067127575010
 GameObject:
@@ -24986,7 +24947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1530756067373266556
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25354,18 +25315,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756065976664857}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1530756067004399891}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -25378,17 +25327,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1530756065976664857}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756067387576603
 GameObject:
@@ -31044,7 +30993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6432839367249725302
 RectTransform:
   m_ObjectHideFlags: 0
