@@ -50,8 +50,6 @@ namespace blockade.Blockade_IHM
             sys.Random rand = new sys.Random();
             current_player = rand.Next(2)+1;
             */
-            // Create DTOLogic
-            dtoLogic = new DTOLogic(this, GetComponent<GameManager>());
 
             // Init cams
             cams.SetActive(true);
@@ -165,7 +163,6 @@ namespace blockade.Blockade_IHM
         ///
         /// Permet de changer la camera de cote (en fonction du numero de joueur)
         /// </summary>
-        /// <param name="current_player"></param>
         public void SwitchPlayerCamera()
         {
             Debug.Log("Rotating camera");
@@ -230,11 +227,24 @@ namespace blockade.Blockade_IHM
         {
             // Fully clean the board to create a new one
             ClearBoard();
-            
-            this.typePartie = typePartie;
-            overlay = GameObject.Find("Overlay");
 
+            // Create DTOLogic
+            dtoLogic = new DTOLogic(this, GetComponent<GameManager>());
+            // Create ApplyDTO
+            gestionDTO = GameObject.Find("Board").GetComponent<ApplyDTO>();
+            gestionDTO.initApplyDTO();
+            // Select type of game
+            this.typePartie = typePartie;
             Debug.Log(typePartie);
+            // Get the overlay
+            overlay = GameObject.Find("Overlay");
+            // Reset GameManager
+            // TODO : dtoLogic.getGameLogic().ResetBoard();
+            // Set camera rotation to 0
+            cams.transform.eulerAngles = new Vector3(0, 0, 0);
+
+            // Set timeScale to 1 (to be sure to move pawns correctly)
+            Time.timeScale = 1;
 
             // Creation du plateau
             board.StartGame(BASE_NBWALLS);
@@ -310,7 +320,6 @@ namespace blockade.Blockade_IHM
         /// Fonction de fin de partie :
         /// - Desactive les inputs des joueurs sur le plateau
         /// - Fait le tour du plateau via une animation
-        /// - Affiche le menu de fin de partie
         /// </summary>
         /// <param name="winner"></param>
         internal void endGame(uint winner)
@@ -330,6 +339,11 @@ namespace blockade.Blockade_IHM
             cams.GetComponent<Animator>().SetTrigger("trigger_spin");
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Affiche le menu de fin de partie, appele par la fonction qui s'occupe d'animer le mouvement de la camera en fin de partie
+        /// </summary>
         internal void ShowEndGameMenu()
         {
             // And show the menu

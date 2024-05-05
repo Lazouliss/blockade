@@ -14,54 +14,10 @@ namespace blockade.Blockade_IHM
         public float speed = 0.5f;
         public GameObject wall;
 
-        // Start is called before the first frame update
-        void Start()
+        // Constructor
+        public void initApplyDTO() 
         {
-            
             stackWall = new Stack<GameObject>();
-            /*
-            Common.DTOPawn dto = new Common.DTOPawn();
-            dto.startPos = (0, 0);
-            dto.destPos = (1000, 1000);
-
-            List<Common.Direction> listMoove = new List<Common.Direction>();
-            listMoove.Add(Common.Direction.UP);
-            listMoove.Add(Common.Direction.RIGHT);
-            listMoove.Add(Common.Direction.DOWN);
-            listMoove.Add(Common.Direction.LEFT);
-            dto.mooves = listMoove;
-
-
-            StartCoroutine(this.movePawn(dto));
-            */
-
-            /*Common.DTOWall dtoWall = new Common.DTOWall();
-            dtoWall.coord1 = (0,0);
-            dtoWall.coord2 = (0,1);
-            dtoWall.direction = Common.Direction.RIGHT;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);
-
-
-            dtoWall.coord1 = (1, 1);
-            dtoWall.coord2 = (2, 1);
-            dtoWall.direction = Common.Direction.DOWN;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);*/
-
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            // For tests
-            /*
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                removeWall();
-            }
-            */
         }
 
         /// <summary>

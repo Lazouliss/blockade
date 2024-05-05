@@ -55,6 +55,7 @@ namespace blockade.Blockade_IHM
 
             }
 
+            Debug.Log("Going to move the pawn " + transform.name + ", Start : " + start + ", Target : " + target);
 
             while (time < 1.0f)
             {
@@ -64,13 +65,15 @@ namespace blockade.Blockade_IHM
                 // Effectuer le lerp
                 transform.position = Vector3.Lerp(start, target, time);
 
+                //Debug.Log("Time : " + time + ", deltaTime :" + Time.deltaTime + " and position : " + transform.position);
+
                 // Attendre la fin de la frame avant de continuer
                 yield return null;
             }
 
             // Assurez-vous que la position finale est exactement la position cible
             transform.position = target;
-
+            //Debug.Log("Final position : " + transform.position);
         }
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)
