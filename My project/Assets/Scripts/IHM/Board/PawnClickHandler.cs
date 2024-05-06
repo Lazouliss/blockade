@@ -9,7 +9,7 @@ namespace blockade.Blockade_IHM
 
         
         /// <summary>
-        /// Par  ABERKANE Doha & Thomas Montigny (partie IHM)
+        /// Par  ABERKANE Doha &  (Thomas Montigny partie où y a écrit IHM)
         /// 
         /// Deplacement du contenu de la fonction OnMouseDown() dans une ActionPawn pour qu'elle 
         /// puisse etre appelee par une autre partie (pour par exemple jouer un coup par une IA)
@@ -27,6 +27,9 @@ namespace blockade.Blockade_IHM
             {
                 //afficher position
                 Debug.Log("Position du pion cliqué  " + transform.position);
+
+                //appel de la fonction afficherCoups possibles 
+                plateau.afficherCoupsPossibles((transform.position.x, transform.position.z));
 
                 //créer startPos
                 Vector2 startPos = new Vector2(transform.position.x, transform.position.z);

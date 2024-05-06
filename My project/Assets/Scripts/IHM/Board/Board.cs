@@ -112,6 +112,14 @@ namespace blockade.Blockade_IHM
 
         }
 
+        //ABERKANE Doha & BENYOUCEF Imad
+
+        public void afficherCoupsPossibles((float, float) positionPion)
+        {
+
+
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         ///
