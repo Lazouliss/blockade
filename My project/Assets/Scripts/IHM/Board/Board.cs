@@ -21,6 +21,8 @@ namespace blockade.Blockade_IHM
 
         public GameObject selectedWall;
 
+        private System.Random rand;
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -31,6 +33,7 @@ namespace blockade.Blockade_IHM
         /// <param name="nbWalls"></param>
         public void StartGame(int nbWalls)
         {
+            rand = new System.Random();
             Init_Plateau();
             Init_Walls(nbWalls);
         }
@@ -76,10 +79,10 @@ namespace blockade.Blockade_IHM
                     caseObj.AddComponent<BoxCollider>();
 
                     //creation de la case de position 
-                    Vector3 position = new Vector3(x, 0f, y);
+                    Vector3 position = new Vector3(x, (float)(-0.05f + 0.01*rand.Next(10)), y);
 
                     //intantiation de la case à la case correspondante dans la case_plateau
-                    GameObject case_plateau = Instantiate(caseObj, position, Quaternion.identity);
+                    GameObject case_plateau = Instantiate(caseObj, position, Quaternion.Euler(0, rand.Next(4) * 90, 0));
                     case_plateau.transform.SetParent(transform);
                     Destroy(caseObj);
 
