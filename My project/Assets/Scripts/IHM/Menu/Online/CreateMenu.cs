@@ -109,7 +109,6 @@ namespace blockade.Blockade_IHM
         public void ClickButton()
         {
             Debug.Log("Creator player " + ConnectionMenu.PlayerName);
-            Debug.Log("iubnrfiuézehbfiubnezifug");
             // TODO : game.GetComponent<Online>().fonction(PlayerName);
 
             this.createMenu.SetActive(false);
