@@ -48,7 +48,9 @@ namespace blockade.Blockade_IHM
         void Update()
         {
             // TODO récupérer l'info de lancement de partie
-            // si partie lancée alors appeler UIManager.PlayGame()
+            // si partie lancée alors appeler
+            // UIManager.SetTypePartie("ONLINE");
+            // UIManager.PlayGame();
             // sinon
             if (wait == true)
             {
@@ -115,6 +117,7 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void ClickButton()
         {
+            wait = true;
             Debug.Log("Joiner player " + ConnectionMenu.PlayerName);
             // TODO : game.GetComponent<Online>().fonction(PlayerName);
 

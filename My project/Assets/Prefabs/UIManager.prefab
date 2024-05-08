@@ -3062,21 +3062,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: SetTypePartie
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ONLINE
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: MenuGlobal, Assembly-CSharp
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 1530756065893104680}
+        m_TargetAssemblyTypeName: blockade.Blockade_IHM.CreateMenu, Assembly-CSharp
+        m_MethodName: ClickButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7444,7 +7432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1530756065893104678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7491,6 +7479,11 @@ MonoBehaviour:
   CodeText: {fileID: 1530756065626851159}
   NumberText: {fileID: 1530756067387576605}
   PlayerNameText: {fileID: 1530756065949338157}
+  game: {fileID: 0}
+  createMenu: {fileID: 1530756065893104679}
+  overlay: {fileID: 104370328191146308}
+  background: {fileID: 1530756067373266557}
+  chat: {fileID: 1530756066375346087}
 --- !u!1 &1530756065902168589
 GameObject:
   m_ObjectHideFlags: 0
@@ -18855,7 +18848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1530756066861240275
 RectTransform:
   m_ObjectHideFlags: 0
