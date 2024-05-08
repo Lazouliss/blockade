@@ -661,10 +661,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1530756065893104680, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1896252176}
     - target: {fileID: 1530756065949594689, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1530756065949594691, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1896252176}
     - target: {fileID: 1530756065950837466, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1245,6 +1253,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -37.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2842400576590937644, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1896252176}
     - target: {fileID: 3187274758155623197, guid: ba9d238e618fb74478396318a84bd4d2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
