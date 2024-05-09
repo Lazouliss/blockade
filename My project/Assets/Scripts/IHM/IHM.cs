@@ -183,6 +183,26 @@ namespace blockade.Blockade_IHM
             overlay.GetComponent<Overlay>().UpdateRemainingWalls("Horizontal", p.horizontalWalls);
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Appelle la fonction de changement d'action pour un joueur.
+        /// </summary>
+        public void SwitchActionPlayer()
+        {
+            overlay.GetComponent<Overlay>().SwitchActionPlayer();
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Appelle la fonction d'affichage de l'erreur.
+        /// </summary>
+        public void ToggleError(bool state)
+        {
+            overlay.GetComponent<Overlay>().ToggleError(state);
+        }
+
         // ===============================
         // Logique de transmission des DTO
         // ===============================

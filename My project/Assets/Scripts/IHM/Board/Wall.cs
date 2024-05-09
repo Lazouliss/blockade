@@ -37,7 +37,6 @@ namespace blockade.Blockade_IHM
         ///
         /// Création d'un mur, cliquable seulement par un joueur (playerID, TODO), aux positions en argument
         /// </summary>
-        
         public static void createWall(Vector2 pos, int id_player, bool isVerti, Board board)
         {
             // Create wall using prefab and instantiate it on the right position

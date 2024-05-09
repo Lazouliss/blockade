@@ -253,8 +253,6 @@ namespace blockade.Blockade_IHM
                 Debug.Log("Destroying object : " + this.gameObject.transform.GetChild(i).gameObject);
                 Destroy(this.gameObject.transform.GetChild(i).gameObject);
             }
-
-            // TODO : reset les cams
         }
     }
 }
