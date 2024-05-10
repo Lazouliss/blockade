@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace blockade.Blockade_IHM
 {
     public class AccountMenu : MonoBehaviour
     {
         public GameObject Chat;
+        public AudioMixer audioMixer;
 
         /// <summary>
         /// Par Martin GADET

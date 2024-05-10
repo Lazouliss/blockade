@@ -7,6 +7,12 @@ namespace blockade.Blockade_IHM
     {
         public static string typePartie; // ONLINE, JCJ, JCE, ECE
 
+
+        void Start()
+        {
+            
+        }
+
         /// <summary>
         /// Par Martin GADET
         /// Méthode qui passe a la scène de jeu
