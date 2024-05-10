@@ -145,9 +145,6 @@ namespace blockade.Blockade_IHM
                 ihm.SetCurrentPlayer(2);
                 ihm.UpdateRemainingWalls(ihm.GetPlayer(2));
             }
-
-            // Tourne la camera si besoin
-            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>

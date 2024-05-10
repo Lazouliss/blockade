@@ -110,12 +110,23 @@ namespace blockade.Blockade_IHM
             Debug.Log("PlayerCam Tag : " + playerCam.tag + ", BoardCam Tag : " + boardCam.tag);
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Change le type d'action a realiser par le joueur
+        /// </summary>
         public void SwitchActionPlayer()
         {
             txtMovePawn.enabled = !txtMovePawn.enabled;
             txtPlaceWall.enabled = !txtPlaceWall.enabled;
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Affiche le message d'erreur generique, en cas d'action illegal et de reception de DTOError
+        /// </summary>
+        /// <param name="state"></param>
         public void ToggleError(bool state)
         {
             txtError.enabled = state;

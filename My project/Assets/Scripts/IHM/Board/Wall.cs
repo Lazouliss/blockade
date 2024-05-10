@@ -35,7 +35,7 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY, Doha ABERKANE (parti mise en beauté du plateau)
         ///
-        /// Création d'un mur, cliquable seulement par un joueur (playerID, TODO), aux positions en argument
+        /// Création d'un mur, cliquable seulement par un joueur (playerID), aux positions en argument
         /// </summary>
         public static void createWall(Vector2 pos, int id_player, bool isVerti, Board board)
         {

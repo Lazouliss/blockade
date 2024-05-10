@@ -252,7 +252,7 @@ namespace blockade.Blockade_IHM
             dtoLogic = new DTOLogic(this, GetComponent<GameManager>());
             // Create ApplyDTO
             gestionDTO = GameObject.Find("Board").GetComponent<ApplyDTO>();
-            gestionDTO.initApplyDTO();
+            gestionDTO.initApplyDTO(this);
             // Select type of game
             this.typePartie = typePartie;
             Debug.Log(typePartie);
