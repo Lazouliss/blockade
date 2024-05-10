@@ -7,8 +7,6 @@ namespace blockade.Blockade_IHM
     {
         public AudioMixer audioMixer;
         public static float volumeValue;
-        public static bool animationValue;
-        public static string languageValue;
 
         /// <summary>
         /// Par Martin GADET
@@ -22,40 +20,6 @@ namespace blockade.Blockade_IHM
             volumeValue = volume;
             Debug.Log(volumeValue);
             // TODO trouver une musique
-        }
-
-        /// <summary>
-        /// Par Martin GADET
-        /// Méthode qui set le booléen des animations
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void setAnimation(bool animation)
-        {
-            animationValue = animation;
-            Debug.Log(animationValue);
-        }
-
-        /// <summary>
-        /// Par Martin GADET
-        /// Méthode qui set le langage des menus
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void setLanguage(int language)
-        {
-            switch (language)
-            {
-                case 0:
-                    languageValue = "Français";
-                    break;
-                case 1:
-                    languageValue = "Anglais";
-                    break;
-            }
-
-            Debug.Log(languageValue);
-            // TODO changer le langage quand nécessaire
         }
     }
 }
