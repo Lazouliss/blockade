@@ -15,13 +15,12 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui passe a la scène de jeu
+        /// Méthode qui affiche le plateau
         /// Publique
         /// </summary>
         /// <returns></returns>
         public static void PlayGame()
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Debug.Log("The game is starting");
             GameObject.Find("Game").GetComponent<IHM>().PlayGame(typePartie);
         }
@@ -40,13 +39,13 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode pour vérifier si une chaîne est composée uniquement de caractères alphanumériques ou si elle a plus de 15 caractères
+        /// Méthode pour vérifier si le nom du joueur est composé uniquement de caractères alphanumériques ou si elle a plus de 12 caractères
         /// Publique
         /// </summary>
         /// <returns>Boolean (true/false)</returns>
         public static bool CheckPlayerName(string str)
         {
-            if (str.Length > 15)
+            if (str.Length > 12)
             {
                 return false;
             }
@@ -62,11 +61,11 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui set le nom d'un joueur
+        /// Méthode qui récupère le nom d'un joueur
         /// Publique
         /// </summary>
         /// <returns>inputName (nom rentré par le joueur)</returns>
-        public static string SetPlayerName(string inputName)
+        public static string getPlayerName(string inputName)
         {
             try
             {
@@ -85,49 +84,58 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode pour vérifier si une chaîne est composée d'au moins 8 caractère
+        /// Méthode pour vérifier si le mdp est composé d'au moins 8 caractère
         /// Publique
         /// </summary>
         /// <returns>Boolean (true/false)</returns>
-        public static bool CheckPlayerPassword(string str)
+        public static bool CheckPlayerPassword(string password)
         {
-            if (str.Length < 8)
-            {
+            if (password.Length != 8)
                 return false;
+
+            bool hasUpperCase = false;
+            bool hasLowerCase = false;
+            bool hasDigit = false;
+
+            foreach (char c in password)
+            {
+                if (char.IsUpper(c))
+                    hasUpperCase = true;
+                else if (char.IsLower(c))
+                    hasLowerCase = true;
+                else if (char.IsDigit(c))
+                    hasDigit = true;
             }
-            return true;
+
+            if (hasUpperCase && hasLowerCase && hasDigit)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui set le mot de passe d'un joueur
+        /// Méthode qui récupère le mot de passe d'un joueur
         /// Publique
         /// </summary>
         /// <returns>inputPassword (nom rentré par le joueur)</returns>
-        public static string SetPlayerPassword(string inputPassword)
+        public static string getPlayerPassword(string inputPassword)
         {
-            try
+            if (!UIManager.CheckPlayerPassword(inputPassword))
             {
-                if (!UIManager.CheckPlayerPassword(inputPassword))
-                {
-                    throw new Exception("Le mot de passe doit contenir 8 caractères minimum.");
-                }
-                return inputPassword;
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Erreur : " + e.Message);
+                // TODO afficher pop up
                 return "0";
             }
+            return inputPassword;
         }
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui set le code rentré par un joueur
+        /// Méthode qui récupère le code de partie rentré par un joueur
         /// Publique
         /// </summary>
         /// <returns>code (code rentré par le joueur)</returns>
-        public static int SetCode(string inputCode)
+        public static int getCode(string inputCode)
         {
             int code = 0;
 
@@ -145,11 +153,11 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui set le niveau de l'IA
+        /// Méthode qui récupère le niveau de l'IA
         /// Publique
         /// </summary>
         /// <returns>levelValue, levelString (numéro du niveau et string correspondante sélectionner par le joueur)</returns>
-        public static (int, string) setIALevel(int level)
+        public static (int, string) getIALevel(int level)
         {
             int levelValue = 1;
             string levelString = "Facile";

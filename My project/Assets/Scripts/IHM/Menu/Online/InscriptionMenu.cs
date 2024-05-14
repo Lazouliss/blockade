@@ -52,11 +52,11 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerName (string inputName)
+        public void getPlayerName (string inputName)
         {   
-            if(UIManager.SetPlayerName(inputName) != "0")
+            if(UIManager.getPlayerName(inputName) != "0")
             {
-                PlayerName = UIManager.SetPlayerName(inputName);
+                PlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("Pseudo : " + PlayerName);
             }
         }
@@ -67,11 +67,11 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerPassword1 (string inputPassword)
+        public void getPlayerPassword1 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
+            if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword1 = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password1 : " + PlayerPassword1);
             }
         }
@@ -82,11 +82,11 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerPassword2 (string inputPassword)
+        public void getPlayerPassword2 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
+            if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password2 : " + PlayerPassword2);
             }
             try
