@@ -24,7 +24,7 @@ public class audiManager : MonoBehaviour
 
     void PlayRandomMusic()
     {
-        int randomIndex = Random.Range(0, audioClips.Length + 1);
+        int randomIndex = Random.Range(0, audioClips.Length);
         AudioClip clipToPlay = audioClips[randomIndex];
         audioSource.clip = clipToPlay;
         audioSource.Play();

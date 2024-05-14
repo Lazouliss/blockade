@@ -72,9 +72,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void DisplayCreatorCode(string inputCode)
         {
-            if (UIManager.getCode(inputCode) != 0)
+            if (UIManager.getGameCode(inputCode) != 0)
             {
-                CreatorCode = UIManager.getCode(inputCode);
+                CreatorCode = UIManager.getGameCode(inputCode);
                 CodeText.SetText(CreatorCode.ToString());
                 Debug.Log("CreatorCode : " + CreatorCode);
             }

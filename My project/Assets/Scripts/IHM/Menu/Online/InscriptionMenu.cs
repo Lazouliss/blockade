@@ -52,7 +52,7 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void getPlayerName (string inputName)
+        public void SetPlayerName (string inputName)
         {   
             if(UIManager.getPlayerName(inputName) != "0")
             {
@@ -67,7 +67,7 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void getPlayerPassword1 (string inputPassword)
+        public void SetPlayerPassword1 (string inputPassword)
         {   
             if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
@@ -82,23 +82,12 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void getPlayerPassword2 (string inputPassword)
+        public void SetPlayerPassword2 (string inputPassword)
         {   
             if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
                 PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password2 : " + PlayerPassword2);
-            }
-            try
-            {
-                if(!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
-                {
-                    throw new Exception("Les mots de passe sont différents.");
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Erreur : " + e.Message);
             }
         }
 

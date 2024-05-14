@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace blockade.Blockade_IHM
@@ -6,7 +7,6 @@ namespace blockade.Blockade_IHM
     public class UIManager : MonoBehaviour
     {
         public static string typePartie; // ONLINE, JCJ, JCE, ECE
-
 
         void Start()
         {
@@ -27,7 +27,7 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui set le type de la partie
+        /// Méthode qui set le type de la partie (ONLINE, JCJ, JCE, ECE)
         /// Publique
         /// </summary>
         /// <returns></returns>
@@ -43,19 +43,14 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns>Boolean (true/false)</returns>
-        public static bool CheckPlayerName(string str)
+        public static bool CheckPlayerName(string login)
         {
-            if (str.Length > 12)
-            {
+            if (login.Length > 12)
                 return false;
-            }
-            foreach (char c in str)
-            {
-                if (!char.IsLetter(c) || char.IsWhiteSpace(c) || char.IsPunctuation(c) || char.IsSymbol(c))
-                {
-                    return false;
-                }
-            }
+
+            if (!Regex.IsMatch(login, @"^[a-zA-Z0-9]+$"))
+                return false;
+
             return true;
         }
 
@@ -67,19 +62,12 @@ namespace blockade.Blockade_IHM
         /// <returns>inputName (nom rentré par le joueur)</returns>
         public static string getPlayerName(string inputName)
         {
-            try
+            if (!UIManager.CheckPlayerName(inputName))
             {
-                if (!UIManager.CheckPlayerName(inputName))
-                {
-                    throw new Exception("Le nom du joueur ne doit pas contenir de caractères spéciaux et ne doit pas dépasser 15 caractères.");
-                }
-                return inputName;
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Erreur : " + e.Message);
+                // TODO afficher popup
                 return "0";
             }
+            return inputName;
         }
 
         /// <summary>
@@ -90,7 +78,7 @@ namespace blockade.Blockade_IHM
         /// <returns>Boolean (true/false)</returns>
         public static bool CheckPlayerPassword(string password)
         {
-            if (password.Length != 8)
+            if (password.Length < 8)
                 return false;
 
             bool hasUpperCase = false;
@@ -135,20 +123,32 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns>code (code rentré par le joueur)</returns>
-        public static int getCode(string inputCode)
+        public static bool CheckCode(string code)
         {
-            int code = 0;
+            int parsedCode;
+            if (!int.TryParse(code, out parsedCode))
+                return false;
 
-            try
+            if (code.Length != 4)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode qui récupère le mot de passe d'un joueur
+        /// Publique
+        /// </summary>
+        /// <returns>inputPassword (nom rentré par le joueur)</returns>
+        public static int getGameCode(string inputCode)
+        {
+            if (!UIManager.CheckCode(inputCode))
             {
-                code = Int32.Parse(inputCode);
-                return code;
-            }
-            catch (FormatException)
-            {
-                Debug.Log("Put a integer number as code");
+                // TODO afficher pop up
                 return 0;
             }
+            return int.Parse(inputCode);
         }
 
         /// <summary>
