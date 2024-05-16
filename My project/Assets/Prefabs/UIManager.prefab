@@ -1067,16 +1067,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1530756066762835838}
-        m_TargetAssemblyTypeName: blockade.Blockade_IHM.UIManager, Assembly-CSharp
-        m_MethodName: SetTypePartie
-        m_Mode: 5
+      - m_Target: {fileID: 9053853599988496517}
+        m_TargetAssemblyTypeName: blockade.Blockade_IHM.EndMenu, Assembly-CSharp
+        m_MethodName: Replay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: JCE
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &822125433352613914
@@ -28678,6 +28678,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   medaille_victoire: {fileID: 3425461521941190329}
   medaille_defaite: {fileID: 3100452839626765594}
+  TypePartie: 
+  IHM: {fileID: 0}
+  UiManager: {fileID: 1530756066762835835}
 --- !u!1 &2523384654043462139
 GameObject:
   m_ObjectHideFlags: 0

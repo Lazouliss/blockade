@@ -158,6 +158,18 @@ namespace blockade.Blockade_IHM
             }
         }
 
+        // Update is called once per frame
+        /// <summary>
+        /// Par Nolan Laroche
+        /// 
+        /// Getter qui permet de récuperer le type de parties
+        /// </summary>
+
+        public string GetTypePartie()
+        {
+            return typePartie;
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         ///
