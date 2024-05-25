@@ -46,9 +46,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetCreatorPlayerName(string inputName)
         {
-            if (UIManager.SetPlayerName(inputName) != "0")
+            if (UIManager.getPlayerName(inputName) != "0")
             {
-                CreatorPlayerName = UIManager.SetPlayerName(inputName);
+                CreatorPlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("CreatorPLayer : " + CreatorPlayerName);
             }
         }
@@ -72,9 +72,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void DisplayCreatorCode(string inputCode)
         {
-            if (UIManager.SetCode(inputCode) != 0)
+            if (UIManager.getGameCode(inputCode) != 0)
             {
-                CreatorCode = UIManager.SetCode(inputCode);
+                CreatorCode = UIManager.getGameCode(inputCode);
                 CodeText.SetText(CreatorCode.ToString());
                 Debug.Log("CreatorCode : " + CreatorCode);
             }
