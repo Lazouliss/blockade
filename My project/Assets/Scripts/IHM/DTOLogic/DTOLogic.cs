@@ -19,6 +19,11 @@ namespace blockade.Blockade_IHM
             this.gamelogic = gamelogic;
         }
 
+        public GameManager getGameLogic()
+        {
+            return gamelogic;
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -83,7 +88,7 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOPawn(Common.DTOPawn dto)
         {
-            //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
+            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
             ihm.board.ForgetSelectedPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 

@@ -17,8 +17,8 @@ namespace blockade.Blockade_IHM
         [SerializeField] private GameObject game;
         [SerializeField] private GameObject createMenu;
         [SerializeField] private GameObject overlay;
-        [SerializeField] private GameObject background;
         [SerializeField] private GameObject chat;
+        [SerializeField] private UIManager ui;
 
         /// <summary>
         /// Par Martin GADET
@@ -52,9 +52,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetCreatorPlayerName(string inputName)
         {
-            if (UIManager.SetPlayerName(inputName) != "0")
+            if (UIManager.getPlayerName(inputName) != "0")
             {
-                CreatorPlayerName = UIManager.SetPlayerName(inputName);
+                CreatorPlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("CreatorPLayer : " + CreatorPlayerName);
             }
         }
@@ -78,9 +78,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void DisplayCreatorCode(string inputCode)
         {
-            if (UIManager.SetCode(inputCode) != 0)
+            if (UIManager.getGameCode(inputCode) != 0)
             {
-                CreatorCode = UIManager.SetCode(inputCode);
+                CreatorCode = UIManager.getGameCode(inputCode);
                 CodeText.SetText(CreatorCode.ToString());
                 Debug.Log("CreatorCode : " + CreatorCode);
             }
@@ -112,11 +112,10 @@ namespace blockade.Blockade_IHM
             // TODO : game.GetComponent<Online>().fonction(PlayerName);
 
             this.createMenu.SetActive(false);
-            this.background.SetActive(false);
             this.overlay.SetActive(true);
             this.chat.SetActive(true);
             UIManager.SetTypePartie("ONLINE");
-            UIManager.PlayGame();
+            ui.PlayGame();
         }
     }
 }

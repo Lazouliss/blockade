@@ -101,9 +101,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetJoinerCode(string inputCode)
         {
-            if (UIManager.SetCode(inputCode) != 0)
+            if (UIManager.getGameCode(inputCode) != 0)
             {
-                JoinerCode = UIManager.SetCode(inputCode);
+                JoinerCode = UIManager.getGameCode(inputCode);
                 Debug.Log("JoinerCode : " + JoinerCode);
             }
         }

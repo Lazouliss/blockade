@@ -39,10 +39,10 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void setIALevel(int level)
+        public void getIALevel(int level)
         {
-            levelValue = UIManager.setIALevel(level).Item1;
-            levelString = UIManager.setIALevel(level).Item2;
+            levelValue = UIManager.getIALevel(level).Item1;
+            levelString = UIManager.getIALevel(level).Item2;
             Debug.Log("levelValue : " + levelValue);
             Debug.Log("levelString : " + levelString);
         }
