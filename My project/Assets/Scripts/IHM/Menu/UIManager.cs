@@ -1,6 +1,9 @@
 using System;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace blockade.Blockade_IHM
 {
@@ -8,20 +11,17 @@ namespace blockade.Blockade_IHM
     {
         public static string typePartie; // ONLINE, JCJ, JCE, ECE
 
-        void Start()
-        {
-            
-        }
-
         /// <summary>
         /// Par Martin GADET
         /// Méthode qui affiche le plateau
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public static void PlayGame()
+        public void PlayGame()
         {
             Debug.Log("The game is starting");
+            RawImage background = GetComponent<RawImage>();
+            background.enabled = false;
             GameObject.Find("Game").GetComponent<IHM>().PlayGame(typePartie);
         }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 using blockade.Blockade_common;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 namespace blockade.Blockade_IHM
 {
@@ -112,6 +113,14 @@ namespace blockade.Blockade_IHM
 
         }
 
+        //ABERKANE Doha & BENYOUCEF Imad
+
+        public void afficherCoupsPossibles((float, float) positionPion)
+        {
+
+
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         ///
@@ -171,9 +180,6 @@ namespace blockade.Blockade_IHM
         //fonction d'envoi des positions en dto
         public void SendDTO(Vector2 pos, bool isStartPos)
         {
-            //dtoPawn = dto; //Màj du dto
-
-            Debug.Log(pos + " " + (uint)pos[0] + " " + (uint)pos[1]);
             if (isStartPos)
             {
                 dtoPawn.startPos = ((uint)pos[0], (uint)pos[1]);
@@ -240,15 +246,20 @@ namespace blockade.Blockade_IHM
             return dto;
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Supprime le plateau
+        /// </summary>
         public void ClearBoard()
         {
-            // Test clear board -> crashing unity
-            /*
-            while (this.gameObject.transform.childCount != 0)
+            for (int i = 0; i< this.gameObject.transform.childCount; i++)
             {
-                Destroy(this.gameObject.transform.GetChild(0).gameObject);
+                Debug.Log("Destroying object : " + this.gameObject.transform.GetChild(i).gameObject);
+                Destroy(this.gameObject.transform.GetChild(i).gameObject);
             }
-            */
+
+            // TODO : reset les cams
         }
     }
 }

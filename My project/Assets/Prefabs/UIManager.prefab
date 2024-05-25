@@ -17089,6 +17089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d82e145d5c9924499ac00f73b09679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 1530756066762835835}
 --- !u!222 &4978162106858912506
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18053,10 +18054,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756067004399891}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1530756067004399893}
+        m_TargetAssemblyTypeName: blockade.Blockade_IHM.ConnectionMenu, Assembly-CSharp
+        m_MethodName: ClickButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18064,30 +18065,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066951508726}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1530756066375346087}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1530756066905518760
 GameObject:
@@ -19095,6 +19072,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPassword: {fileID: 1530756067080222416}
   ConnectionButton: {fileID: 1530756066900960854}
+  game: {fileID: 0}
+  connectionMenu: {fileID: 1530756067004399891}
+  mainMenu: {fileID: 1530756066951508726}
+  chat: {fileID: 1530756066375346087}
 --- !u!1 &1530756067005658369
 GameObject:
   m_ObjectHideFlags: 0
