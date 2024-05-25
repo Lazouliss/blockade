@@ -20207,7 +20207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1530756067004399893}
         m_TargetAssemblyTypeName: blockade.Blockade_IHM.ConnectionMenu, Assembly-CSharp
-        m_MethodName: SetPlayerName
+        m_MethodName: SetPlayerPassword
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
