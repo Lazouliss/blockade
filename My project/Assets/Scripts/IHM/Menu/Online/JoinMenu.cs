@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Threading;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
@@ -16,6 +17,13 @@ namespace blockade.Blockade_IHM
         public GameObject menuObject;
         public GameObject waitScreenObject;
         public TMP_Text PlayerNameText;
+
+        public Button JoinButton;
+
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject menu;
+        [SerializeField] private GameObject waitScreen;
+        [SerializeField] private GameObject chat;
 
         /// <summary>
         /// Par Martin GADET
@@ -40,7 +48,9 @@ namespace blockade.Blockade_IHM
         void Update()
         {
             // TODO récupérer l'info de lancement de partie
-            // si partie lancée alors appeler UIManager.PlayGame()
+            // si partie lancée alors appeler
+            // UIManager.SetTypePartie("ONLINE");
+            // UIManager.PlayGame();
             // sinon
             if (wait == true)
             {
@@ -96,6 +106,24 @@ namespace blockade.Blockade_IHM
                 JoinerCode = UIManager.getGameCode(inputCode);
                 Debug.Log("JoinerCode : " + JoinerCode);
             }
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// 
+        /// Appelle la fonction de rejoindre une partie
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            wait = true;
+            Debug.Log("Joiner player " + ConnectionMenu.PlayerName);
+            // TODO : game.GetComponent<Online>().fonction(PlayerName);
+
+            this.menu.SetActive(false);
+            this.waitScreen.SetActive(true);
+            this.chat.SetActive(false);
         }
     }
 }

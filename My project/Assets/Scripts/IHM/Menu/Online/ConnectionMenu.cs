@@ -10,6 +10,7 @@ namespace blockade.Blockade_IHM
         public static string PlayerPassword;
 
         public TMP_InputField inputPassword;
+        
         public Button ConnectionButton;
 
         [SerializeField] private GameObject game;
