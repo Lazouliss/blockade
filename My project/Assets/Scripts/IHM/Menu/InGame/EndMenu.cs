@@ -9,6 +9,10 @@ namespace blockade.Blockade_IHM
         public GameObject medaille_victoire;
         public GameObject medaille_defaite;
 
+        public string TypePartie;
+        public IHM IHM;
+        
+
         // Update is called once per frame
         /// <summary>
         /// Par Nolan Laroche
@@ -29,8 +33,19 @@ namespace blockade.Blockade_IHM
             }
         }
 
-
-
+        // Update is called once per frame
+        /// <summary>
+        /// Par Nolan Laroche
+        /// 
+        /// Fonction qui permet de passer les variables de parties actuelles et qui les renvoies 
+        /// </summary>
+        public void Replay()
+        {
+            TypePartie = IHM.GetTypePartie();
+            Debug.Log(TypePartie);
+            UIManager.SetTypePartie(TypePartie);
+            
+        }
 
 
     }
