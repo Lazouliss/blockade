@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using blockade.Blockade_common;
 using sys = System;
 using System.Threading;
@@ -32,6 +33,7 @@ namespace blockade.Blockade_IHM
         
         // Only for GameEnd
         [SerializeField] private GameObject endGameMenu;
+        [SerializeField] private GameObject ui;
         private int winner;
 
         // Structure d'un joueur
@@ -361,6 +363,7 @@ namespace blockade.Blockade_IHM
             // And show the menu
             overlay.SetActive(false);
             endGameMenu.SetActive(true);
+            ui.GetComponent<RawImage>().enabled = true;
             endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == this.winner);
         }
     }
