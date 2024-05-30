@@ -1,61 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace blockade.Blockade_IHM
+public class SettingsMenu : MonoBehaviour
 {
-    public class SettingsMenu : MonoBehaviour
+    public AudioMixer audioMixer;
+    public float volumeValue;
+    public bool animationValue;
+    public string languageValue;
+
+    public void setVolume (float volume)
     {
-        public AudioMixer audioMixer;
-        public static float volumeValue;
-        public static bool animationValue;
-        public static string languageValue;
+        audioMixer.SetFloat("volume", volume);
+        volumeValue = volume;
+        Debug.Log(volumeValue);
+    }
 
-        /// <summary>
-        /// Par Martin GADET
-        /// Méthode qui set le volume dans une variable change celui du AudioMixer
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void setVolume(float volume)
+    public void setAnimation (bool animation)
+    {
+        animationValue = animation;
+        Debug.Log(animationValue);
+    }
+
+    public void setLanguage (int language)
+    {
+        switch(language)
         {
-            audioMixer.SetFloat("volume", volume);
-            volumeValue = volume;
-            Debug.Log(volumeValue);
-            // TODO trouver une musique
+            case 0:
+                languageValue = "Français";
+                break;
+            case 1:
+                languageValue = "Anglais";
+                break;
         }
 
-        /// <summary>
-        /// Par Martin GADET
-        /// Méthode qui set le booléen des animations
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void setAnimation(bool animation)
-        {
-            animationValue = animation;
-            Debug.Log(animationValue);
-        }
-
-        /// <summary>
-        /// Par Martin GADET
-        /// Méthode qui set le langage des menus
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void setLanguage(int language)
-        {
-            switch (language)
-            {
-                case 0:
-                    languageValue = "Français";
-                    break;
-                case 1:
-                    languageValue = "Anglais";
-                    break;
-            }
-
-            Debug.Log(languageValue);
-            // TODO changer le langage quand nécessaire
-        }
+        Debug.Log(languageValue);
     }
 }
