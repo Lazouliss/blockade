@@ -10,6 +10,7 @@ namespace blockade.Blockade_IHM
         public static string PlayerPassword;
 
         public TMP_InputField inputPassword;
+        
         public Button ConnectionButton;
 
         [SerializeField] private GameObject game;
@@ -56,9 +57,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerName(string inputName)
         {
-            if (UIManager.SetPlayerName(inputName) != "0")
+            if (UIManager.getPlayerName(inputName) != "0")
             {
-                PlayerName = UIManager.SetPlayerName(inputName);
+                PlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("Pseudo : " + PlayerName);
             }
         }
@@ -71,9 +72,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword(string inputPassword)
         {
-            if (UIManager.SetPlayerPassword(inputPassword) != "0")
+            if (UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password : " + PlayerPassword);
             }
         }
