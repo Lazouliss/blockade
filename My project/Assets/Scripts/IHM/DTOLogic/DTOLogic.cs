@@ -77,6 +77,8 @@ namespace blockade.Blockade_IHM
 
             // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
+            ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -98,6 +100,8 @@ namespace blockade.Blockade_IHM
             {
                 ihm.SetPlayerPlacingWall(current_player, true);
             }
+            ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -141,9 +145,6 @@ namespace blockade.Blockade_IHM
                 ihm.SetCurrentPlayer(2);
                 ihm.UpdateRemainingWalls(ihm.GetPlayer(2));
             }
-
-            // Tourne la camera si besoin
-            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>
@@ -157,6 +158,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOError(Common.DTOError dto)
         {
             Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
+            ihm.ToggleError(true);
         }
 
         /// <summary>
