@@ -29,32 +29,61 @@ namespace blockade.Blockade_IHM
 
             float length = ApplyDTO.LENGTH_TILE;
 
-            float speed = 1.0f; // Vitesse de déplacement
+            float speed = 5.0f; // Vitesse de déplacement
             float time = 0;
 
             Vector3 start = transform.position;
+            Quaternion startRotation = transform.rotation;
+
+
 
             Vector3 target = start;
+            Quaternion targetRotation;
             switch (direction)
             {
                 case Common.Direction.UP:
                     target += new Vector3(0, 0, length);
+                    targetRotation = Quaternion.Euler(0, 0, 0);
+
                     break;
                 case Common.Direction.DOWN:
                     target += new Vector3(0, 0, -length);
+                    targetRotation = Quaternion.Euler(0, 180, 0);
                     break;
                 case Common.Direction.LEFT:
                     target += new Vector3(-length, 0, 0);
+                    targetRotation = Quaternion.Euler(0, -90, 0);
                     break;
                 case Common.Direction.RIGHT:
                     target += new Vector3(length, 0, 0);
+                    targetRotation = Quaternion.Euler(0, 90, 0);
                     break;
                 default:
                     target += new Vector3(0, 0, 0);
+                    targetRotation = Quaternion.Euler(0, 0, 0);
                     break;
 
             }
 
+
+            Debug.Log("Going to turn the pawn " + transform.name + ", Start : " + startRotation + ", Target : " + targetRotation);
+
+            while (time < 1.0f)
+            {
+                // Augmenter le temps de lerp basé sur le temps écoulé multiplié par la vitesse
+                time += Time.deltaTime * speed;
+
+                // Effectuer le lerp
+                transform.rotation = Quaternion.Lerp(startRotation, targetRotation, time);
+
+                //Debug.Log("Time : " + time + ", deltaTime :" + Time.deltaTime + " and position : " + transform.position);
+
+                // Attendre la fin de la frame avant de continuer
+                yield return null;
+            }
+
+            time = 0;
+            Debug.Log("Going to move the pawn " + transform.name + ", Start : " + start + ", Target : " + target);
 
             while (time < 1.0f)
             {
@@ -64,13 +93,15 @@ namespace blockade.Blockade_IHM
                 // Effectuer le lerp
                 transform.position = Vector3.Lerp(start, target, time);
 
+                //Debug.Log("Time : " + time + ", deltaTime :" + Time.deltaTime + " and position : " + transform.position);
+
                 // Attendre la fin de la frame avant de continuer
                 yield return null;
             }
 
             // Assurez-vous que la position finale est exactement la position cible
             transform.position = target;
-
+            //Debug.Log("Final position : " + transform.position);
         }
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)

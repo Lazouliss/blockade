@@ -3,38 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SettingsMenu : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public AudioMixer audioMixer;
-    public float volumeValue;
-    public bool animationValue;
-    public string languageValue;
-
-    public void setVolume (float volume)
+    public class SettingsMenu : MonoBehaviour
     {
-        audioMixer.SetFloat("volume", volume);
-        volumeValue = volume;
-        Debug.Log(volumeValue);
-    }
+        public AudioMixer audioMixer;
 
-    public void setAnimation (bool animation)
-    {
-        animationValue = animation;
-        Debug.Log(animationValue);
-    }
-
-    public void setLanguage (int language)
-    {
-        switch(language)
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode qui set le volume de l'AudioMixer
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public void setVolume(float volume)
         {
-            case 0:
-                languageValue = "Français";
-                break;
-            case 1:
-                languageValue = "Anglais";
-                break;
+            audioMixer.SetFloat("volume", volume);
         }
-
-        Debug.Log(languageValue);
     }
 }

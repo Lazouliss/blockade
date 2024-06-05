@@ -10,7 +10,13 @@ namespace blockade.Blockade_IHM
         public static string PlayerPassword;
 
         public TMP_InputField inputPassword;
+        
         public Button ConnectionButton;
+
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject connectionMenu;
+        [SerializeField] private GameObject mainMenu;
+        [SerializeField] private GameObject chat;
 
         void Start() 
         {
@@ -51,9 +57,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerName(string inputName)
         {
-            if (UIManager.SetPlayerName(inputName) != "0")
+            if (UIManager.getPlayerName(inputName) != "0")
             {
-                PlayerName = UIManager.SetPlayerName(inputName);
+                PlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("Pseudo : " + PlayerName);
             }
         }
@@ -66,11 +72,28 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword(string inputPassword)
         {
-            if (UIManager.SetPlayerPassword(inputPassword) != "0")
+            if (UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password : " + PlayerPassword);
             }
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Appelle la fonction de connexion du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            Debug.Log("Connecting player "+PlayerName);
+            // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+
+            this.connectionMenu.SetActive(false);
+            this.mainMenu.SetActive(true);
+            this.chat.SetActive(true);
         }
     }
 }

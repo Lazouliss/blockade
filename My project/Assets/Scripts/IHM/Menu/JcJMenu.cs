@@ -1,27 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
-public class JcJMenu : MonoBehaviour
+namespace blockade.Blockade_IHM
 {
-    public string Player1Name;
-    public string Player2Name;
-
-    public void PlayGame ()
+    public class JcJMenu : MonoBehaviour
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+        public static string Player2Name;
 
-    public void SetPlayer1Name (string inputName)
-    {
-        Player1Name = inputName;
-        Debug.Log(Player1Name);
-    }
+        public TMP_Text PlayerNameText;
 
-    public void SetPlayer2Name (string inputName)
-    {
-        Player2Name = inputName;
-        Debug.Log(Player2Name);
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode Start qui récupère le nom du joueur et l'affiche
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        void Start()
+        {
+            DisplayPlayerName(ConnectionMenu.PlayerName);
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode qui affiche le nom du joueur
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public void DisplayPlayerName(string name)
+        {
+            PlayerNameText.SetText(name);
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// Méthode qui set le nom du joueur 2
+        /// Publique
+        /// </summary>
+        /// <returns></returns>
+        public void SetPlayer2Name(string inputName)
+        {
+            if (UIManager.getPlayerName(inputName) != "0")
+            {
+                Player2Name = UIManager.getPlayerName(inputName);
+                Debug.Log("Player2 : " + Player2Name);
+            }
+        }
     }
 }

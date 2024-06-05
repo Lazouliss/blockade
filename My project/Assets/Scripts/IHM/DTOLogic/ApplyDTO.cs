@@ -14,54 +14,13 @@ namespace blockade.Blockade_IHM
         public float speed = 0.5f;
         public GameObject wall;
 
-        // Start is called before the first frame update
-        void Start()
+        private IHM ihm;
+
+        // Constructor
+        public void initApplyDTO(IHM ihm) 
         {
-            
             stackWall = new Stack<GameObject>();
-            /*
-            Common.DTOPawn dto = new Common.DTOPawn();
-            dto.startPos = (0, 0);
-            dto.destPos = (1000, 1000);
-
-            List<Common.Direction> listMoove = new List<Common.Direction>();
-            listMoove.Add(Common.Direction.UP);
-            listMoove.Add(Common.Direction.RIGHT);
-            listMoove.Add(Common.Direction.DOWN);
-            listMoove.Add(Common.Direction.LEFT);
-            dto.mooves = listMoove;
-
-
-            StartCoroutine(this.movePawn(dto));
-            */
-
-            /*Common.DTOWall dtoWall = new Common.DTOWall();
-            dtoWall.coord1 = (0,0);
-            dtoWall.coord2 = (0,1);
-            dtoWall.direction = Common.Direction.RIGHT;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);
-
-
-            dtoWall.coord1 = (1, 1);
-            dtoWall.coord2 = (2, 1);
-            dtoWall.direction = Common.Direction.DOWN;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);*/
-
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            // For tests
-            /*
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                removeWall();
-            }
-            */
+            this.ihm = ihm;
         }
 
         /// <summary>
@@ -170,7 +129,26 @@ namespace blockade.Blockade_IHM
 
             animator.SetTrigger("descendMur");
 
+            // Attend la fin de l'animation avant de changer de perspective de joueur
+            StartCoroutine(DelayedSwitchPlayer(animator.GetCurrentAnimatorStateInfo(0).length));
+
             stackWall.Push(newObject);
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Attend un certain delais avant de changer de perspective de joueur
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        IEnumerator DelayedSwitchPlayer(float delay = 0)
+        {
+            Debug.Log("Delayed animation");
+            yield return new WaitForSeconds(delay);
+
+            // Tourne la camera
+            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>

@@ -19,6 +19,11 @@ namespace blockade.Blockade_IHM
             this.gamelogic = gamelogic;
         }
 
+        public GameManager getGameLogic()
+        {
+            return gamelogic;
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -72,6 +77,8 @@ namespace blockade.Blockade_IHM
 
             // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
+            ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -83,7 +90,7 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOPawn(Common.DTOPawn dto)
         {
-            //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
+            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
             ihm.board.ForgetSelectedPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
@@ -93,6 +100,8 @@ namespace blockade.Blockade_IHM
             {
                 ihm.SetPlayerPlacingWall(current_player, true);
             }
+            ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -136,9 +145,6 @@ namespace blockade.Blockade_IHM
                 ihm.SetCurrentPlayer(2);
                 ihm.UpdateRemainingWalls(ihm.GetPlayer(2));
             }
-
-            // Tourne la camera si besoin
-            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>
@@ -152,6 +158,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOError(Common.DTOError dto)
         {
             Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
+            ihm.ToggleError(true);
         }
 
         /// <summary>

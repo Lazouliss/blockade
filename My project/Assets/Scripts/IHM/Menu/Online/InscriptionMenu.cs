@@ -13,7 +13,13 @@ namespace blockade.Blockade_IHM
 
         public TMP_InputField inputPassword1;
         public TMP_InputField inputPassword2;
+
         public Button InscriptionButton;
+
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject inscriptionMenu;
+        [SerializeField] private GameObject connectionMenu;
+        [SerializeField] private GameObject chat;
 
         void Start() 
         {
@@ -54,9 +60,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerName (string inputName)
         {   
-            if(UIManager.SetPlayerName(inputName) != "0")
+            if(UIManager.getPlayerName(inputName) != "0")
             {
-                PlayerName = UIManager.SetPlayerName(inputName);
+                PlayerName = UIManager.getPlayerName(inputName);
                 Debug.Log("Pseudo : " + PlayerName);
             }
         }
@@ -69,9 +75,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword1 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
+            if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword1 = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password1 : " + PlayerPassword1);
             }
         }
@@ -84,21 +90,10 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword2 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
+            if(UIManager.getPlayerPassword(inputPassword) != "0")
             {
-                PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
+                PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
                 // Debug.Log("Password2 : " + PlayerPassword2);
-            }
-            try
-            {
-                if(!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
-                {
-                    throw new Exception("Les mots de passe sont différents.");
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Erreur : " + e.Message);
             }
         }
 
@@ -115,6 +110,23 @@ namespace blockade.Blockade_IHM
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// 
+        /// Appelle la fonction de création de compte du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            Debug.Log("Sign out player " + PlayerName);
+            // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+
+            this.inscriptionMenu.SetActive(false);
+            this.connectionMenu.SetActive(true);
+            this.chat.SetActive(false);
         }
     }
 }
