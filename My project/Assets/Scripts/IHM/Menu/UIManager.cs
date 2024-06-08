@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,9 @@ namespace blockade.Blockade_IHM
     public class UIManager : MonoBehaviour
     {
         public static string typePartie; // ONLINE, JCJ, JCE, ECE
+
+        public static GameObject ErrorPopupObj;
+        public static TMP_Text ErrorPopup;
 
         /// <summary>
         /// Par Martin GADET
@@ -62,11 +66,6 @@ namespace blockade.Blockade_IHM
         /// <returns>inputName (nom rentré par le joueur)</returns>
         public static string getPlayerName(string inputName)
         {
-            if (!UIManager.CheckPlayerName(inputName))
-            {
-                // TODO afficher popup
-                return "0";
-            }
             return inputName;
         }
 
@@ -109,11 +108,6 @@ namespace blockade.Blockade_IHM
         /// <returns>inputPassword (nom rentré par le joueur)</returns>
         public static string getPlayerPassword(string inputPassword)
         {
-            if (!UIManager.CheckPlayerPassword(inputPassword))
-            {
-                // TODO afficher pop up
-                return "0";
-            }
             return inputPassword;
         }
 
@@ -143,11 +137,6 @@ namespace blockade.Blockade_IHM
         /// <returns>inputPassword (nom rentré par le joueur)</returns>
         public static int getGameCode(string inputCode)
         {
-            if (!UIManager.CheckCode(inputCode))
-            {
-                // TODO afficher pop up
-                return 0;
-            }
             return int.Parse(inputCode);
         }
 

@@ -21,6 +21,9 @@ namespace blockade.Blockade_IHM
         [SerializeField] private GameObject connectionMenu;
         [SerializeField] private GameObject chat;
 
+        public GameObject ErrorPopupObj;
+        public TMP_Text ErrorPopup;
+
         void Start() 
         {
             inputPassword1.contentType = TMP_InputField.ContentType.Password;
@@ -60,11 +63,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerName (string inputName)
         {   
-            if(UIManager.getPlayerName(inputName) != "0")
-            {
-                PlayerName = UIManager.getPlayerName(inputName);
-                Debug.Log("Pseudo : " + PlayerName);
-            }
+            ErrorPopupObj.SetActive(false);
+            PlayerName = UIManager.getPlayerName(inputName);
+            Debug.Log("Pseudo : " + PlayerName);
         }
 
         /// <summary>
@@ -75,11 +76,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword1 (string inputPassword)
         {   
-            if(UIManager.getPlayerPassword(inputPassword) != "0")
-            {
-                PlayerPassword1 = UIManager.getPlayerPassword(inputPassword);
-                // Debug.Log("Password1 : " + PlayerPassword1);
-            }
+            ErrorPopupObj.SetActive(false);
+            PlayerPassword1 = UIManager.getPlayerPassword(inputPassword);
+            // Debug.Log("Password1 : " + PlayerPassword1);
         }
 
         /// <summary>
@@ -90,11 +89,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword2 (string inputPassword)
         {   
-            if(UIManager.getPlayerPassword(inputPassword) != "0")
-            {
-                PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
-                // Debug.Log("Password2 : " + PlayerPassword2);
-            }
+            ErrorPopupObj.SetActive(false);
+            PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
+            // Debug.Log("Password2 : " + PlayerPassword2);
         }
 
         /// <summary>
@@ -121,12 +118,36 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void ClickButton()
         {
-            Debug.Log("Sign out player " + PlayerName);
-            // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+            if (!UIManager.CheckPlayerName(PlayerName))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le nom de joueur doit contenir moins de 12 caracteres et ne pas contenir de caractere special.");
+            }
+            if (!UIManager.CheckPlayerPassword(PlayerPassword1))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
+            }
+            else if (!UIManager.CheckPlayerPassword(PlayerPassword2))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
+            }
+            else if (!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Les mots de passe sont différents.");
+            }
+            else
+            {
+                ErrorPopupObj.SetActive(false);
+                Debug.Log("Sign out player " + PlayerName);
+                // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
 
-            this.inscriptionMenu.SetActive(false);
-            this.connectionMenu.SetActive(true);
-            this.chat.SetActive(false);
+                this.inscriptionMenu.SetActive(false);
+                this.connectionMenu.SetActive(true);
+                this.chat.SetActive(false);
+            }
         }
     }
 }
