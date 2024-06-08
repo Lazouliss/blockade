@@ -61,8 +61,8 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerName (string inputName)
-        {   
+        public void SetPlayerName(string inputName)
+        {
             ErrorPopupObj.SetActive(false);
             PlayerName = UIManager.getPlayerName(inputName);
             Debug.Log("Pseudo : " + PlayerName);
@@ -118,23 +118,28 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void ClickButton()
         {
+            Debug.Log("oiuehzfoiuehfoiueh" + PlayerName + UIManager.CheckPlayerName(PlayerName));
             if (!UIManager.CheckPlayerName(PlayerName))
             {
+                Debug.Log("check player");
                 ErrorPopupObj.SetActive(true);
                 ErrorPopup.SetText("Le nom de joueur doit contenir moins de 12 caracteres et ne pas contenir de caractere special.");
             }
-            if (!UIManager.CheckPlayerPassword(PlayerPassword1))
+            else if (!UIManager.CheckPlayerPassword(PlayerPassword1))
             {
+                Debug.Log("pw1");
                 ErrorPopupObj.SetActive(true);
                 ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
             }
             else if (!UIManager.CheckPlayerPassword(PlayerPassword2))
             {
+                Debug.Log("pw2");
                 ErrorPopupObj.SetActive(true);
                 ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
             }
             else if (!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
             {
+                Debug.Log("equality");
                 ErrorPopupObj.SetActive(true);
                 ErrorPopup.SetText("Les mots de passe sont différents.");
             }

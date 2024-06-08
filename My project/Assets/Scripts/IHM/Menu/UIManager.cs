@@ -49,6 +49,7 @@ namespace blockade.Blockade_IHM
         /// <returns>Boolean (true/false)</returns>
         public static bool CheckPlayerName(string login)
         {
+            Debug.Log(login);
             if (login.Length > 12)
                 return false;
 
