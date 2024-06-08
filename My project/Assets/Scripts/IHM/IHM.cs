@@ -47,28 +47,8 @@ namespace blockade.Blockade_IHM
         // Start is called before the first frame update
         void Start()
         {
-            // DEBUG : num�ro de joueur al�atoire pour que la cam�ra ne soit jamais sur le m�me joueur au d�part
-            /*
-            sys.Random rand = new sys.Random();
-            current_player = rand.Next(2)+1;
-            */
-
             // Init cams
             cams.SetActive(true);
-
-            /*
-            // For tests
-            PlayGame("JCJ");
-
-            // Tests
-            current_player = 1;
-            p1.isPlacingWall = true;
-
-            // Initialize the cam in function of player number
-            SwitchPlayerCamera(current_player);
-            */
-            // DEBUG : to test the spin animation on game end
-            //cams.GetComponent<Animator>().SetTrigger("trigger_spin");
         }
 
         // =================
@@ -166,7 +146,6 @@ namespace blockade.Blockade_IHM
         /// 
         /// Getter qui permet de récuperer le type de parties
         /// </summary>
-
         public string GetTypePartie()
         {
             return typePartie;
@@ -309,16 +288,34 @@ namespace blockade.Blockade_IHM
             }
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Lance la fonction de nettoyage du plateau
+        /// Privee
+        /// </summary>
         private void ClearBoard()
         {
             board.ClearBoard();
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Initialise les variables pour une partie en ligne
+        /// Privee
+        /// </summary>
         private void StartOnlineGame()
         {
             // TODO
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Initialise les variables pour une partie JcJ hors ligne
+        /// Privee
+        /// </summary>
         private void StartJCJGame()
         {
             p1.verticalWalls = BASE_NBWALLS;
@@ -338,11 +335,23 @@ namespace blockade.Blockade_IHM
             current_player = 1;
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Initialise les variables pour une partie JCE
+        /// Privee
+        /// </summary>
         private void StartJCEGame()
         {
             // TODO
         }
 
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Initialise les variables pour une partie ECE
+        /// Privee
+        /// </summary>
         private void StartECEGame()
         {
             // TODO
