@@ -5317,10 +5317,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.15686275}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.36862746}
+    m_HighlightedColor: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+    m_PressedColor: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5339,18 +5339,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530756065710583816}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1530756066861240272}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -5362,6 +5350,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1530756065710583816}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1530756065716271050
 GameObject:
@@ -7437,7 +7437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3242caad9f0a444a1a69a1a39b02a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreatorCode: 0
+  CreatorCode: 
   nbPlayer: 0
   CodeText: {fileID: 1530756065626851159}
   NumberText: {fileID: 1530756067387576605}
@@ -17993,7 +17993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb51125e47b90484bb585f0040a932f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoinerCode: 0
+  JoinerCode: 
   points: 
   i: 0
   wait: 0
@@ -18006,6 +18006,8 @@ MonoBehaviour:
   menu: {fileID: 1530756066786218794}
   waitScreen: {fileID: 1530756066999630732}
   chat: {fileID: 1530756066375346087}
+  ErrorPopupObj: {fileID: 436653104467992053}
+  ErrorPopup: {fileID: 2380158837364835638}
 --- !u!1 &1530756066898864561
 GameObject:
   m_ObjectHideFlags: 0

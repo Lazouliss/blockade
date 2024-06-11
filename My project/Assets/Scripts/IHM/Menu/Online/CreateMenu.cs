@@ -7,7 +7,7 @@ namespace blockade.Blockade_IHM
     {
         public static string CreatorPlayerName;
 
-        public int CreatorCode;
+        public string CreatorCode;
 
         public int nbPlayer;
         public TMP_Text CodeText;
@@ -78,12 +78,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void DisplayCreatorCode(string inputCode)
         {
-            if (UIManager.getGameCode(inputCode) != 0)
-            {
-                CreatorCode = UIManager.getGameCode(inputCode);
-                CodeText.SetText(CreatorCode.ToString());
-                Debug.Log("CreatorCode : " + CreatorCode);
-            }
+            CreatorCode = UIManager.getGameCode(inputCode);
+            CodeText.SetText(CreatorCode);
+            Debug.Log("CreatorCode : " + CreatorCode);
         }
 
         /// <summary>

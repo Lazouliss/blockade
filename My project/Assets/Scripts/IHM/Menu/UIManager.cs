@@ -135,9 +135,9 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns>inputPassword (nom rentré par le joueur)</returns>
-        public static int getGameCode(string inputCode)
+        public static string getGameCode(string inputCode)
         {
-            return int.Parse(inputCode);
+            return inputCode;
         }
 
         /// <summary>
