@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 using sys = System;
+using blockade.Blockade_IHM;
 
 public class Click : MonoBehaviour
 {
@@ -26,8 +27,11 @@ public class Click : MonoBehaviour
             case 0:
                 Common.DTOPawn tempPawn = new Common.DTOPawn();
                 tempPawn.startPos = (0, 0);
-                tempPawn.destPos = (0, 0);
-                tempPawn.mooves = (getRandomDirection(), getRandomDirection());
+                tempPawn.destPos = (0, 0);var directions = new List<Common.Direction>
+                {
+                    getRandomDirection(),
+                    getRandomDirection()
+                };
                 ihm.sendDTO(tempPawn);
                 break;
 

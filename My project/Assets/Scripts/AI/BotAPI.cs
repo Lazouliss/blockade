@@ -23,8 +23,8 @@ namespace blockade.AI
         {
             return new DTOPawn()
             {
-                startPos = ((int)move.getOld().posX, (int)move.getOld().posY),
-                destPos = ((int)move.getNew().posX, (int)move.getNew().posY)
+                startPos = ((uint)move.getOld().posX, (uint)move.getOld().posY),
+                destPos = ((uint)move.getNew().posX, (uint)move.getNew().posY)
             };
         }
             
@@ -50,8 +50,8 @@ namespace blockade.AI
 
             return new DTOWall()
             {
-                coord1 = ((int)wall.pos1X, (int)wall.pos1Y),
-                coord2 = ((int)wall.pos2X, (int)wall.pos2Y),
+                coord1 = ((uint)wall.pos1X, (uint)wall.pos1Y),
+                coord2 = ((uint)wall.pos2X, (uint)wall.pos2Y),
                 direction = direction,
                 isAdd = true, // always isadd because we use this function to send DTOs
             };
@@ -119,7 +119,7 @@ namespace blockade.AI
         {
             Wall wall = get_wall(dto_wall);
 
-            if (dto_wall.isAdd)
+            if ((bool)dto_wall.isAdd)
             {
                 _board.placeWall(wall);
             }
