@@ -7,7 +7,7 @@ namespace blockade.Blockade_IHM
 {
     public class JoinMenu : MonoBehaviour
     {
-        public int JoinerCode;
+        public string JoinerCode;
 
         public string points;
         public int i;
@@ -24,6 +24,9 @@ namespace blockade.Blockade_IHM
         [SerializeField] private GameObject menu;
         [SerializeField] private GameObject waitScreen;
         [SerializeField] private GameObject chat;
+
+        public GameObject ErrorPopupObj;
+        public TMP_Text ErrorPopup;
 
         /// <summary>
         /// Par Martin GADET
@@ -68,22 +71,6 @@ namespace blockade.Blockade_IHM
 
         /// <summary>
         /// Par Martin GADET
-        /// Méthode qui affiche l'écran d'attente et met la variable wait a true
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public void JoinGame()
-        {
-            // TODO verifier si le code rentré est le meme que celui de la partie
-            // si oui
-            // Passer a un ecran d'attente
-            menuObject.SetActive(false);
-            waitScreenObject.SetActive(true);
-            wait = true;
-        }
-
-        /// <summary>
-        /// Par Martin GADET
         /// Méthode qui affiche le nom du joueur
         /// Publique
         /// </summary>
@@ -101,11 +88,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetJoinerCode(string inputCode)
         {
-            if (UIManager.getGameCode(inputCode) != 0)
-            {
-                JoinerCode = UIManager.getGameCode(inputCode);
-                Debug.Log("JoinerCode : " + JoinerCode);
-            }
+            ErrorPopupObj.SetActive(false);
+            JoinerCode = UIManager.getGameCode(inputCode);
+            Debug.Log("JoinerCode : " + JoinerCode);
         }
 
         /// <summary>
@@ -117,13 +102,25 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void ClickButton()
         {
-            wait = true;
-            Debug.Log("Joiner player " + ConnectionMenu.PlayerName);
-            // TODO : game.GetComponent<Online>().fonction(PlayerName);
+            if (!UIManager.CheckCode(JoinerCode))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le code doit être un nombre à 4 chiffres.");
+            }
+            // TODO si le code est incorrect
+            // ErrorPopupObj.SetActive(true);
+            // ErrorPopup.SetText("Le code est incorrect.");
+            else
+            {
+                ErrorPopupObj.SetActive(false);
+                wait = true;
+                Debug.Log("Joiner player " + ConnectionMenu.PlayerName);
+                // TODO : game.GetComponent<Online>().fonction(PlayerName);
 
-            this.menu.SetActive(false);
-            this.waitScreen.SetActive(true);
-            this.chat.SetActive(false);
+                this.menu.SetActive(false);
+                this.waitScreen.SetActive(true);
+                this.chat.SetActive(false);
+            }
         }
     }
 }
