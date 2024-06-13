@@ -14,10 +14,13 @@ namespace blockade.Blockade_IHM
         public float speed = 0.5f;
         public GameObject wall;
 
+        private IHM ihm;
+
         // Constructor
-        public void initApplyDTO() 
+        public void initApplyDTO(IHM ihm) 
         {
             stackWall = new Stack<GameObject>();
+            this.ihm = ihm;
         }
 
         /// <summary>
@@ -126,7 +129,26 @@ namespace blockade.Blockade_IHM
 
             animator.SetTrigger("descendMur");
 
+            // Attend la fin de l'animation avant de changer de perspective de joueur
+            StartCoroutine(DelayedSwitchPlayer(animator.GetCurrentAnimatorStateInfo(0).length));
+
             stackWall.Push(newObject);
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Attend un certain delais avant de changer de perspective de joueur
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        IEnumerator DelayedSwitchPlayer(float delay = 0)
+        {
+            Debug.Log("Delayed animation");
+            yield return new WaitForSeconds(delay);
+
+            // Tourne la camera
+            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>
