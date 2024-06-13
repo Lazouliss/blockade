@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 using blockade.Blockade_IHM;
+using blockade.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private Player playingPlayer;
     private DTOHandler dtoHandler = new DTOHandler();
     private IHM ihm;
+    private BotAPI botAPI;
     private bool wallPlaced = false;
     private bool pawnMoved = false;
 
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
         playingPlayer = players[0];
         algoBoard = new AlgoBoard(playerY, playerR);
         algoBoard.initBoard();
+        botAPI = new BotAPI();
     }
     void Awake()
     {
@@ -38,6 +41,11 @@ public class GameManager : MonoBehaviour
         switch (dto)
             {
                 case Common.DTOWall dtoWall:
+
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoWall);
+                }
+
                 if (wallPlaced || dtoWall.coord1.Item1 > 10 || dtoWall.coord1.Item2 > 14 || dtoWall.coord2.Item1 > 10 || dtoWall.coord2.Item2 > 14 || dtoWall.coord1.Item1 < 0 || dtoWall.coord1.Item2 < 0 || dtoWall.coord2.Item1 < 0 || dtoWall.coord2.Item2 < 0){
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
                     Debug.Log("Wall impossible to place");
@@ -64,6 +72,11 @@ public class GameManager : MonoBehaviour
 
 
                 case Common.DTOPawn dtoPawn: 
+
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoPawn);
+                }
+
                 if (pawnMoved){
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
                     break;
@@ -101,7 +114,28 @@ public class GameManager : MonoBehaviour
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], playingPlayerID, playingPlayerString));
                 } else {
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
+                    if(ihm.GetTypePartie() == "JCE"){
+                        botAPI.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
+                        
+
+                        (Common.DTOPawn, Common.DTOWall) dtosBot = botAPI.get_move(BotAPI.Difficulty.HARD); // TODO : put real difficulty here 
+                        ihm.sendDTO(dtosBot.Item1);
+                        ihm.sendDTO(dtosBot.Item2);
+
+                        uint botPlayerID = playingPlayer.getPlayerID();
+                        bool botWon = algoBoard.checkWin(playingPlayer);
+                        togglePlayingPlayer();
+                        string playingPlayerStringBot = playingPlayer.getPlayerID() == 1 ? "Yellow" : "Red";
+
+                        if (botWon){
+                            ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], botPlayerID, playingPlayerStringBot));
+                        } else {
+                            ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerStringBot));
+                            botAPI.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerStringBot));
+                        }
+                    }
                 }
+                ihm.board.ChangeCaseTexture(algoBoard.GetValidPawnMoves(playingPlayer));
             }
     }
 
@@ -110,6 +144,8 @@ public class GameManager : MonoBehaviour
      {
          players.Add(player);
      }
+
+
     public void check_winning()
     {
         if (algoBoard.checkWin(playingPlayer))
