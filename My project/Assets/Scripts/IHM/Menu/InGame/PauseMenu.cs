@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace blockade.Blockade_IHM
 {
@@ -10,6 +11,7 @@ namespace blockade.Blockade_IHM
         public GameObject pauseMenuUI;
 
         public GameObject btn_pause;
+        [SerializeField] private GameObject ui;
 
         // Update is called once per frame
         /// <summary>
@@ -64,6 +66,11 @@ namespace blockade.Blockade_IHM
         {
             Debug.Log("Quitting game...");
             Application.Quit();
+        }
+
+        public void ShowMainMenu()
+        {
+            ui.GetComponent<RawImage>().enabled = true;
         }
     }
 }
