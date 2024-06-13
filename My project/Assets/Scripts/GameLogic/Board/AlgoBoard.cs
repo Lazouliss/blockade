@@ -12,7 +12,7 @@ public class AlgoBoard
     private uint CASE_GAGNANTE_playerJaune_2 = 40;
     private uint CASE_GAGNANTE_playerRouge_1 = 113;
     private uint CASE_GAGNANTE_playerRouge_2 = 117;
-    private List<uint> CASES_GAGNANTES;
+    public List<uint> CASES_GAGNANTES;
     private Square[] cases = new Square[154];
     private Player playerJaune;
     private Player playerRouge;
@@ -31,7 +31,7 @@ public class AlgoBoard
         this.playerRouge = _playerRouge;
         this.playerRouge.setWinningSquaresPosition(new uint[] { CASE_GAGNANTE_playerJaune_1, CASE_GAGNANTE_playerJaune_2 });
         this.playerRouge.setPositionsPions(new uint[] { CASE_GAGNANTE_playerRouge_1, CASE_GAGNANTE_playerRouge_2 });
-        CASES_GAGNANTES = new List<uint> { CASE_GAGNANTE_playerJaune_1, CASE_GAGNANTE_playerJaune_2, CASE_GAGNANTE_playerRouge_1, CASE_GAGNANTE_playerRouge_2};
+        CASES_GAGNANTES = new List<uint> { CASE_GAGNANTE_playerJaune_1, CASE_GAGNANTE_playerJaune_2, CASE_GAGNANTE_playerRouge_1, CASE_GAGNANTE_playerRouge_2 };
         AssignNeighbors();
     }
     private void AssignNeighbors()
@@ -183,7 +183,7 @@ public class AlgoBoard
                 }
 
                 var (found, resultPath, resultMoves) = getCheminRecursive(next, destination, path, nextIsJumping, moves + newMoves);
-                if (found )
+                if (found)
                 {
                     return (true, resultPath, resultMoves);
                 }
@@ -591,5 +591,27 @@ public class AlgoBoard
             }
         }
         return true;
+    }
+
+    public List<(uint, uint)> GetValidPawnMoves(Player player)
+    {
+        List<(uint, uint)> validMoves = new List<(uint, uint)>();
+
+        foreach (uint pawnPosition in player.getPositionsPions())
+        {
+            (uint pawnX, uint pawnY) = getCoordinates(pawnPosition);
+
+            foreach (Square square in cases)
+            {
+                uint idCase = square.getIdCase();
+                (uint, uint) dest = getCoordinates(idCase);
+                if (getChemin((pawnX, pawnY), dest).Item1 && !player.getPositionsPions().Contains(idCase))
+                {
+                    validMoves.Add(dest);
+                }
+            }
+        }
+
+        return validMoves;
     }
 }
