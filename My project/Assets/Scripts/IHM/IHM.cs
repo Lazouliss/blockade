@@ -5,6 +5,7 @@ using sys = System;
 using System.Threading;
 using System.Reflection;
 using System;
+using System.Collections.Generic;
 
 namespace blockade.Blockade_IHM
 {
@@ -42,6 +43,8 @@ namespace blockade.Blockade_IHM
             public int verticalWalls, horizontalWalls;
             public bool isPlaying;
             public bool isPlacingWall;
+            public GameObject pawn1, pawn2;
+            public Stack<GameObject> stackVerticalWalls, stackHorizontalWalls;
         }
 
         // Start is called before the first frame update
@@ -140,7 +143,6 @@ namespace blockade.Blockade_IHM
             }
         }
 
-        // Update is called once per frame
         /// <summary>
         /// Par Nolan Laroche
         /// 
@@ -258,10 +260,10 @@ namespace blockade.Blockade_IHM
 
             // Set timeScale to 1 (to be sure to move pawns correctly)
             Time.timeScale = 1;
-
+            
             // Creation du plateau
             board.StartGame(BASE_NBWALLS);
-
+            
             switch (typePartie)
             {
                 case "ONLINE":
@@ -323,16 +325,13 @@ namespace blockade.Blockade_IHM
             p1.isPlaying = true;
             p1.isPlacingWall = false;
 
-            UpdateRemainingWalls(p1);
-
             p2.verticalWalls = BASE_NBWALLS;
             p2.horizontalWalls = BASE_NBWALLS;
             p2.isPlaying = false;
             p2.isPlacingWall = false;
 
-            UpdateRemainingWalls(p2);
-
             current_player = 1;
+            UpdateRemainingWalls(p1);
         }
 
         /// <summary>

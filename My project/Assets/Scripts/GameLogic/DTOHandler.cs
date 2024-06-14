@@ -60,6 +60,13 @@ public class DTOHandler
         return Pawn;
     }
 
+    // Surcharge pour avoir la position d'arrive dans le dto aussi
+    public Common.DTOPawn createPawnDTO((uint, uint) pos, (uint?, uint?) destPos, List<Common.Direction> mooves)
+    {
+        Common.DTOPawn Pawn = new Common.DTOPawn() { startPos = pos, destPos = destPos, mooves = mooves };
+        return Pawn;
+    }
+
     public Common.DTOWall createWallDTO((uint, uint) pos, (uint, uint) secondPos, Common.Direction dir, bool add) {
         Common.DTOWall Wall = new Common.DTOWall() { coord1 = pos, coord2 = secondPos, direction = dir, isAdd = add };
         return Wall;

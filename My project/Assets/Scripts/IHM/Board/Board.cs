@@ -92,23 +92,24 @@ namespace blockade.Blockade_IHM
                     //initialisation des pions dans leurs cases de départ
                     if (x == 3 && y == 3)
                     {
-                        Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this, 1);
+                        //ihm.SetPlayerPawn(1, Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this, 1), 1);                        
+                        Pawn.createPawn(new Vector2Int(3, 3), "player1_pion1", this, 1);                        
                         case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
 
                     }
                     else if (x == 7 && y == 3)
                     {
-                        Pawn.createPawn(new Vector2Int(7, 3), "player1_Pion2", this, 1);
+                        Pawn.createPawn(new Vector2Int(7, 3), "player1_pion2", this, 1);
                         case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                     }
                     else if (x == 3 && y == 10)
                     {
-                        Pawn.createPawn(new Vector2Int(3, 10), "player2_Pion1", this, 2);
+                        Pawn.createPawn(new Vector2Int(3, 10), "player2_pion1", this, 2);
                         case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                     }
                     else if (x == 7 && y == 10)
                     {
-                        Pawn.createPawn(new Vector2Int(7, 10), "player2_Pion2", this, 2);
+                        Pawn.createPawn(new Vector2Int(7, 10), "player2_pion2", this, 2);
                         case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
                     }
                 }
