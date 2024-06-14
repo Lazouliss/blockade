@@ -37,7 +37,7 @@ namespace blockade.Blockade_IHM
         ///
         /// Création d'un mur, cliquable seulement par un joueur (playerID), aux positions en argument
         /// </summary>
-        public static void createWall(Vector2 pos, int id_player, bool isVerti, Board board)
+        public static GameObject createWall(Vector2 pos, int id_player, bool isVerti, Board board)
         {
             // Create wall using prefab and instantiate it on the right position
             //string path = "Graveyard/kenney_graveyard-kit/Models/FBX format/brick-wall";
@@ -72,6 +72,8 @@ namespace blockade.Blockade_IHM
 
             // change de parent pour prendre le plateau
             wall.transform.SetParent(board.transform, false);
+
+            return wall;
         }
 
         /// <summary>
@@ -101,6 +103,7 @@ namespace blockade.Blockade_IHM
 
             // Création du DTO
             Common.DTOWall wall = new Common.DTOWall();
+            wall.isAdd = true;
             
             // Si le mur est vertical initialisation des positions en ajoutant 1 au z de la seconde coordonnée
             if (this.isVerti)
@@ -125,11 +128,6 @@ namespace blockade.Blockade_IHM
                 return;
             }
 
-            // for tests --> apply dto without checking if its legal
-            /*
-            wall.isAdd = true;
-            board.ihm.sendDTO(wall);
-            */
             // Send DTO to game logic
             board.ihm.sendDTOToLogic(wall);
         }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 using System.Collections;
+using static blockade.Blockade_common.Common;
 
 namespace blockade.Blockade_IHM
 {
@@ -9,7 +10,6 @@ namespace blockade.Blockade_IHM
     {
 
         public const float LENGTH_TILE = 1;
-        public Pawn selectedPawn;
         private Stack<GameObject> stackWall;
         public float speed = 0.5f;
         public GameObject wall;
@@ -46,16 +46,37 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private IEnumerator movePawn(Common.DTOPawn dto)
         {
-
-            Pawn p = this.selectedPawn;
-
+            Pawn p = GetPawn(dto);
+            
             foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
             {
                 yield return StartCoroutine(p.move(direction));
             }
+        }
 
-            selectedPawn = null;
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Retourne le pion a déplacer
+        /// 
+        /// Privé
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Pawn</returns>
+        private Pawn GetPawn(Common.DTOPawn dto)
+        {
+            string p1_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion1";
+            string p2_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion2";
 
+            if (GameObject.Find(p1_name).transform.position.x == dto.startPos.Item1 && GameObject.Find(p1_name).transform.position.z == dto.startPos.Item2)
+            {
+                Debug.Log("Moving : " + p1_name);
+                Pawn p1 = GameObject.Find(p1_name).GetComponent<Pawn>();
+                return p1;
+            }
+            Debug.Log("Moving : " + p2_name);
+            Pawn p2 = GameObject.Find(p2_name).GetComponent<Pawn>();
+            return p2;
         }
 
         /// <summary>

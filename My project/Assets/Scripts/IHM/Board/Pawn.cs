@@ -6,15 +6,7 @@ namespace blockade.Blockade_IHM
 {
     public class Pawn : MonoBehaviour
     {
-
-        int x, y;
         int id_player;
-
-        public Pawn(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
 
         /// <summary>
         /// Par Wassim BOUKHARI
@@ -106,7 +98,7 @@ namespace blockade.Blockade_IHM
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)
         //creation d'un fonction qui va créer mon objet pion
-        public static Pawn createPawn(Vector2Int position, string name, Board plateau, int id_player)
+        public static GameObject createPawn(Vector2Int position, string name, Board plateau, int id_player)
         {
 
             string path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character";
@@ -128,8 +120,6 @@ namespace blockade.Blockade_IHM
 
             Pawn pawn = pawnObj.AddComponent<Pawn>(); // ajout d'un Pawn component pour le GameObject
             pawn.name = name; // attribution d'un nom
-            pawn.x = position.x; // attribution position x
-            pawn.y = position.y; // attribution position y
             pawn.id_player = id_player;
 
             pawnObj.name = name; // attribution d'un nom à mon objet pawnObj
@@ -141,7 +131,7 @@ namespace blockade.Blockade_IHM
             // change de parent pour prendre le plateau
             pawnObj.transform.SetParent(plateau.transform, false);
 
-            return pawn;
+            return pawnObj;
         }
 
         public int GetID()
