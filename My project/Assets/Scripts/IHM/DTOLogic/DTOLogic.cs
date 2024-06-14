@@ -103,7 +103,8 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOPawn(Common.DTOPawn dto)
         {
-            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
+            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
+            //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
             ihm.board.RefreshDTOPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 

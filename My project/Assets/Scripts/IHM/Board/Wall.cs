@@ -103,6 +103,7 @@ namespace blockade.Blockade_IHM
 
             // Création du DTO
             Common.DTOWall wall = new Common.DTOWall();
+            wall.isAdd = true;
             
             // Si le mur est vertical initialisation des positions en ajoutant 1 au z de la seconde coordonnée
             if (this.isVerti)
