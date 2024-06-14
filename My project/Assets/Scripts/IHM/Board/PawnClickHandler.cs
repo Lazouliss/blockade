@@ -34,9 +34,6 @@ namespace blockade.Blockade_IHM
                 //créer startPos
                 Vector2 startPos = new Vector2(transform.position.x, transform.position.z);
 
-                // sélection du pion
-                plateau.SelectPawn(this.GetComponent<Pawn>());
-
                 //envoi du dto 
                 plateau.SendDTO(startPos, true);
             }

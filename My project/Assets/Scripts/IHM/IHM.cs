@@ -43,7 +43,6 @@ namespace blockade.Blockade_IHM
             public int verticalWalls, horizontalWalls;
             public bool isPlaying;
             public bool isPlacingWall;
-            public GameObject pawn1, pawn2;
             public Stack<GameObject> stackVerticalWalls, stackHorizontalWalls;
         }
 
@@ -57,6 +56,25 @@ namespace blockade.Blockade_IHM
         // =================
         // Getters & Setters
         // =================
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Fonction d'initialisation d'un joueur
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="startPlaying"></param>
+        private Player initPlayer(Player player, bool startPlaying)
+        {
+            player.verticalWalls = BASE_NBWALLS;
+            player.horizontalWalls = BASE_NBWALLS;
+            player.isPlaying = startPlaying;
+            player.isPlacingWall = false;
+            player.stackHorizontalWalls = new Stack<GameObject>();
+            player.stackVerticalWalls = new Stack<GameObject>();
+
+            return player;
+        }
 
         /// <summary>
         /// Par Thomas MONTIGNY
@@ -144,6 +162,43 @@ namespace blockade.Blockade_IHM
         }
 
         /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Modifie la pile de murs d'un joueur, 
+        /// Si le mur est un objet, ajoute le mur a la pile
+        /// Sinon enleve le mur de la liste et le detruit
+        /// </summary>
+        /// <param name="id_player"></param>
+        /// <param name="wall"></param>
+        public void EditStackVerticalWall (int id_player, GameObject wall)
+        {
+            Player player = GetPlayer(id_player);
+            if (wall is null)
+            {
+                Debug.Log("Pop vertical wall");
+                Destroy(player.stackVerticalWalls.Pop());
+            } else
+            {
+                Debug.Log("Push vertical wall");
+                player.stackVerticalWalls.Push(wall.gameObject);
+            }
+        }
+        public void EditStackHorizontalWall(int id_player, GameObject wall)
+        {
+            Player player = GetPlayer(id_player);
+            if (wall is null)
+            {
+                Debug.Log("Pop horizontal wall");
+                Destroy(player.stackHorizontalWalls.Pop());
+            }
+            else
+            {
+                Debug.Log("Push horizontal wall");
+                player.stackHorizontalWalls.Push(wall.gameObject);
+            }
+        }
+
+        /// <summary>
         /// Par Nolan Laroche
         /// 
         /// Getter qui permet de récuperer le type de parties
@@ -156,12 +211,19 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         ///
-        /// Permet de changer la camera de cote (en fonction du numero de joueur)
+        /// Permet de changer la camera de cote si le mode de jeu est JCJ
         /// </summary>
         public void SwitchPlayerCamera()
         {
-            Debug.Log("Rotating camera");
-            cams.transform.Rotate(0, 180, 0, Space.Self);
+            if (typePartie == "JCJ")
+            {
+                Debug.Log("Rotating camera");
+                cams.transform.Rotate(0, 180, 0, Space.Self);
+            } else
+            {
+                Debug.Log("Not rotating camera because the GameMode is : " + typePartie);
+            }
+            
         }
 
         /// <summary>
@@ -261,9 +323,6 @@ namespace blockade.Blockade_IHM
             // Set timeScale to 1 (to be sure to move pawns correctly)
             Time.timeScale = 1;
             
-            // Creation du plateau
-            board.StartGame(BASE_NBWALLS);
-            
             switch (typePartie)
             {
                 case "ONLINE":
@@ -288,6 +347,9 @@ namespace blockade.Blockade_IHM
 
                 default: Debug.Log("Something is broken..."); break;
             }
+            
+            // Creation du plateau
+            board.StartGame(BASE_NBWALLS);
         }
 
         /// <summary>
@@ -320,15 +382,8 @@ namespace blockade.Blockade_IHM
         /// </summary>
         private void StartJCJGame()
         {
-            p1.verticalWalls = BASE_NBWALLS;
-            p1.horizontalWalls = BASE_NBWALLS;
-            p1.isPlaying = true;
-            p1.isPlacingWall = false;
-
-            p2.verticalWalls = BASE_NBWALLS;
-            p2.horizontalWalls = BASE_NBWALLS;
-            p2.isPlaying = false;
-            p2.isPlacingWall = false;
+            p1 = initPlayer(p1, true);
+            p2 = initPlayer(p2, false);
 
             current_player = 1;
             UpdateRemainingWalls(p1);

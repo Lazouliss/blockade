@@ -69,11 +69,24 @@ namespace blockade.Blockade_IHM
         private void applyDTOWall(Common.DTOWall dto)
         {
             // Fait disparaitre le mur que le joueur avait de selectionne
-            this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
+            if (ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "Online" && ihm.GetCurrentPlayer() == 1))
+            {
+                Debug.Log("Forgetting wall");
+                this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
+            }
 
             // Puis applique le nouveau mur
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
             ihm.gestionDTO.actionWall(dto, ihm.board);
+
+            // Supprime le mur de la liste en fonction de sa direction
+            if (dto.direction == Common.Direction.UP)
+            {
+                ihm.EditStackHorizontalWall(ihm.GetCurrentPlayer(), null);
+            } else
+            {
+                ihm.EditStackVerticalWall(ihm.GetCurrentPlayer(), null);
+            }
 
             // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
             ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
@@ -91,7 +104,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOPawn(Common.DTOPawn dto)
         {
             Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
-            ihm.board.ForgetSelectedPawn();
+            ihm.board.RefreshDTOPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
             // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur

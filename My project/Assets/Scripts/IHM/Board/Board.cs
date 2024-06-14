@@ -16,7 +16,6 @@ namespace blockade.Blockade_IHM
 
         public IHM ihm;
 
-        private Pawn selectedPawn;
         private Common.DTOPawn dtoPawn;
 
         public GameObject selectedWall;
@@ -92,7 +91,6 @@ namespace blockade.Blockade_IHM
                     //initialisation des pions dans leurs cases de départ
                     if (x == 3 && y == 3)
                     {
-                        //ihm.SetPlayerPawn(1, Pawn.createPawn(new Vector2Int(3, 3), "player1_Pion1", this, 1), 1);                        
                         Pawn.createPawn(new Vector2Int(3, 3), "player1_pion1", this, 1);                        
                         case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
 
@@ -160,9 +158,9 @@ namespace blockade.Blockade_IHM
             {
                 // Player 1
                 // Création d'un mur horizontal, aligné verticalement le long du plateau
-                Wall.createWall(currentPos, 1, false, this);
+                ihm.EditStackHorizontalWall(1, Wall.createWall(currentPos, 1, false, this));
                 // Création d'un mur vertical, aligné horizontalement le long du plateau
-                Wall.createWall(currentPosHoriz, 1, true, this);
+                ihm.EditStackVerticalWall(1, Wall.createWall(currentPosHoriz, 1, true, this));
 
                 // Mise à jour des positions pour les prochains murs
                 currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
@@ -170,9 +168,9 @@ namespace blockade.Blockade_IHM
 
                 // Player 2
                 // Création d'un mur horizontal, aligné verticalement le long du plateau
-                Wall.createWall(currentPosP2, 2, false, this);
+                ihm.EditStackHorizontalWall(2, Wall.createWall(currentPosP2, 2, false, this));
                 // Création d'un mur vertical, aligné horizontalement le long du plateau
-                Wall.createWall(currentPosHorizP2, 2, true, this);
+                ihm.EditStackVerticalWall(2, Wall.createWall(currentPosHorizP2, 2, true, this));
 
                 // Mise à jour des positions pour les prochains murs
                 currentPosP2 = new Vector2(currentPosP2.x, currentPosP2.y - spaceBetweenWalls);
@@ -196,39 +194,14 @@ namespace blockade.Blockade_IHM
             //Vérifie si dtoPawn contient des valeurs de positions de type float
             if (dtoPawn.startPos != (1000, 1000) && dtoPawn.destPos != (1000, 1000))
             {
-                // select the pawn on the board
-                ihm.GetComponent<IHM>().gestionDTO.selectedPawn = selectedPawn;
-
-                // Test
-                /*
-                dtoPawn.mooves.Add(Common.Direction.UP);
-                dtoPawn.mooves.Add(Common.Direction.UP);
-                ihm.GetComponent<IHM>().sendDTO(dtoPawn);
-                */
-
                 ihm.GetComponent<IHM>().sendDTOToLogic(dtoPawn); //appel de la fonction  sendDTOToLogic() pour envoyer les valeurs du DTO actuel
             }
         }
 
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        ///
-        /// Selectionne le pion
-        /// 
-        /// Publique
-        /// </summary>
-        /// <param name="pawn"></param>
-        public void SelectPawn(Pawn pawn)
-        {
-            this.selectedPawn = pawn;
-        }
-
-        public void ForgetSelectedPawn()
+        public void RefreshDTOPawn()
         {
             // reset dto pawn
             dtoPawn = InitDTOPawn();
-            // and remove selected pawn
-            selectedPawn = null;
         }
 
         /// <summary>

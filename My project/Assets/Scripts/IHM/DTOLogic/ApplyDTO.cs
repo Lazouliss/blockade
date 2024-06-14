@@ -10,7 +10,6 @@ namespace blockade.Blockade_IHM
     {
 
         public const float LENGTH_TILE = 1;
-        public Pawn selectedPawn;
         private Stack<GameObject> stackWall;
         public float speed = 0.5f;
         public GameObject wall;
@@ -47,17 +46,12 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private IEnumerator movePawn(Common.DTOPawn dto)
         {
-
-            //Pawn p = this.selectedPawn;
             Pawn p = GetPawn(dto);
             
             foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
             {
                 yield return StartCoroutine(p.move(direction));
             }
-
-            selectedPawn = null;
-
         }
 
         /// <summary>
