@@ -91,8 +91,7 @@ public class GameManager : MonoBehaviour
                     uint casePionArrivee = algoBoard.getPosition((uint)endPos.Item1, (uint)endPos.Item2);
                     playingPlayer.deplacerPion(casePionDepart, casePionArrivee);
                     algoBoard.deplacerPion(((uint)startPos.Item1, (uint)startPos.Item2), ((uint)endPos.Item1, (uint)endPos.Item2));
-                    //ihm.sendDTO(dtoHandler.createPawnDTO(startPos, algoBoard.GetPath(res.Item2.ToArray())));
-                    ihm.sendDTO(dtoHandler.createPawnDTO(startPos, endPos, algoBoard.GetPath(res.Item2.ToArray())));
+                    ihm.sendDTO(dtoHandler.createPawnDTO(startPos, algoBoard.GetPath(res.Item2.ToArray())));
                 } else {
                     ihm.sendDTO(dtoHandler.createErrorDTO(1));
                     Debug.Log("Pawn impossible to place");
