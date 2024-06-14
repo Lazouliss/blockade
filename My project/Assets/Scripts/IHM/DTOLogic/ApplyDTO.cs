@@ -68,16 +68,14 @@ namespace blockade.Blockade_IHM
             string p1_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion1";
             string p2_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion2";
 
-            if (GameObject.Find(p1_name).GetComponent<Pawn>().GetPosPawn() == dto.startPos)
+            if (GameObject.Find(p1_name).transform.position.x == dto.startPos.Item1 && GameObject.Find(p1_name).transform.position.z == dto.startPos.Item2)
             {
                 Debug.Log("Moving : " + p1_name);
                 Pawn p1 = GameObject.Find(p1_name).GetComponent<Pawn>();
-                p1.SetPosPawn((uint)dto.destPos.Item1, (uint)dto.destPos.Item2);
                 return p1;
             }
             Debug.Log("Moving : " + p2_name);
             Pawn p2 = GameObject.Find(p2_name).GetComponent<Pawn>();
-            p2.SetPosPawn((uint)dto.destPos.Item1, (uint)dto.destPos.Item2);
             return p2;
         }
 

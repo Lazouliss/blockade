@@ -6,26 +6,7 @@ namespace blockade.Blockade_IHM
 {
     public class Pawn : MonoBehaviour
     {
-
-        uint x, y;
         int id_player;
-
-        public Pawn(uint x, uint y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        /// <summary>
-        /// Par Thomas MONTIGNY
-        /// 
-        /// Getters & Setters des positions du pion
-        /// 
-        /// Publique
-        /// </summary>
-        /// <returns></returns>
-        public (uint,uint) GetPosPawn() { return (x, y); }
-        public void SetPosPawn(uint x, uint y) { this.x = x; this.y = y; }
 
         /// <summary>
         /// Par Wassim BOUKHARI
@@ -139,8 +120,6 @@ namespace blockade.Blockade_IHM
 
             Pawn pawn = pawnObj.AddComponent<Pawn>(); // ajout d'un Pawn component pour le GameObject
             pawn.name = name; // attribution d'un nom
-            pawn.x = (uint)position.x; // attribution position x
-            pawn.y = (uint)position.y; // attribution position y
             pawn.id_player = id_player;
 
             pawnObj.name = name; // attribution d'un nom à mon objet pawnObj
