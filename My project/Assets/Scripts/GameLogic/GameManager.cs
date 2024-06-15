@@ -119,7 +119,18 @@ public class GameManager : MonoBehaviour
                         
 
                         (Common.DTOPawn, Common.DTOWall) dtosBot = botAPI.get_move(BotAPI.Difficulty.HARD); // TODO : put real difficulty here 
-                        ihm.sendDTO(dtosBot.Item1);
+                        (uint, uint) startPos = dtosBot.Item1.startPos;
+                        (uint?, uint?) endPos = dtosBot.Item1.destPos;
+                        (bool, List<Square>, int) resBot = algoBoard.getChemin(((uint)startPos.Item1, (uint)startPos.Item2), ((uint)endPos.Item1, (uint)endPos.Item2));
+                        
+                        if (resBot.Item1)
+                        {
+                            uint casePionDepart = algoBoard.getPosition((uint)startPos.Item1, (uint)startPos.Item2);
+                            uint casePionArrivee = algoBoard.getPosition((uint)endPos.Item1, (uint)endPos.Item2);
+                            playingPlayer.deplacerPion(casePionDepart, casePionArrivee);
+                            algoBoard.deplacerPion(((uint)startPos.Item1, (uint)startPos.Item2), ((uint)endPos.Item1, (uint)endPos.Item2));
+                            ihm.sendDTO(dtoHandler.createPawnDTO(startPos, algoBoard.GetPath(resBot.Item2.ToArray())));
+                        }
                         ihm.sendDTO(dtosBot.Item2);
 
                         uint botPlayerID = playingPlayer.getPlayerID();
