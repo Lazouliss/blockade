@@ -53,12 +53,7 @@ namespace blockade.Blockade_Online
         {
             string json = "{\n";
             json += "\"startPos\":" + dto.startPos + ",\n";
-            json += "\"mooves\":";
-            for (int i = 0; i < dto.mooves.Count; i++)
-            {
-                json += dto.mooves[i] + ",";
-            }
-            json += "\n";
+            json += "\"destPos\":" + dto.destPos + ",\n";
 
             json += "}";
             return json;
@@ -130,70 +125,70 @@ namespace blockade.Blockade_Online
         {
             json = json.Replace("{", "").Replace("}", "").Replace("\n", "");
             string[] formattedJSON = json.Split(',');
+
             uint startPosValue1 = 0;
             uint startPosValue2 = 0;
             if (formattedJSON[0].IndexOf('(') != -1 && formattedJSON[1].IndexOf(')') != -1)
             {
-                startPosValue1 = Convert.ToUInt32(formattedJSON[0].Substring(formattedJSON[0].IndexOf('(') + 1));
-                startPosValue2 = Convert.ToUInt32(formattedJSON[1].Substring(0, formattedJSON[1].IndexOf(')')));
+            startPosValue1 = Convert.ToUInt32(formattedJSON[0].Substring(formattedJSON[0].IndexOf('(') + 1));
+            startPosValue2 = Convert.ToUInt32(formattedJSON[1].Substring(0, formattedJSON[1].IndexOf(')')));
             }
             (uint, uint) startPos = (startPosValue1, startPosValue2);
-            List<Common.Direction> mooves = new List<Common.Direction>();
-            string moovesString = formattedJSON[2].Substring(formattedJSON[2].IndexOf(':') + 1);
-            if (!string.IsNullOrEmpty(moovesString))
+
+            uint destPosValue1 = 0;
+            uint destPosValue2 = 0;
+            if (formattedJSON[2].IndexOf('(') != -1 && formattedJSON[3].IndexOf(')') != -1)
             {
-                string[] moovesArray = moovesString.Split(',');
-                foreach (string move in moovesArray)
-                {
-                    Common.Direction direction = (Common.Direction)Enum.Parse(typeof(Common.Direction), move);
-                    mooves.Add(direction);
-                }
+            destPosValue1 = Convert.ToUInt32(formattedJSON[2].Substring(formattedJSON[2].IndexOf('(') + 1));
+            destPosValue2 = Convert.ToUInt32(formattedJSON[3].Substring(0, formattedJSON[3].IndexOf(')')));
             }
+            (uint, uint) destPos = (destPosValue1, destPosValue2);
+
             Common.DTOPawn dtoPawn = new Common.DTOPawn()
             {
-                startPos = startPos,
-                mooves = mooves
+            startPos = startPos,
+            destPos = destPos
             };
             return dtoPawn;
         }
     //A corriger car SetHorizontalWalls et SetVerticalWalls n'existe pas
-        // public static Common.DTOGameState jsonToDTOGameState(string json)
-        //  {
-        //     json = json.Replace("{", "").Replace("}", "").Replace("\n", "");
-        //     string[] formattedJSON = json.Split(',');
+        public static Common.DTOGameState jsonToDTOGameState(string json)
+         {
+            json = json.Replace("{", "").Replace("}", "").Replace("\n", "");
+            string[] formattedJSON = json.Split(',');
 
-        //     Player playerY = new Player("yellowPlayer", 1);
-        //     Player playerR = new Player("redPlayer", 2);
+            Player playerY = new Player("yellowPlayer", 1);
+            Player playerR = new Player("redPlayer", 2);
 
-        //     uint redPlayerHorizontalWalls = Convert.ToUInt32(formattedJSON[1].Substring(formattedJSON[1].IndexOf(':') + 1));
-        //     uint redPlayerVerticalWalls = Convert.ToUInt32(formattedJSON[2].Substring(formattedJSON[2].IndexOf(':') + 1));
-        //     bool redPlayerIsPlaying = bool.Parse(formattedJSON[3].Substring(formattedJSON[3].IndexOf(':') + 1));
+            uint redPlayerHorizontalWalls = Convert.ToUInt32(formattedJSON[1].Substring(formattedJSON[1].IndexOf(':') + 1));
+            uint redPlayerVerticalWalls = Convert.ToUInt32(formattedJSON[2].Substring(formattedJSON[2].IndexOf(':') + 1));
+            bool redPlayerIsPlaying = bool.Parse(formattedJSON[3].Substring(formattedJSON[3].IndexOf(':') + 1));
 
-        //     uint yellowPlayerHorizontalWalls = Convert.ToUInt32(formattedJSON[5].Substring(formattedJSON[5].IndexOf(':') + 1));
-        //     uint yellowPlayerVerticalWalls = Convert.ToUInt32(formattedJSON[6].Substring(formattedJSON[6].IndexOf(':') + 1));
-        //     bool yellowPlayerIsPlaying = bool.Parse(formattedJSON[7].Substring(formattedJSON[7].IndexOf(':') + 1));
+            uint yellowPlayerHorizontalWalls = Convert.ToUInt32(formattedJSON[5].Substring(formattedJSON[5].IndexOf(':') + 1));
+            uint yellowPlayerVerticalWalls = Convert.ToUInt32(formattedJSON[6].Substring(formattedJSON[6].IndexOf(':') + 1));
+            bool yellowPlayerIsPlaying = bool.Parse(formattedJSON[7].Substring(formattedJSON[7].IndexOf(':') + 1));
 
-        //     uint winner = Convert.ToUInt32(formattedJSON[8].Substring(formattedJSON[8].IndexOf(':') + 1));
+            uint winner = Convert.ToUInt32(formattedJSON[8].Substring(formattedJSON[8].IndexOf(':') + 1));
 
-        //     playerR.SetHorizontalWalls(redPlayerHorizontalWalls);
-        //     playerR.SetVerticalWalls(redPlayerVerticalWalls);
+            playerR.SetHorizontalWalls(redPlayerHorizontalWalls);
+            playerR.SetVerticalWalls(redPlayerVerticalWalls);
 
-        //     playerY.SetHorizontalWalls(yellowPlayerHorizontalWalls);
-        //     playerY.SetVerticalWalls(yellowPlayerVerticalWalls);
+            playerY.SetHorizontalWalls(yellowPlayerHorizontalWalls);
+            playerY.SetVerticalWalls(yellowPlayerVerticalWalls);
 
-        //     string currentPlayer = "";
-        //     if (redPlayerIsPlaying)
-        //     {
-        //         currentPlayer = "Red";
-        //     } else if (yellowPlayerIsPlaying)
-        //     {
-        //         currentPlayer = "Yellow";
-        //     }
+            string currentPlayer = "";
+            if (redPlayerIsPlaying)
+            {
+                currentPlayer = "Red";
+            } else if (yellowPlayerIsPlaying)
+            {
+                currentPlayer = "Yellow";
+            }
 
-        //     DTOHandler Handler = new DTOHandler();
-        //     Common.DTOGameState gameStateDTO = Handler.createGameStateDTO(playerY, playerR, winner, currentPlayer);
-        //      return gameStateDTO;
-        //  }
+            DTOHandler Handler = new DTOHandler();
+            Common.DTOGameState gameStateDTO = Handler.createGameStateDTO(playerY, playerR, winner, currentPlayer);
+             return gameStateDTO;
+         }
         public static Common.DTOError jsonToDTOError(string json)
         {
             json = json.Replace("{", "").Replace("}", "").Replace("\n", "");

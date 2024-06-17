@@ -114,5 +114,13 @@ namespace blockade.Blockade_Online
         public bool host_started_game(){
             return lobbyClient.hostStarted;
         }
+
+        public void sendAction(object dto){
+            lobbyClient.sendAction(userId, dto, jwt);
+        }
+
+        public void sendChat(string message){
+            lobbyClient.SendMessageToLobby(message, userId, jwt);
+        }
     }
 }

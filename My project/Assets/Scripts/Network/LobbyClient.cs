@@ -52,6 +52,10 @@ public class LobbyClient : MonoBehaviour
     public int nbJoueurs = 1;
     public bool hostStarted = false;
     public int gameId = 0;
+    private int state = 0;
+    private int state_watcher = 0;
+    public Action<object, bool> gmDtoSend;
+    private object dtoToSend;
 
     void Start()
     {
@@ -104,9 +108,17 @@ public class LobbyClient : MonoBehaviour
                         Debug.Log("Lobby invitation received");
                         //acceptInvite(data[0], guestId, globalToken);
                         break;
-                    case "action-end":
-                        Debug.Log("Action ended");
+                    case "action-movement":
                         // TODO Gérer l'action de l'autre joueur
+                        Debug.Log("Action received");
+                        if (state == 0) {
+                            dtoToSend = JsonUtils.jsonToDTOPawn_IHM(jsonObject["data"].ToString());
+                            state = 1;
+                        } else if (state == 1){
+                            dtoToSend =  JsonUtils.jsonToDTOWall_IHM(jsonObject["data"].ToString());
+                            state = 0;
+                            Debug.Log("Action ended");
+                        }
                         break;
                     case "lobby-join":
                         nbJoueurs += 1;
@@ -133,6 +145,15 @@ public class LobbyClient : MonoBehaviour
         };
 
         ws.Connect();
+    }
+
+    public void Update(){
+        if (state != state_watcher) {
+            state_watcher = state;
+            Debug.Log("State: " + state);
+            Debug.Log("DTO: " + dtoToSend);
+            gmDtoSend?.Invoke(dtoToSend, false);
+        }
     }
 
     public void JoinLobby(string userId, string token, string globalToken)
@@ -229,7 +250,7 @@ public class LobbyClient : MonoBehaviour
         Debug.Log("Starting game...");
     }
 
-    public void endAction(string userId, object DTO, string globalToken)
+    public void sendAction(string userId, object DTO, string globalToken)
     {
         object DTOToSend;
         switch (DTO.GetType())
@@ -240,6 +261,9 @@ public class LobbyClient : MonoBehaviour
             case Type t when t == typeof(Common.DTOPawn):
                 DTOToSend = JsonUtils.dtoPawnToJSON((Common.DTOPawn)DTO);
                 break;
+            case Type t when t == typeof(Common.DTOGameState):
+                DTOToSend = JsonUtils.dtoGameStateToJSON((Common.DTOGameState)DTO);
+                break;
             default:
                 DTOToSend = null;
                 break;
@@ -247,7 +271,7 @@ public class LobbyClient : MonoBehaviour
         var request = new
         {
             token = globalToken,
-            requestType = "action-end",
+            requestType = "action-movement",
             userId = userId,
             data = DTOToSend
         };

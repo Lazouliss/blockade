@@ -593,6 +593,59 @@ public class AlgoBoard
         return true;
     }
 
+    public void removeWall((uint, uint) firstCoords, (uint, uint) secondCoords, Common.Direction direction)
+    {
+        (uint firstX, uint firstY) = firstCoords;
+        Square firstSquare = getSquareById(getPosition(firstX, firstY));
+
+        (uint secondX, uint secondY) = secondCoords;
+        Square secondSquare = getSquareById(getPosition(secondX, secondY));
+
+        switch (direction)
+        {
+            case Common.Direction.UP:
+                uint firstSquareUpId = firstSquare.getIdCase() - 11;
+                uint secondSquareUpId = secondSquare.getIdCase() - 11;
+                Square firstSquareUp = getSquareById(firstSquareUpId);
+                Square secondSquareUp = getSquareById(secondSquareUpId);
+                firstSquare.SetUpperSquare(firstSquareUp);
+                secondSquare.SetUpperSquare(secondSquareUp);
+                firstSquareUp.SetLowerSquare(firstSquare);
+                secondSquareUp.SetLowerSquare(secondSquare);
+                break;
+            case Common.Direction.DOWN:
+                uint firstSquareDownId = firstSquare.getIdCase() + 11;
+                uint secondSquareDownId = secondSquare.getIdCase() + 11;
+                Square firstSquareDown = getSquareById(firstSquareDownId);
+                Square secondSquareDown = getSquareById(secondSquareDownId);
+                firstSquare.SetLowerSquare(firstSquareDown);
+                secondSquare.SetLowerSquare(secondSquareDown);
+                firstSquareDown.SetUpperSquare(firstSquare);
+                secondSquareDown.SetUpperSquare(secondSquare);
+                break;
+            case Common.Direction.LEFT:
+                uint firstSquareLeftId = firstSquare.getIdCase() - 1;
+                uint secondSquareLeftId = secondSquare.getIdCase() - 1;
+                Square firstSquareLeft = getSquareById(firstSquareLeftId);
+                Square secondSquareLeft = getSquareById(secondSquareLeftId);
+                firstSquare.SetLeftSquare(firstSquareLeft);
+                secondSquare.SetLeftSquare(secondSquareLeft);
+                firstSquareLeft.SetRightSquare(firstSquare);
+                secondSquareLeft.SetRightSquare(secondSquare);
+                break;
+            case Common.Direction.RIGHT:
+                uint firstSquareRightId = firstSquare.getIdCase() + 1;
+                uint secondSquareRightId = secondSquare.getIdCase() + 1;
+                Square firstSquareRight = getSquareById(firstSquareRightId);
+                Square secondSquareRight = getSquareById(secondSquareRightId);
+                firstSquare.SetRightSquare(firstSquareRight);
+                secondSquare.SetRightSquare(secondSquareRight);
+                firstSquareRight.SetLeftSquare(firstSquare);
+                secondSquareRight.SetLeftSquare(secondSquare);
+                break;
+        }
+    }
+
     public List<(uint, uint)> GetValidPawnMoves(Player player)
     {
         List<(uint, uint)> validMoves = new List<(uint, uint)>();

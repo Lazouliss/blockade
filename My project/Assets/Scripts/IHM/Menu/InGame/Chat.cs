@@ -9,6 +9,7 @@ namespace blockade.Blockade_IHM
         private string last_received_message = "";
 
         [SerializeField] private GameObject game;
+        [SerializeField] private TMP_Text txt;
 
         /// <summary>
         /// Par Martin GADET
@@ -66,6 +67,13 @@ namespace blockade.Blockade_IHM
         public void addMessage(string playerName, string message)
         {
             ChatContent.text += createMessageToSend(playerName, message);
+        }
+
+        public void send_message()
+        {
+            game.GetComponent<GameManager>().online.sendChat(txt.text);
+            addMessage("You", txt.text);
+            txt.text = "";
         }
     }
 }

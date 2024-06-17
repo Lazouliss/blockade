@@ -78,7 +78,8 @@ namespace blockade.Blockade_IHM
                     //Debug.Log(ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall);
 
                     // and if the player cant place walls or is trying to move a wall of the opponent
-                    if (!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall || hit.collider.gameObject.GetComponent<Wall>().GetId() != ihm.GetCurrentPlayer())
+                    //!ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall || 
+                    if (hit.collider.gameObject.GetComponent<Wall>().GetId() != ihm.GetCurrentPlayer())
                     {
                         return;
                     }

@@ -232,6 +232,8 @@ namespace blockade.Blockade_IHM
             
         }
 
+        
+
         //ABERKANE Doha & Thomas MONTIGNY
         //fonction d'envoi des positions en dto
         public void SendDTO(Vector2 pos, bool isStartPos)

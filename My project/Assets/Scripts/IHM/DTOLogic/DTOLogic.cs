@@ -69,7 +69,13 @@ namespace blockade.Blockade_IHM
         private void applyDTOWall(Common.DTOWall dto)
         {
             // Fait disparaitre le mur que le joueur avait de selectionne
-            if (ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "ONLINE" && ihm.GetCurrentPlayer() == 1))
+            int idPlayerOnline;
+            if(ihm.board.is_guest_online){
+                idPlayerOnline = 2;
+            } else {
+                idPlayerOnline = 1;
+            }
+            if ((dto.isAdd == true) && ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "ONLINE" && ihm.GetCurrentPlayer() == idPlayerOnline))
             {
                 Debug.Log("Forgetting wall");
                 this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
@@ -88,9 +94,9 @@ namespace blockade.Blockade_IHM
                 ihm.EditStackVerticalWall(ihm.GetCurrentPlayer(), null);
             }
 
-            // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
-            ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
-            ihm.SwitchActionPlayer();
+            // // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
+            // ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
+            // ihm.SwitchActionPlayer();
             ihm.ToggleError(false);
         }
 
@@ -103,18 +109,18 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOPawn(Common.DTOPawn dto)
         {
-            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves);
+            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0]);
             //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
             ihm.board.RefreshDTOPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
-            // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
-            int current_player = ihm.GetCurrentPlayer();
-            if (ihm.GetPlayer(current_player).verticalWalls > 0 || ihm.GetPlayer(current_player).horizontalWalls > 0)
-            {
-                ihm.SetPlayerPlacingWall(current_player, true);
-            }
-            ihm.SwitchActionPlayer();
+            // // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
+            // int current_player = ihm.GetCurrentPlayer();
+            // if (ihm.GetPlayer(current_player).verticalWalls > 0 || ihm.GetPlayer(current_player).horizontalWalls > 0)
+            // {
+            //     ihm.SetPlayerPlacingWall(current_player, true);
+            // }
+            // ihm.SwitchActionPlayer();
             ihm.ToggleError(false);
         }
 

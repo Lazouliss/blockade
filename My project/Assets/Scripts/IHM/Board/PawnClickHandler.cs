@@ -27,7 +27,7 @@ namespace blockade.Blockade_IHM
         {
             IHM ihm = this.plateau.GetComponent<Board>().ihm.GetComponent<IHM>();
 
-            if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() && !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall)
+            if (this.GetComponent<Pawn>().GetID() == ihm.GetCurrentPlayer() )//&& !ihm.GetPlayer(ihm.GetCurrentPlayer()).isPlacingWall
             {
                 //afficher position
                 Debug.Log("Position du pion cliqué  " + transform.position);

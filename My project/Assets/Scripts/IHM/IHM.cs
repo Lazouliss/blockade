@@ -457,5 +457,6 @@ namespace blockade.Blockade_IHM
             ui.GetComponent<RawImage>().enabled = true;
             endGameMenu.GetComponent<EndMenu>().SelectWinner(current_player == this.winner);
         }
+        
     }
 }

@@ -33,19 +33,21 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         public void moveDTOPawn(Common.DTOPawn dto)
         {
+            Debug.Log("Debut du moveDTOPawn");
             StartCoroutine(movePawn(dto));
         }
 
         /// <summary>
         /// Par Wassim BOUKHARI
         /// 
-        /// Lance une coroutine qui déplace le pion 
+        /// Lance une coroutine qui dï¿½place le pion 
         /// pour chaque direction
         /// 
         /// </summary>
         /// <param name="dto"></param>
         private IEnumerator movePawn(Common.DTOPawn dto)
         {
+            Debug.Log("Debut du movePawn");
             Pawn p = GetPawn(dto);
             
             foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
@@ -57,14 +59,15 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Retourne le pion a déplacer
+        /// Retourne le pion a dï¿½placer
         /// 
-        /// Privé
+        /// Privï¿½
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>Pawn</returns>
         private Pawn GetPawn(Common.DTOPawn dto)
         {
+            Debug.Log("Debut du GetPawn");
             string p1_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion1";
             string p2_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion2";
 
@@ -189,12 +192,14 @@ namespace blockade.Blockade_IHM
 
                 Animator animator = wall.GetComponent<Animator>();
                 animator.SetTrigger("monterMur");
+                
+                StartCoroutine(DelayedSwitchPlayer(animator.GetCurrentAnimatorStateInfo(0).length));
 
 
             }
             else
             {
-                Debug.LogWarning("La pile est vide, plus de mur à retirer");
+                Debug.LogWarning("La pile est vide, plus de mur ï¿½ retirer");
             }
 
         }
