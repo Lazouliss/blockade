@@ -144,9 +144,22 @@ namespace blockade.Blockade_IHM
                 Debug.Log("Sign out player " + PlayerName);
                 // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
 
+                game.GetComponent<GameManager>().online.Register(PlayerName, PlayerPassword1,OnSignUpComplete);
+            }
+        }
+        private void OnSignUpComplete(bool success)
+        {
+            if (success)
+            {
+
+                this.chat.SetActive(false);
                 this.inscriptionMenu.SetActive(false);
                 this.connectionMenu.SetActive(true);
-                this.chat.SetActive(false);
+            }
+            else
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("La création de compte a échoué.");
             }
         }
     }

@@ -47,10 +47,11 @@ public class LobbyClient : MonoBehaviour
 
     private WebSocket ws;
     //private string password = "#UFIPHV";
-    private string guestId = "5200";
-    private string hostId = "5201";
-    private string globalToken = "0x0";
-
+    public string last_message = "";
+    public string code = "XXXX";
+    public int nbJoueurs = 1;
+    public bool hostStarted = false;
+    public int gameId = 0;
 
     void Start()
     {
@@ -60,16 +61,19 @@ public class LobbyClient : MonoBehaviour
         {
 
             // All messages received from the sockets
-            Debug.Log("Received: " + e.Data);
-            string text = "{\"requestType\":\"lobby-join\",\"data\":\"GUEST1\"}";
-            if(e.Data == text) {
-                Debug.Log("alo");
-                endAction(hostId, wallDTO, globalToken);
-            }
+            // Debug.Log("Received: " + e.Data);
+            // string text = "{\"requestType\":\"lobby-join\",\"data\":\"GUEST1\"}";
+            // if(e.Data == text) {
+            //     Debug.Log("alo");
+            //     endAction(hostId, wallDTO, globalToken);
+            // }
+
             JObject jsonObject = JObject.Parse(e.Data);
             string[] data = null;
             string responseType = null;
             string requestType = null;
+
+            Debug.Log("Received: " + jsonObject);
 
             if(jsonObject.ContainsKey("requestType")) {
                 requestType = jsonObject["requestType"].ToString();
@@ -77,18 +81,18 @@ public class LobbyClient : MonoBehaviour
             if(jsonObject.ContainsKey("responseType")) {
                 responseType = jsonObject["responseType"].ToString();
             }
-            if (jsonObject.ContainsKey("data")) {
-                Debug.Log("Data: " + jsonObject["data"]);
-                data = jsonObject["data"].ToObject<string[]>();
-            }
+            // if (jsonObject.ContainsKey("data")) {
+            //     Debug.Log("Data: " + jsonObject["data"]);
+            //     data = jsonObject["data"].ToObject<string[]>();
+            // }
+            
+            
+            Debug.Log("Response type: " + responseType);
             if(responseType != null)
             {
                 switch(responseType) {
                     case "lobby-host":
-                        sendInvite(data[0], hostId, globalToken);
-                        break;
-                    case "lobby-join":
-                        SendMessageToLobby("SALUT EH OH", hostId, globalToken);
+                        code = jsonObject["data"].ToString();
                         break;
                 }
             } else {
@@ -98,11 +102,23 @@ public class LobbyClient : MonoBehaviour
                         break;
                     case "lobby-invite":
                         Debug.Log("Lobby invitation received");
-                        acceptInvite(data[0], guestId, globalToken);
+                        //acceptInvite(data[0], guestId, globalToken);
                         break;
                     case "action-end":
                         Debug.Log("Action ended");
                         // TODO Gérer l'action de l'autre joueur
+                        break;
+                    case "lobby-join":
+                        nbJoueurs += 1;
+                        break;
+                    case "lobby-start-game":
+                        Debug.Log("Game started");
+                        hostStarted = true;
+                        gameId = jsonObject["gameId"].ToObject<int>();
+                        break;
+                    case "lobby-send-msg":
+                        Debug.Log("Message received: " + jsonObject["data"]);
+                        last_message = jsonObject["data"].ToString();
                         break;
                 }
             }
@@ -119,7 +135,7 @@ public class LobbyClient : MonoBehaviour
         ws.Connect();
     }
 
-    private void JoinLobby(string userId, string password, string globalToken)
+    public void JoinLobby(string userId, string token, string globalToken)
     {
         Debug.Log("Enter lobby password:");
         
@@ -128,7 +144,7 @@ public class LobbyClient : MonoBehaviour
             token = globalToken,
             requestType = "lobby-join",
             userId = userId,
-            data = password
+            data = token
         };
 
         ws.Send(JsonConvert.SerializeObject(request));
@@ -136,7 +152,7 @@ public class LobbyClient : MonoBehaviour
     }
 
     
-    private void HostLobby(string userId, string globalToken)
+    public void HostLobby(string userId, string globalToken)
     {
         var request = new
         {
@@ -150,7 +166,7 @@ public class LobbyClient : MonoBehaviour
         Debug.Log("Hosting a new lobby...");
     }
 
-    private void SendMessageToLobby(string message, string userId, string globalToken)
+    public void SendMessageToLobby(string message, string userId, string globalToken)
     {
         var messageRequest = new
         {
@@ -164,7 +180,7 @@ public class LobbyClient : MonoBehaviour
         Debug.Log("Sending message to lobby: " + message);
     }
 
-    private void sendInvite(string password, string userId, string globalToken){
+    public void sendInvite(string password, string userId, string globalToken){
         var request = new
         {
             token = globalToken,
@@ -176,7 +192,7 @@ public class LobbyClient : MonoBehaviour
         Debug.Log("Lobby invitation sent");
     }
 
-    private void sendRequest(string userId, string globalToken){
+    public void sendRequest(string userId, string globalToken){
         var request = new 
         {
             token = globalToken,
@@ -188,7 +204,7 @@ public class LobbyClient : MonoBehaviour
         Debug.Log("Friend request sent");
     }
 
-    private void acceptInvite(string password, string userId, string globalToken){
+    public void acceptInvite(string password, string userId, string globalToken){
         var request = new 
         {
             token = "0x0",

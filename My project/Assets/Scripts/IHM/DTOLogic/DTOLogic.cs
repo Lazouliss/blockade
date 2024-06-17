@@ -69,7 +69,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOWall(Common.DTOWall dto)
         {
             // Fait disparaitre le mur que le joueur avait de selectionne
-            if (ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "Online" && ihm.GetCurrentPlayer() == 1))
+            if (ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "ONLINE" && ihm.GetCurrentPlayer() == 1))
             {
                 Debug.Log("Forgetting wall");
                 this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();

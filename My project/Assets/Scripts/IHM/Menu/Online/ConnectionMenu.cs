@@ -106,10 +106,23 @@ namespace blockade.Blockade_IHM
                 // si mot de passe incorrect
                 // ErrorPopupGO.SetActive(true);
                 // ErrorPopup.SetText("Le mot de passe est incorrect.");
+                game.GetComponent<GameManager>().online.Login(PlayerName, PlayerPassword,OnLoginComplete);
+            }
+        }
+        private void OnLoginComplete(bool success, string jwt)
+        {
+            if (success)
+            {
+                Debug.Log("Login successful, JWT: " + jwt);
 
                 this.connectionMenu.SetActive(false);
                 this.mainMenu.SetActive(true);
                 this.chat.SetActive(true);
+            }
+            else
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le mot de passe est incorrect.");
             }
         }
     }

@@ -98,7 +98,7 @@ namespace blockade.Blockade_IHM
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)
         //creation d'un fonction qui va créer mon objet pion
-        public static GameObject createPawn(Vector2Int position, string name, Board plateau, int id_player)
+        public static GameObject createPawn(Vector2Int position, string name, Board plateau, int id_player, bool flag)
         {
 
             string path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character";
@@ -127,6 +127,7 @@ namespace blockade.Blockade_IHM
             pawnObj.AddComponent<CapsuleCollider>(); // ajout d'une CapsuleCollider pour mon pawn
             pawnObj.AddComponent<PawnClickHandler>(); // ajout de mon PawnClickHandler pour gestion des cliques
             pawnObj.GetComponent<PawnClickHandler>().plateau = plateau;
+            pawnObj.GetComponent<PawnClickHandler>().flag = flag;
 
             // change de parent pour prendre le plateau
             pawnObj.transform.SetParent(plateau.transform, false);

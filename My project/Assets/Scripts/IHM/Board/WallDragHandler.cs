@@ -6,22 +6,23 @@ namespace blockade.Blockade_IHM
     {
         private GameObject selectedWall;
         public Board board;
+        public bool flag = true;
 
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Exécutée toutes les frames
+        /// Exï¿½cutï¿½e toutes les frames
         /// </summary>
         void Update()
         {
-            // Déplace le mur avec le curseur tant qu'il est sélectionné
+            // Dï¿½place le mur avec le curseur tant qu'il est sï¿½lectionnï¿½
             if (selectedWall != null)
             {
                 Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedWall.transform.position).z);
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
                 selectedWall.transform.position = new Vector3(worldPosition.x, 1.25f, worldPosition.z);
 
-                // Garder la possibilité de faire tourner un mur ? (il faut changer l'attribut isVerti si c'est le cas, et supprimer le bon mur de l'espace de droite après cela).
+                // Garder la possibilitï¿½ de faire tourner un mur ? (il faut changer l'attribut isVerti si c'est le cas, et supprimer le bon mur de l'espace de droite aprï¿½s cela).
                 /*
                 if (Input.GetMouseButtonDown(1))
                 {
@@ -42,13 +43,15 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void OnMouseDown()
         {
-            ActionWall();
+            if (flag) {
+                ActionWall();
+            }
         }
 
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Sélectionne le mur à déplacé si ce n'est pas déjà fait ou envoie un DTO pour essayer de le placer sinon.
+        /// Sï¿½lectionne le mur ï¿½ dï¿½placï¿½ si ce n'est pas dï¿½jï¿½ fait ou envoie un DTO pour essayer de le placer sinon.
         /// 
         /// Publique
         /// </summary>
@@ -117,7 +120,7 @@ namespace blockade.Blockade_IHM
                 // Destroy the wall
                 Destroy(selectedWall);
 
-                // Déselectionne l'objet et fait réapparaitre le curseur
+                // Dï¿½selectionne l'objet et fait rï¿½apparaitre le curseur
                 selectedWall = null;
                 Cursor.visible = true;
             } 
@@ -126,9 +129,9 @@ namespace blockade.Blockade_IHM
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Récupère l'objet que le curseur pointe
+        /// Rï¿½cupï¿½re l'objet que le curseur pointe
         /// 
-        /// Privée
+        /// Privï¿½e
         /// </summary>
         /// <returns></returns>
         private RaycastHit CastRay()

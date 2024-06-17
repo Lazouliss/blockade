@@ -4,6 +4,7 @@ using UnityEngine;
 using blockade.Blockade_common;
 using blockade.Blockade_IHM;
 using blockade.AI;
+using blockade.Blockade_Online;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     private BotAPI botAPI;
     private bool wallPlaced = false;
     private bool pawnMoved = false;
+    public Online online;
 
     public GameManager()
     {       
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("awake game manager");
         ihm = GetComponent<IHM>();
+        online = gameObject.AddComponent<Online>();
     }
     private void togglePlayingPlayer()
     {
@@ -114,6 +117,7 @@ public class GameManager : MonoBehaviour
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], playingPlayerID, playingPlayerString));
                 } else {
                     ihm.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
+
                     if(ihm.GetTypePartie() == "JCE"){
                         botAPI.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerString));
                         
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
                             botAPI.sendDTO(dtoHandler.createGameStateDTO(players[0], players[1], 0, playingPlayerStringBot));
                         }
                     }
+                    // TODO mode online
                 }
                 ihm.board.ChangeCaseTexture(algoBoard.GetValidPawnMoves(playingPlayer));
             }

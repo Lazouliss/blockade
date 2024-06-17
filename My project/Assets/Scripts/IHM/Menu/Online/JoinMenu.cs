@@ -23,7 +23,9 @@ namespace blockade.Blockade_IHM
         [SerializeField] private GameObject game;
         [SerializeField] private GameObject menu;
         [SerializeField] private GameObject waitScreen;
+        [SerializeField] private GameObject overlay;
         [SerializeField] private GameObject chat;
+        [SerializeField] private UIManager ui;
 
         public GameObject ErrorPopupObj;
         public TMP_Text ErrorPopup;
@@ -67,6 +69,14 @@ namespace blockade.Blockade_IHM
                 }
                 Thread.Sleep(500);
             }
+            if (game.GetComponent<GameManager>().online.host_started_game() && wait == true){
+                wait = false;
+                this.waitScreen.SetActive(false);
+                this.overlay.SetActive(true);
+                this.chat.SetActive(true);
+                UIManager.SetTypePartie("ONLINE");
+                ui.PlayGame();
+            }
         }
 
         /// <summary>
@@ -105,7 +115,7 @@ namespace blockade.Blockade_IHM
             if (!UIManager.CheckCode(JoinerCode))
             {
                 ErrorPopupObj.SetActive(true);
-                ErrorPopup.SetText("Le code doit être un nombre à 4 chiffres.");
+                ErrorPopup.SetText("Le code doit être un nombre à 7 char.");
             }
             // TODO si le code est incorrect
             // ErrorPopupObj.SetActive(true);
@@ -116,10 +126,14 @@ namespace blockade.Blockade_IHM
                 wait = true;
                 Debug.Log("Joiner player " + ConnectionMenu.PlayerName);
                 // TODO : game.GetComponent<Online>().fonction(PlayerName);
-
+                game.GetComponent<GameManager>().online.join_lobby(JoinerCode);
+                
                 this.menu.SetActive(false);
                 this.waitScreen.SetActive(true);
                 this.chat.SetActive(false);
+
+                game.GetComponent<IHM>().board.is_guest_online = true;
+
             }
         }
     }

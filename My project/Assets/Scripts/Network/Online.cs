@@ -13,21 +13,26 @@ namespace blockade.Blockade_Online
     {
         
         private string jwt;
+        private string userId;
+        public LobbyClient lobbyClient;
 
         void Awake()
         {
-            DTOHandler dtoHandler = new DTOHandler();
-            Common.DTOWall wall = dtoHandler.createWallDTO((1,2), (3,4), Common.Direction.UP, false);
-            string dtoWallStr = JsonUtils.dtoWallToJSON(wall);
-            Debug.Log(wall.isAdd);
-            Debug.Log(JsonUtils.jsonToDTOWall_IHM(dtoWallStr).isAdd);
+            lobbyClient = gameObject.AddComponent<LobbyClient>();
+            // Debug.Log("awake online");
+            // DTOHandler dtoHandler = new DTOHandler();
+            // Common.DTOWall wall = dtoHandler.createWallDTO((1,2), (3,4), Common.Direction.UP, false);
+            // string dtoWallStr = JsonUtils.dtoWallToJSON(wall);
+            // Debug.Log(wall.direction);
+            // Debug.Log(JsonUtils.jsonToDTOWall_IHM(dtoWallStr).direction);
 
-            Common.DTOPawn pawn = dtoHandler.createPawnDTO((1,2), new List<Common.Direction> { Common.Direction.UP, Common.Direction.RIGHT, Common.Direction.DOWN });
-            string dtoPawnStr = JsonUtils.dtoPawnToJSON(pawn);
-            Debug.Log(pawn.mooves[0]);
-            Debug.Log(JsonUtils.jsonToDTOPawn_IHM(dtoPawnStr).mooves[0]);
+            // Common.DTOPawn pawn = dtoHandler.createPawnDTO((1,2), new List<Common.Direction> { Common.Direction.UP, Common.Direction.RIGHT, Common.Direction.DOWN });
+            // string dtoPawnStr = JsonUtils.dtoPawnToJSON(pawn);
+            // Debug.Log(pawn.mooves[0]);
+            // Debug.Log(JsonUtils.jsonToDTOPawn_IHM(dtoPawnStr).mooves[0]);
 
         }
+
         public void Login(string username, string password, Action<bool, string> onComplete)
         {
             StartCoroutine(SendLoginRequest(username, password, onComplete));
@@ -45,11 +50,15 @@ namespace blockade.Blockade_Online
             else
             {
                 string responseText = request.downloadHandler.text;
+                Debug.Log("Response: " + responseText);
                 Dictionary<string, string> dictionary = JsonUtils.ParseJsonToDictionary(responseText);
 
                 if (dictionary.TryGetValue("jwt", out jwt))
                 {
                     onComplete?.Invoke(true, jwt);
+                    if (dictionary.TryGetValue("userId", out userId)){
+                        Debug.Log("User id: " + userId);
+                    }
                 }
                 else
                 {
@@ -78,6 +87,32 @@ namespace blockade.Blockade_Online
             {
                 onComplete?.Invoke(true);
             }
+        }
+
+        //------------------WebSocket------------------
+
+        public void create_lobby(){
+            lobbyClient.HostLobby(userId, jwt);
+        }
+
+        public string get_code(){
+            return lobbyClient.code;
+        }
+
+        public int get_nb_joueurs(){
+            return lobbyClient.nbJoueurs;
+        }
+
+        public void start_game(){
+            lobbyClient.StartGame(userId, jwt);
+        }
+
+        public void join_lobby(string code){
+            lobbyClient.JoinLobby(userId, code, jwt);
+        }
+
+        public bool host_started_game(){
+            return lobbyClient.hostStarted;
         }
     }
 }

@@ -6,6 +6,9 @@ namespace blockade.Blockade_IHM
     public class Chat : MonoBehaviour
     {
         public TMP_Text ChatContent;
+        private string last_received_message = "";
+
+        [SerializeField] private GameObject game;
 
         /// <summary>
         /// Par Martin GADET
@@ -13,10 +16,19 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        // void Start()
-        // {
-        //     StartCoroutine(test());
-        // }
+        void Start()
+        {
+            addMessage("System", "Welcome to the chat !");
+        }
+
+        void Update()
+        {
+            if (last_received_message != game.GetComponent<GameManager>().online.lobbyClient.last_message)
+            {
+                last_received_message = game.GetComponent<GameManager>().online.lobbyClient.last_message;
+                addMessage("OtherPlayer", last_received_message);
+            }
+        }
 
         /// <summary>
         /// Par Martin GADET

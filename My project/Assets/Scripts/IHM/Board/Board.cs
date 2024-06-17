@@ -22,6 +22,8 @@ namespace blockade.Blockade_IHM
 
         private System.Random rand;
 
+        public bool is_guest_online = false;
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -89,26 +91,52 @@ namespace blockade.Blockade_IHM
                     clickHandler.plateau = this;//référence du plateau à chaque CaseClickHandler
 
                     //initialisation des pions dans leurs cases de départ
-                    if (x == 3 && y == 3)
-                    {
-                        Pawn.createPawn(new Vector2Int(3, 3), "player1_pion1", this, 1);                        
-                        case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                    Debug.Log("Type de partie : " + ihm.GetTypePartie());
+                    if (ihm.GetTypePartie() == "ONLINE") {
+                        if (x == 3 && y == 3)
+                        {
+                            Pawn.createPawn(new Vector2Int(3, 3), "player1_pion1", this, 1, !is_guest_online);                        
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
 
-                    }
-                    else if (x == 7 && y == 3)
-                    {
-                        Pawn.createPawn(new Vector2Int(7, 3), "player1_pion2", this, 1);
-                        case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
-                    }
-                    else if (x == 3 && y == 10)
-                    {
-                        Pawn.createPawn(new Vector2Int(3, 10), "player2_pion1", this, 2);
-                        case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
-                    }
-                    else if (x == 7 && y == 10)
-                    {
-                        Pawn.createPawn(new Vector2Int(7, 10), "player2_pion2", this, 2);
-                        case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                        else if (x == 7 && y == 3)
+                        {
+                            Pawn.createPawn(new Vector2Int(7, 3), "player1_pion2", this, 1, !is_guest_online);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                        else if (x == 3 && y == 10)
+                        {
+                            Pawn.createPawn(new Vector2Int(3, 10), "player2_pion1", this, 2, is_guest_online);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                        else if (x == 7 && y == 10)
+                        {
+                            Pawn.createPawn(new Vector2Int(7, 10), "player2_pion2", this, 2, is_guest_online);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                    } else {
+                            
+                        if (x == 3 && y == 3)
+                        {
+                            Pawn.createPawn(new Vector2Int(3, 3), "player1_pion1", this, 1, true);                        
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+
+                        }
+                        else if (x == 7 && y == 3)
+                        {
+                            Pawn.createPawn(new Vector2Int(7, 3), "player1_pion2", this, 1, true);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                        else if (x == 3 && y == 10)
+                        {
+                            Pawn.createPawn(new Vector2Int(3, 10), "player2_pion1", this, 2, true);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
+                        else if (x == 7 && y == 10)
+                        {
+                            Pawn.createPawn(new Vector2Int(7, 10), "player2_pion2", this, 2, true);
+                            case_plateau.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.gray);
+                        }
                     }
                 }
             }
@@ -154,28 +182,54 @@ namespace blockade.Blockade_IHM
             Vector2 startPosHorizP2 = new Vector2(-1, 13 - (nb_walls * spaceBetweenWalls + 1));
             Vector2 currentPosHorizP2 = startPosHorizP2;
 
-            for (int i = 0; i < nb_walls; i++)
-            {
-                // Player 1
-                // Création d'un mur horizontal, aligné verticalement le long du plateau
-                ihm.EditStackHorizontalWall(1, Wall.createWall(currentPos, 1, false, this));
-                // Création d'un mur vertical, aligné horizontalement le long du plateau
-                ihm.EditStackVerticalWall(1, Wall.createWall(currentPosHoriz, 1, true, this));
+            if (ihm.GetTypePartie() == "ONLINE") {
+                for (int i = 0; i < nb_walls; i++)
+                {
+                    // Player 1
+                    // Création d'un mur horizontal, aligné verticalement le long du plateau
+                    ihm.EditStackHorizontalWall(1, Wall.createWall(currentPos, 1, false, this, !is_guest_online));
+                    // Création d'un mur vertical, aligné horizontalement le long du plateau
+                    ihm.EditStackVerticalWall(1, Wall.createWall(currentPosHoriz, 1, true, this, !is_guest_online));
 
-                // Mise à jour des positions pour les prochains murs
-                currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
-                currentPosHoriz = new Vector2(currentPosHoriz.x + spaceBetweenWalls, currentPosHoriz.y);
+                    // Mise à jour des positions pour les prochains murs
+                    currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
+                    currentPosHoriz = new Vector2(currentPosHoriz.x + spaceBetweenWalls, currentPosHoriz.y);
 
-                // Player 2
-                // Création d'un mur horizontal, aligné verticalement le long du plateau
-                ihm.EditStackHorizontalWall(2, Wall.createWall(currentPosP2, 2, false, this));
-                // Création d'un mur vertical, aligné horizontalement le long du plateau
-                ihm.EditStackVerticalWall(2, Wall.createWall(currentPosHorizP2, 2, true, this));
+                    // Player 2
+                    // Création d'un mur horizontal, aligné verticalement le long du plateau
+                    ihm.EditStackHorizontalWall(2, Wall.createWall(currentPosP2, 2, false, this, is_guest_online));
+                    // Création d'un mur vertical, aligné horizontalement le long du plateau
+                    ihm.EditStackVerticalWall(2, Wall.createWall(currentPosHorizP2, 2, true, this, is_guest_online));
 
-                // Mise à jour des positions pour les prochains murs
-                currentPosP2 = new Vector2(currentPosP2.x, currentPosP2.y - spaceBetweenWalls);
-                currentPosHorizP2 = new Vector2(currentPosHorizP2.x - spaceBetweenWalls, currentPosHorizP2.y);
+                    // Mise à jour des positions pour les prochains murs
+                    currentPosP2 = new Vector2(currentPosP2.x, currentPosP2.y - spaceBetweenWalls);
+                    currentPosHorizP2 = new Vector2(currentPosHorizP2.x - spaceBetweenWalls, currentPosHorizP2.y);
+                }
+            } else {
+                for (int i = 0; i < nb_walls; i++)
+                {
+                    // Player 1
+                    // Création d'un mur horizontal, aligné verticalement le long du plateau
+                    ihm.EditStackHorizontalWall(1, Wall.createWall(currentPos, 1, false, this, true));
+                    // Création d'un mur vertical, aligné horizontalement le long du plateau
+                    ihm.EditStackVerticalWall(1, Wall.createWall(currentPosHoriz, 1, true, this, true));
+
+                    // Mise à jour des positions pour les prochains murs
+                    currentPos = new Vector2(currentPos.x, currentPos.y + spaceBetweenWalls);
+                    currentPosHoriz = new Vector2(currentPosHoriz.x + spaceBetweenWalls, currentPosHoriz.y);
+
+                    // Player 2
+                    // Création d'un mur horizontal, aligné verticalement le long du plateau
+                    ihm.EditStackHorizontalWall(2, Wall.createWall(currentPosP2, 2, false, this, true));
+                    // Création d'un mur vertical, aligné horizontalement le long du plateau
+                    ihm.EditStackVerticalWall(2, Wall.createWall(currentPosHorizP2, 2, true, this, true));
+
+                    // Mise à jour des positions pour les prochains murs
+                    currentPosP2 = new Vector2(currentPosP2.x, currentPosP2.y - spaceBetweenWalls);
+                    currentPosHorizP2 = new Vector2(currentPosHorizP2.x - spaceBetweenWalls, currentPosHorizP2.y);
+                }
             }
+            
         }
 
         //ABERKANE Doha & Thomas MONTIGNY

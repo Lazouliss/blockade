@@ -37,7 +37,7 @@ namespace blockade.Blockade_IHM
         ///
         /// Création d'un mur, cliquable seulement par un joueur (playerID), aux positions en argument
         /// </summary>
-        public static GameObject createWall(Vector2 pos, int id_player, bool isVerti, Board board)
+        public static GameObject createWall(Vector2 pos, int id_player, bool isVerti, Board board, bool flag)
         {
             // Create wall using prefab and instantiate it on the right position
             //string path = "Graveyard/kenney_graveyard-kit/Models/FBX format/brick-wall";
@@ -62,6 +62,7 @@ namespace blockade.Blockade_IHM
             // Add DragHandler and asign the board to it
             wall.AddComponent<WallDragHandler>();
             wall.GetComponent<WallDragHandler>().board = board;
+            wall.GetComponent<WallDragHandler>().flag = flag;
 
             // Add script to wall
             wall.AddComponent<Wall>();

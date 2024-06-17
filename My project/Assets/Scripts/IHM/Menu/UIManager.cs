@@ -119,11 +119,7 @@ namespace blockade.Blockade_IHM
         /// <returns>code (code rentré par le joueur)</returns>
         public static bool CheckCode(string code)
         {
-            int parsedCode;
-            if (!int.TryParse(code, out parsedCode))
-                return false;
-
-            if (code.Length != 4)
+            if (code.Length != 7)
                 return false;
 
             return true;

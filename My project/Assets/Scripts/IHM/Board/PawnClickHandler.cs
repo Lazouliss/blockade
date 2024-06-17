@@ -7,6 +7,8 @@ namespace blockade.Blockade_IHM
     {
         public Board plateau;
 
+        public bool flag = true;
+
         
         /// <summary>
         /// Par  ABERKANE Doha &  (Thomas Montigny partie où y a écrit IHM)
@@ -16,7 +18,9 @@ namespace blockade.Blockade_IHM
         /// </summary>
         public void OnMouseDown()
         {
-            ActionPawn();
+            if (flag){
+                ActionPawn();
+            }
         }
         
         public void ActionPawn()

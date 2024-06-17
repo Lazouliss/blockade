@@ -371,7 +371,11 @@ namespace blockade.Blockade_IHM
         /// </summary>
         private void StartOnlineGame()
         {
-            // TODO
+            p1 = initPlayer(p1, true);
+            p2 = initPlayer(p2, false);
+
+            current_player = 1;
+            UpdateRemainingWalls(p1);
         }
 
         /// <summary>

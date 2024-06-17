@@ -28,8 +28,7 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         void Start()
         {
-            string testcode = "1234"; // TODO : tu peux changer le code de la game ici
-            DisplayCreatorCode(testcode);
+            game.GetComponent<GameManager>().online.create_lobby();
             DisplayPlayerName(ConnectionMenu.PlayerName);
         }
 
@@ -41,7 +40,8 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         void Update()
         {
-            DisplayNumberOfPlayer(1); // TODO : ici on regarde le nombre de joueur dans la game
+            DisplayCreatorCode(game.GetComponent<GameManager>().online.get_code());
+            DisplayNumberOfPlayer(game.GetComponent<GameManager>().online.get_nb_joueurs()); 
         }
 
         /// <summary>
@@ -80,7 +80,6 @@ namespace blockade.Blockade_IHM
         {
             CreatorCode = UIManager.getGameCode(inputCode);
             CodeText.SetText(CreatorCode);
-            Debug.Log("CreatorCode : " + CreatorCode);
         }
 
         /// <summary>
@@ -93,7 +92,6 @@ namespace blockade.Blockade_IHM
         {
             nbPlayer = nb;
             NumberText.SetText(nbPlayer.ToString());
-            Debug.Log(nbPlayer);
         }
 
         /// <summary>
@@ -107,6 +105,7 @@ namespace blockade.Blockade_IHM
         {
             Debug.Log("Creator player " + ConnectionMenu.PlayerName);
             // TODO : game.GetComponent<Online>().fonction(PlayerName);
+            game.GetComponent<GameManager>().online.start_game();
 
             this.createMenu.SetActive(false);
             this.overlay.SetActive(true);
