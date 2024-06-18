@@ -52,10 +52,6 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Wall impossible to place");
                     break;
                 }
-
-                if(ihm.GetTypePartie() == "JCE"){
-                    botAPI.sendDTO(dtoWall);
-                }
                 
                 bool canPlaceWall = (algoBoard.IsWallplaceable(dtoWall, players[0]) && algoBoard.IsWallplaceable(dtoWall, players[1]));
                 if (canPlaceWall){
@@ -64,6 +60,10 @@ public class GameManager : MonoBehaviour
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
                     Debug.Log("Wall impossible to place");
                     break;
+                }
+
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoWall);
                 }
 
                 if(dtoWall.direction == Common.Direction.LEFT || dtoWall.direction == Common.Direction.RIGHT){
@@ -87,10 +87,7 @@ public class GameManager : MonoBehaviour
                     break;
                 }
 
-                if(ihm.GetTypePartie() == "JCE"){
-                    botAPI.sendDTO(dtoPawn);
-                }
-                
+
                 (uint, uint) startPos = dtoPawn.startPos;
                 (uint?, uint?) endPos = dtoPawn.destPos;
                 (bool, List<Square>, int) res = algoBoard.getChemin(((uint)startPos.Item1, (uint)startPos.Item2), ((uint)endPos.Item1, (uint)endPos.Item2));
@@ -110,6 +107,10 @@ public class GameManager : MonoBehaviour
                     ihm.sendDTO(dtoHandler.createErrorDTO(1));
                     Debug.Log("Pawn impossible to place");
                     break;
+                }
+                
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoPawn);
                 }
                 pawnMoved = true;
                 if(ihm.GetTypePartie() == "ONLINE" && isCurrentPlayer){
