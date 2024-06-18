@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Host Lobby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-friend{
+            width: 10%;
+            background-color: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+		button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        textarea {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            height: 100px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+		.linegroup{
+			display: flex; 
+			margin: 5px;
+		}
+        .will_appear{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class = "Header">
+            <h1>Host Lobby</h1>
+            <button class="btn-friend" onclick="addFriend()"><i class="glyphicon glyphicon-user"></i></button>Ajouter un ami
+            <input type="text" class="will_appear" id="user_id">
+            <button id="btn-confirm" class="will_appear" onclick="sendRequest()">Confirm</button>
+            <button class="btn-friend" onclick="inviteLobby()"><i class="glyphicon glyphicon-user"></i></button>Inviter un ami
+            <input type="text" class="will_appear" id="user_id2">
+            <button id="btn-confirm2" class="will_appear" onclick="sendInvite()">Confirm</button>
+        </div>
+        <label for="WS_IP">WebSocket URL:</label>
+        <div class="linegroup">
+			<input type="text" id="WS_IP" value="ws://localhost:27015">
+			<button id="btn_connect" onclick="connectWS()">Connect</button>
+        </div>
+		<div class="linegroup">
+			<button id="btn_host" onclick="hostLobby()" disabled>Host Lobby</button>
+			<button id="btn_close" onclick="closeLobby()" disabled>Close Lobby</button>
+			<input type="text" id="lobby_id" readonly>
+		</div>
+		
+        <input type="text" id="message" disabled>
+        <button id="btn_msg" onclick="sendMsg()" disabled>Send</button>
+        
+        <label for="rem_message">Remote Messages:</label>
+        <textarea id="rem_message" readonly></textarea>
+    </div>
+    
+    <script>
+        let userId = 'HOST1';
+    
+        let socket = null;
+        let btn_connect = document.getElementById('btn_connect');
+        let btn_host = document.getElementById('btn_host');
+        let btn_close = document.getElementById('btn_close');
+        let lobby_id = document.getElementById('lobby_id');
+        let btn_msg = document.getElementById('btn_msg');
+        let WS_IP = document.getElementById('WS_IP');
+        let inp_msg = document.getElementById('message');
+        let inp_rem_msg = document.getElementById('rem_message');
+        let btn_confirm = document.getElementById('btn-confirm');
+        let input_user = document.getElementById('user_id');
+        let btn_confirm2 = document.getElementById('btn-confirm2');
+        let input_user2 = document.getElementById('user_id2');
+
+        function addFriend() {
+            input_user.style.visibility = "visible";
+            btn_confirm.style.visibility = "visible";
+        }
+
+        function inviteLobby() {
+            input_user2.style.visibility = "visible";
+            btn_confirm2.style.visibility = "visible";
+        }
+
+        function sendInvite(){
+            if(input_user2.value != ""){
+                const req = {
+                    token: '0x0',
+                    requestType: 'lobby-invite',
+                    userId: userId,
+                    data: [input_user2.value, lobby_id.value]
+                };
+                socket.send(JSON.stringify(req));
+            }
+        }
+
+        function sendRequest(){
+            if(input_user.value != ""){
+                const req = {
+                    token: '0x0',
+                    requestType: 'friend-request',
+                    userId: userId,
+                    data: input_user.value
+                };
+                socket.send(JSON.stringify(req));
+            }
+        }
+		
+		function connectWS(){
+			socket = new WebSocket(WS_IP.value);
+			socket.onopen = () => {
+				OnConnect();
+                console.log('Opened connection');
+			};
+			
+			socket.onmessage = (event) => {
+                const json = JSON.parse(event.data);
+                if (json.requestType){
+					console.log('Request', json);
+                    switch (json.requestType){
+                        case 'lobby-join':
+                            OnGuestAdded(json.data);
+                            break;
+                        case 'lobby-send-msg':
+                            inp_rem_msg.value += json.data + '\n';
+                            break;
+                        case 'friend-request':
+                            alert('friend request received');
+                            break;
+						case 'lobby-lost-guest':
+                            OnGuestLost();
+                            break;
+                    }
+                }
+				if(json.responseType){
+					switch (json.responseType){
+                        case 'lobby-host':
+                            if(json.result == 200){
+								alert('Lobby password is ' + json.data);
+								lobby_id.value = json.data;
+								OnLobbyOpen();
+							}
+							else
+								alert(json.msg)
+							break;
+						case 'lobby-send-msg':
+							if(json.result == 200)
+								inp_rem_msg.value += 'You: ' + json.data + '\n';
+                            break;
+                        case 'friend-request':
+                            alert('friend request sent');
+                            break;
+                        case 'lobby-invite': 
+                            alert('lobby invite sent');
+                            break;
+                    }
+				}
+            };
+			
+			socket.onclose = () => {
+                console.log('Closed connection');
+				OnDisconnect();
+            };
+		}
+		
+        function hostLobby() {
+			const req = {
+				token: '0x0',
+				requestType: 'lobby-host',
+				userId: userId
+			};
+			socket.send(JSON.stringify(req));
+        }
+		
+		function closeLobby(){
+			const req = {
+				token: '0x0',
+				requestType: 'lobby-close',
+				userId: userId
+			};
+			socket.send(JSON.stringify(req));
+			
+			OnLobbyClose();
+		}
+
+        function sendMsg() {
+            const req = {
+                token: '0x0',
+                requestType: 'lobby-send-msg',
+                userId: userId,
+                data: inp_msg.value
+            };
+            socket.send(JSON.stringify(req));
+			console.log(req);
+        }
+		
+		function OnConnect(){
+			btn_connect.disabled = true;
+			WS_IP.disabled = true;
+			btn_host.disabled = false;
+		}
+		
+		function OnDisconnect(){
+			OnLobbyClose();
+			btn_connect.disabled = false;
+			WS_IP.disabled = false;
+			btn_host.disabled = true;
+			btn_close.disabled = true;
+		}
+		
+		function OnLobbyOpen(){
+			btn_host.disabled = true;
+			btn_close.disabled = false;
+		}
+		
+		function OnLobbyClose(){
+			btn_host.disabled = false;
+			btn_close.disabled = true;
+			lobby_id.value = '';
+			inp_rem_msg.value = '';
+			inp_msg.disabled = true;
+			btn_msg.disabled = true;
+			inp_rem_msg.disabled = true;
+		}
+		
+		function OnGuestAdded(_userId){
+            inp_rem_msg.value += `--> Guest ${_userId} has joined the lobby! \n`;
+			inp_msg.disabled = false;
+			btn_msg.disabled = false;
+			inp_rem_msg.disabled = false;
+		}
+		
+		function OnGuestLost(){
+            inp_rem_msg.value += '--> Guest lost \n';
+			inp_msg.disabled = true;
+			btn_msg.disabled = true;
+			inp_rem_msg.disabled = true;
+		}
+    </script>
+</body>
+</html>
