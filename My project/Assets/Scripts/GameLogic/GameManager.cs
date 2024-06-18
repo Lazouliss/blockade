@@ -47,14 +47,14 @@ public class GameManager : MonoBehaviour
             {
                 case Common.DTOWall dtoWall:
 
-                if(ihm.GetTypePartie() == "JCE"){
-                    botAPI.sendDTO(dtoWall);
-                }
-
                 if (wallPlaced || dtoWall.coord1.Item1 > 10 || dtoWall.coord1.Item2 > 14 || dtoWall.coord2.Item1 > 10 || dtoWall.coord2.Item2 > 14 || dtoWall.coord1.Item1 < 0 || dtoWall.coord1.Item2 < 0 || dtoWall.coord2.Item1 < 0 || dtoWall.coord2.Item2 < 0){
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
                     Debug.Log("Wall impossible to place");
                     break;
+                }
+
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoWall);
                 }
                 
                 bool canPlaceWall = (algoBoard.IsWallplaceable(dtoWall, players[0]) && algoBoard.IsWallplaceable(dtoWall, players[1]));
@@ -82,14 +82,15 @@ public class GameManager : MonoBehaviour
 
                 case Common.DTOPawn dtoPawn: 
 
-                if(ihm.GetTypePartie() == "JCE"){
-                    botAPI.sendDTO(dtoPawn);
-                }
-
                 if (pawnMoved){
                     ihm.sendDTO(dtoHandler.createErrorDTO(0));
                     break;
                 }
+
+                if(ihm.GetTypePartie() == "JCE"){
+                    botAPI.sendDTO(dtoPawn);
+                }
+                
                 (uint, uint) startPos = dtoPawn.startPos;
                 (uint?, uint?) endPos = dtoPawn.destPos;
                 (bool, List<Square>, int) res = algoBoard.getChemin(((uint)startPos.Item1, (uint)startPos.Item2), ((uint)endPos.Item1, (uint)endPos.Item2));
