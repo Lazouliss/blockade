@@ -16,47 +16,26 @@ namespace blockade.Blockade_IHM
         [SerializeField] private GameObject btn_switchCamera;
         [SerializeField] private KeyCode key_switchCamera;
 
-        private IHM ihm;
-
-        // tests not working
-        /*
-        private GameObject verti;
-        private GameObject horiz;
-        */
+        // Overlay pour l'action a realiser
+        [SerializeField] private TextMeshProUGUI txtMovePawn;
+        [SerializeField] private TextMeshProUGUI txtPlaceWall;
+        [SerializeField] private TextMeshProUGUI txtError;
 
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
-        /// Initialise la page, place automatiquement les éléments.
+        /// Initialise les cameras.
         /// </summary>
         void Start()
         {
-            // Move the remaining walls labels to the top left corner
-            //remainingWalls.transform.position = new Vector3(110, this.GetComponent<RectTransform>().rect.height - 60, 0);
-
-            // for tests
-            //UpdateRemainingWalls("Vertical", 5);
-            //UpdateRemainingWalls("Horizontal", 8);
-
-            // tests not working
-            /*
-            verti = GameObject.Find("RemainingWalls_Vertical");
-            horiz = GameObject.Find("RemainingWalls_Horizontal");
-            //Debug.Log(remainingWalls.transform.Find("RemainingWalls_Title").position);
-            Debug.Log(verti.GetComponent<Transform>().position);
-            //Debug.Log(verti.GetComponent<>);
-            Debug.Log(horiz.transform.position);
-            */
-
-            // Recupere l'ihm --> NORMALEMENT INUTILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            ihm = GameObject.Find("Game").GetComponent<IHM>();
-
             // Initialise les cameras
             playerCam.enabled = true;
             boardCam.enabled = false;
 
-            // Move the switch camera button to the top right corner
-            //btn_switchCamera.transform.position = new Vector3(this.GetComponent<RectTransform>().rect.width - 32, this.GetComponent<RectTransform>().rect.height - 32, 0);
+            // Initialise les actions du joueur
+            txtMovePawn.enabled = true;
+            txtPlaceWall.enabled = false;
+            txtError.enabled = false;
         }
 
         // Update is called once per frame
@@ -129,6 +108,28 @@ namespace blockade.Blockade_IHM
                 boardCam.tag = "MainCamera";
             }
             Debug.Log("PlayerCam Tag : " + playerCam.tag + ", BoardCam Tag : " + boardCam.tag);
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Change le type d'action a realiser par le joueur
+        /// </summary>
+        public void SwitchActionPlayer()
+        {
+            txtMovePawn.enabled = !txtMovePawn.enabled;
+            txtPlaceWall.enabled = !txtPlaceWall.enabled;
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Affiche le message d'erreur generique, en cas d'action illegal et de reception de DTOError
+        /// </summary>
+        /// <param name="state"></param>
+        public void ToggleError(bool state)
+        {
+            txtError.enabled = state;
         }
     }
 }

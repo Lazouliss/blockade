@@ -13,7 +13,16 @@ namespace blockade.Blockade_IHM
 
         public TMP_InputField inputPassword1;
         public TMP_InputField inputPassword2;
+
         public Button InscriptionButton;
+
+        [SerializeField] private GameObject game;
+        [SerializeField] private GameObject inscriptionMenu;
+        [SerializeField] private GameObject connectionMenu;
+        [SerializeField] private GameObject chat;
+
+        public GameObject ErrorPopupObj;
+        public TMP_Text ErrorPopup;
 
         void Start() 
         {
@@ -52,13 +61,11 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void SetPlayerName (string inputName)
-        {   
-            if(UIManager.SetPlayerName(inputName) != "0")
-            {
-                PlayerName = UIManager.SetPlayerName(inputName);
-                Debug.Log("Pseudo : " + PlayerName);
-            }
+        public void SetPlayerName(string inputName)
+        {
+            ErrorPopupObj.SetActive(false);
+            PlayerName = UIManager.getPlayerName(inputName);
+            Debug.Log("Pseudo : " + PlayerName);
         }
 
         /// <summary>
@@ -69,11 +76,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword1 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
-            {
-                PlayerPassword1 = UIManager.SetPlayerPassword(inputPassword);
-                // Debug.Log("Password1 : " + PlayerPassword1);
-            }
+            ErrorPopupObj.SetActive(false);
+            PlayerPassword1 = UIManager.getPlayerPassword(inputPassword);
+            // Debug.Log("Password1 : " + PlayerPassword1);
         }
 
         /// <summary>
@@ -84,22 +89,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayerPassword2 (string inputPassword)
         {   
-            if(UIManager.SetPlayerPassword(inputPassword) != "0")
-            {
-                PlayerPassword2 = UIManager.SetPlayerPassword(inputPassword);
-                // Debug.Log("Password2 : " + PlayerPassword2);
-            }
-            try
-            {
-                if(!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
-                {
-                    throw new Exception("Les mots de passe sont différents.");
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Erreur : " + e.Message);
-            }
+            ErrorPopupObj.SetActive(false);
+            PlayerPassword2 = UIManager.getPlayerPassword(inputPassword);
+            // Debug.Log("Password2 : " + PlayerPassword2);
         }
 
         /// <summary>
@@ -115,6 +107,60 @@ namespace blockade.Blockade_IHM
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Par Martin GADET
+        /// 
+        /// Appelle la fonction de création de compte du joueur
+        /// 
+        /// Publique
+        /// </summary>
+        public void ClickButton()
+        {
+            if (!UIManager.CheckPlayerName(PlayerName))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le nom de joueur doit contenir moins de 12 caracteres et ne pas contenir de caractere special.");
+            }
+            else if (!UIManager.CheckPlayerPassword(PlayerPassword1))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
+            }
+            else if (!UIManager.CheckPlayerPassword(PlayerPassword2))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Le mot de passe doit contenir au moins 8 caracteres, une minuscule, une majuscule et un chiffre.");
+            }
+            else if (!CheckEqualityPassword(PlayerPassword1, PlayerPassword2))
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("Les mots de passe sont différents.");
+            }
+            else
+            {
+                ErrorPopupObj.SetActive(false);
+                Debug.Log("Sign out player " + PlayerName);
+                // TODO : game.GetComponent<Online>().fonction(PlayerName, PlayerPassword);
+
+                game.GetComponent<GameManager>().online.Register(PlayerName, PlayerPassword1,OnSignUpComplete);
+            }
+        }
+        private void OnSignUpComplete(bool success)
+        {
+            if (success)
+            {
+
+                this.chat.SetActive(false);
+                this.inscriptionMenu.SetActive(false);
+                this.connectionMenu.SetActive(true);
+            }
+            else
+            {
+                ErrorPopupObj.SetActive(true);
+                ErrorPopup.SetText("La création de compte a échoué.");
+            }
         }
     }
 }

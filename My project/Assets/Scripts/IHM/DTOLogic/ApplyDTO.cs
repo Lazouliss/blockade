@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using blockade.Blockade_common;
 using System.Collections;
+using static blockade.Blockade_common.Common;
 
 namespace blockade.Blockade_IHM
 {
@@ -9,59 +10,17 @@ namespace blockade.Blockade_IHM
     {
 
         public const float LENGTH_TILE = 1;
-        public Pawn selectedPawn;
         private Stack<GameObject> stackWall;
         public float speed = 0.5f;
         public GameObject wall;
 
-        // Start is called before the first frame update
-        void Start()
+        private IHM ihm;
+
+        // Constructor
+        public void initApplyDTO(IHM ihm) 
         {
-            
             stackWall = new Stack<GameObject>();
-            /*
-            Common.DTOPawn dto = new Common.DTOPawn();
-            dto.startPos = (0, 0);
-            dto.destPos = (1000, 1000);
-
-            List<Common.Direction> listMoove = new List<Common.Direction>();
-            listMoove.Add(Common.Direction.UP);
-            listMoove.Add(Common.Direction.RIGHT);
-            listMoove.Add(Common.Direction.DOWN);
-            listMoove.Add(Common.Direction.LEFT);
-            dto.mooves = listMoove;
-
-
-            StartCoroutine(this.movePawn(dto));
-            */
-
-            /*Common.DTOWall dtoWall = new Common.DTOWall();
-            dtoWall.coord1 = (0,0);
-            dtoWall.coord2 = (0,1);
-            dtoWall.direction = Common.Direction.RIGHT;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);
-
-
-            dtoWall.coord1 = (1, 1);
-            dtoWall.coord2 = (2, 1);
-            dtoWall.direction = Common.Direction.DOWN;
-            dtoWall.isAdd = true;
-            actionWall(dtoWall);*/
-
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            // For tests
-            /*
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                removeWall();
-            }
-            */
+            this.ihm = ihm;
         }
 
         /// <summary>
@@ -74,29 +33,53 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         public void moveDTOPawn(Common.DTOPawn dto)
         {
+            Debug.Log("Debut du moveDTOPawn");
             StartCoroutine(movePawn(dto));
         }
 
         /// <summary>
         /// Par Wassim BOUKHARI
         /// 
-        /// Lance une coroutine qui déplace le pion 
+        /// Lance une coroutine qui dï¿½place le pion 
         /// pour chaque direction
         /// 
         /// </summary>
         /// <param name="dto"></param>
         private IEnumerator movePawn(Common.DTOPawn dto)
         {
-
-            Pawn p = this.selectedPawn;
-
+            Debug.Log("Debut du movePawn");
+            Pawn p = GetPawn(dto);
+            
             foreach (Common.Direction direction in (List<Common.Direction>)(dto.mooves))
             {
                 yield return StartCoroutine(p.move(direction));
             }
+        }
 
-            selectedPawn = null;
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Retourne le pion a dï¿½placer
+        /// 
+        /// Privï¿½
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Pawn</returns>
+        private Pawn GetPawn(Common.DTOPawn dto)
+        {
+            Debug.Log("Debut du GetPawn");
+            string p1_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion1";
+            string p2_name = "Board/player" + ihm.GetCurrentPlayer() + "_pion2";
 
+            if (GameObject.Find(p1_name).transform.position.x == dto.startPos.Item1 && GameObject.Find(p1_name).transform.position.z == dto.startPos.Item2)
+            {
+                Debug.Log("Moving : " + p1_name);
+                Pawn p1 = GameObject.Find(p1_name).GetComponent<Pawn>();
+                return p1;
+            }
+            Debug.Log("Moving : " + p2_name);
+            Pawn p2 = GameObject.Find(p2_name).GetComponent<Pawn>();
+            return p2;
         }
 
         /// <summary>
@@ -170,7 +153,26 @@ namespace blockade.Blockade_IHM
 
             animator.SetTrigger("descendMur");
 
+            // Attend la fin de l'animation avant de changer de perspective de joueur
+            StartCoroutine(DelayedSwitchPlayer(animator.GetCurrentAnimatorStateInfo(0).length));
+
             stackWall.Push(newObject);
+        }
+
+        /// <summary>
+        /// Par Thomas MONTIGNY
+        /// 
+        /// Attend un certain delais avant de changer de perspective de joueur
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        IEnumerator DelayedSwitchPlayer(float delay = 0)
+        {
+            Debug.Log("Delayed animation");
+            yield return new WaitForSeconds(delay);
+
+            // Tourne la camera
+            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>
@@ -190,12 +192,14 @@ namespace blockade.Blockade_IHM
 
                 Animator animator = wall.GetComponent<Animator>();
                 animator.SetTrigger("monterMur");
+                
+                StartCoroutine(DelayedSwitchPlayer(animator.GetCurrentAnimatorStateInfo(0).length));
 
 
             }
             else
             {
-                Debug.LogWarning("La pile est vide, plus de mur à retirer");
+                Debug.LogWarning("La pile est vide, plus de mur ï¿½ retirer");
             }
 
         }

@@ -19,6 +19,11 @@ namespace blockade.Blockade_IHM
             this.gamelogic = gamelogic;
         }
 
+        public GameManager getGameLogic()
+        {
+            return gamelogic;
+        }
+
         /// <summary>
         /// Par Thomas MONTIGNY
         /// 
@@ -64,14 +69,35 @@ namespace blockade.Blockade_IHM
         private void applyDTOWall(Common.DTOWall dto)
         {
             // Fait disparaitre le mur que le joueur avait de selectionne
-            this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
+            int idPlayerOnline;
+            if(ihm.board.is_guest_online){
+                idPlayerOnline = 2;
+            } else {
+                idPlayerOnline = 1;
+            }
+            if ((dto.isAdd == true) && ihm.GetTypePartie() == "JCJ" || (ihm.GetTypePartie() == "JCE" && ihm.GetCurrentPlayer() == 1) || (ihm.GetTypePartie() == "ONLINE" && ihm.GetCurrentPlayer() == idPlayerOnline))
+            {
+                Debug.Log("Forgetting wall");
+                this.ihm.board.GetSelectedWall().GetComponent<WallDragHandler>().UnSelectWall();
+            }
 
             // Puis applique le nouveau mur
             Debug.Log("applyDTOWall, coord1 = " + dto.coord1 + ", coord2 = " + dto.coord2 + ", direction = " + dto.direction + ", isAdd = " + dto.isAdd);
             ihm.gestionDTO.actionWall(dto, ihm.board);
 
-            // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
-            ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
+            // Supprime le mur de la liste en fonction de sa direction
+            if (dto.direction == Common.Direction.UP)
+            {
+                ihm.EditStackHorizontalWall(ihm.GetCurrentPlayer(), null);
+            } else
+            {
+                ihm.EditStackVerticalWall(ihm.GetCurrentPlayer(), null);
+            }
+
+            // // Le joueur viens de d�placer un mur donc sa prochaine action est de d�placer un pion
+            // ihm.SetPlayerPlacingWall(ihm.GetCurrentPlayer(), false);
+            // ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -83,16 +109,19 @@ namespace blockade.Blockade_IHM
         /// <param name="dto"></param>
         private void applyDTOPawn(Common.DTOPawn dto)
         {
-            //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0] + ", " + dto.mooves[1]);
-            ihm.board.ForgetSelectedPawn();
+            Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + dto.mooves[0]);
+            //Debug.Log("applyDTOPawn, startPos = " + dto.startPos + ", destPos = " + dto.destPos + ", mooves = " + string.Join(", ", dto.mooves));
+            ihm.board.RefreshDTOPawn();
             ihm.gestionDTO.moveDTOPawn(dto);
 
-            // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
-            int current_player = ihm.GetCurrentPlayer();
-            if (ihm.GetPlayer(current_player).verticalWalls > 0 || ihm.GetPlayer(current_player).horizontalWalls > 0)
-            {
-                ihm.SetPlayerPlacingWall(current_player, true);
-            }
+            // // Le joueur viens de d�placer un pion donc sa prochaine action est de d�placer un mur
+            // int current_player = ihm.GetCurrentPlayer();
+            // if (ihm.GetPlayer(current_player).verticalWalls > 0 || ihm.GetPlayer(current_player).horizontalWalls > 0)
+            // {
+            //     ihm.SetPlayerPlacingWall(current_player, true);
+            // }
+            // ihm.SwitchActionPlayer();
+            ihm.ToggleError(false);
         }
 
         /// <summary>
@@ -136,9 +165,6 @@ namespace blockade.Blockade_IHM
                 ihm.SetCurrentPlayer(2);
                 ihm.UpdateRemainingWalls(ihm.GetPlayer(2));
             }
-
-            // Tourne la camera si besoin
-            ihm.SwitchPlayerCamera();
         }
 
         /// <summary>
@@ -152,6 +178,7 @@ namespace blockade.Blockade_IHM
         private void applyDTOError(Common.DTOError dto)
         {
             Debug.Log("applyDTOError, errorCode = " + dto.errorCode);
+            ihm.ToggleError(true);
         }
 
         /// <summary>

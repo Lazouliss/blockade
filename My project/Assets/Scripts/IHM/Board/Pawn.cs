@@ -6,15 +6,7 @@ namespace blockade.Blockade_IHM
 {
     public class Pawn : MonoBehaviour
     {
-
-        int x, y;
         int id_player;
-
-        public Pawn(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
 
         /// <summary>
         /// Par Wassim BOUKHARI
@@ -29,32 +21,61 @@ namespace blockade.Blockade_IHM
 
             float length = ApplyDTO.LENGTH_TILE;
 
-            float speed = 1.0f; // Vitesse de déplacement
+            float speed = 5.0f; // Vitesse de déplacement
             float time = 0;
 
             Vector3 start = transform.position;
+            Quaternion startRotation = transform.rotation;
+
+
 
             Vector3 target = start;
+            Quaternion targetRotation;
             switch (direction)
             {
                 case Common.Direction.UP:
                     target += new Vector3(0, 0, length);
+                    targetRotation = Quaternion.Euler(0, 0, 0);
+
                     break;
                 case Common.Direction.DOWN:
                     target += new Vector3(0, 0, -length);
+                    targetRotation = Quaternion.Euler(0, 180, 0);
                     break;
                 case Common.Direction.LEFT:
                     target += new Vector3(-length, 0, 0);
+                    targetRotation = Quaternion.Euler(0, -90, 0);
                     break;
                 case Common.Direction.RIGHT:
                     target += new Vector3(length, 0, 0);
+                    targetRotation = Quaternion.Euler(0, 90, 0);
                     break;
                 default:
                     target += new Vector3(0, 0, 0);
+                    targetRotation = Quaternion.Euler(0, 0, 0);
                     break;
 
             }
 
+
+            Debug.Log("Going to turn the pawn " + transform.name + ", Start : " + startRotation + ", Target : " + targetRotation);
+
+            while (time < 1.0f)
+            {
+                // Augmenter le temps de lerp basé sur le temps écoulé multiplié par la vitesse
+                time += Time.deltaTime * speed;
+
+                // Effectuer le lerp
+                transform.rotation = Quaternion.Lerp(startRotation, targetRotation, time);
+
+                //Debug.Log("Time : " + time + ", deltaTime :" + Time.deltaTime + " and position : " + transform.position);
+
+                // Attendre la fin de la frame avant de continuer
+                yield return null;
+            }
+
+            time = 0;
+            Debug.Log("Going to move the pawn " + transform.name + ", Start : " + start + ", Target : " + target);
 
             while (time < 1.0f)
             {
@@ -64,18 +85,20 @@ namespace blockade.Blockade_IHM
                 // Effectuer le lerp
                 transform.position = Vector3.Lerp(start, target, time);
 
+                //Debug.Log("Time : " + time + ", deltaTime :" + Time.deltaTime + " and position : " + transform.position);
+
                 // Attendre la fin de la frame avant de continuer
                 yield return null;
             }
 
             // Assurez-vous que la position finale est exactement la position cible
             transform.position = target;
-
+            //Debug.Log("Final position : " + transform.position);
         }
 
         //ABERKANE Doha & Thomas MONTIGNY (Bug fix)
         //creation d'un fonction qui va créer mon objet pion
-        public static Pawn createPawn(Vector2Int position, string name, Board plateau, int id_player)
+        public static GameObject createPawn(Vector2Int position, string name, Board plateau, int id_player, bool flag)
         {
 
             string path = "ToonyTinyPeople/TT_RTS/TT_RTS_standard_demo/prefab/TT_RTS_Demo_Character";
@@ -97,8 +120,6 @@ namespace blockade.Blockade_IHM
 
             Pawn pawn = pawnObj.AddComponent<Pawn>(); // ajout d'un Pawn component pour le GameObject
             pawn.name = name; // attribution d'un nom
-            pawn.x = position.x; // attribution position x
-            pawn.y = position.y; // attribution position y
             pawn.id_player = id_player;
 
             pawnObj.name = name; // attribution d'un nom à mon objet pawnObj
@@ -106,11 +127,12 @@ namespace blockade.Blockade_IHM
             pawnObj.AddComponent<CapsuleCollider>(); // ajout d'une CapsuleCollider pour mon pawn
             pawnObj.AddComponent<PawnClickHandler>(); // ajout de mon PawnClickHandler pour gestion des cliques
             pawnObj.GetComponent<PawnClickHandler>().plateau = plateau;
+            pawnObj.GetComponent<PawnClickHandler>().flag = flag;
 
             // change de parent pour prendre le plateau
             pawnObj.transform.SetParent(plateau.transform, false);
 
-            return pawn;
+            return pawnObj;
         }
 
         public int GetID()

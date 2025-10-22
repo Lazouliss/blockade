@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Lobby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+		button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        textarea {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            height: 100px; /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+		.linegroup{
+			display: flex; 
+			margin: 5px;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Join Lobby</h1>
+        <label for="WS_IP">WebSocket URL:</label>
+        <div class="linegroup">
+			<input type="text" id="WS_IP" value="ws://localhost:27015">
+			<button id="btn_connect" onclick="connectWS()">Connect</button>
+        </div>
+		<div class="linegroup">
+			<button id="btn_join" onclick="joinLobby()" disabled>Join Lobby</button>
+			<button id="btn_leave" onclick="leaveLobby()" disabled>Leave Lobby</button>
+			<input type="text" id="lobby_id" readonly>
+		</div>
+        
+        
+        <input type="text" id="message" disabled>
+        <button id="btn_msg" onclick="sendMsg()" disabled>Send</button>
+        
+        <label for="rem_message">Remote Messages:</label>
+        <textarea id="rem_message" readonly></textarea>
+    </div>
+</body>
+    
+    <script>
+        let userId = 'GUEST1';
+
+        let socket = null;
+		let btn_connect = document.getElementById('btn_connect');
+		let btn_join = document.getElementById('btn_join');
+		let btn_leave = document.getElementById('btn_leave');
+        let lobby_id = document.getElementById('lobby_id');
+        let btn_msg = document.getElementById('btn_msg');
+        let WS_IP = document.getElementById('WS_IP');
+        let inp_msg = document.getElementById('message');
+        let inp_rem_msg = document.getElementById('rem_message');
+    
+		function connectWS(){
+			socket = new WebSocket(WS_IP.value);
+			socket.onopen = () => {
+				OnConnect();
+                console.log('Opened connection');
+			};
+			
+			socket.onmessage = (event) => {
+                const json = JSON.parse(event.data);
+                if (json.requestType){
+					console.log('Request', json);
+                    switch (json.requestType){
+                        case 'lobby-send-msg':
+                            inp_rem_msg.value += json.data + '\n';
+                            break;
+                        case 'friend-request':
+                            alert('friend request received');
+                            break;
+                        case 'lobby-invite': 
+                            acceptInvite(json.data);
+                            break;
+						case 'lobby-lost-host':
+                            alert('Host lost!')
+                            OnHostLost();
+                            break;
+                    }
+                }
+				if(json.responseType){
+					switch (json.responseType){
+                        case 'lobby-join':
+                            if(json.result == 200){
+								lobby_id.value = json.data;
+								OnLobbyJoin();
+							}
+							else
+								alert(json.msg)
+							break;
+						case 'lobby-send-msg':
+							if(json.result == 200)
+								inp_rem_msg.value += 'You: ' + json.data + '\n';
+                            break;
+                    }
+				}
+            };
+			
+			socket.onclose = () => {
+                console.log('Closed connection');
+				OnDisconnect();
+            };
+		}
+	
+        function joinLobby() {
+            const password = prompt('Enter lobby password:');
+			
+			const req = {
+				token: '0x0',
+				requestType: 'lobby-join',
+				userId: userId,
+				data: password
+			};
+			socket.send(JSON.stringify(req));
+        }
+
+        function acceptInvite(password){
+            const req = {
+                token: '0x0',
+                requestType: 'lobby-join',
+                userId: userId,
+                data: password
+            };
+            socket.send(JSON.stringify(req));
+        }
+		
+		function leaveLobby(){
+			const req = {
+				token: '0x0',
+				requestType: 'lobby-leave',
+				userId: userId
+			};
+			socket.send(JSON.stringify(req));
+			
+			OnLobbyLeave();
+		}
+
+        function sendMsg() {
+            const req = {
+                token: '0x0',
+                requestType: 'lobby-send-msg',
+                userId: userId,
+                data: inp_msg.value
+            };
+            socket.send(JSON.stringify(req));
+			console.log(req);
+        }
+		
+		function OnConnect(){
+			btn_connect.disabled = true;
+			WS_IP.disabled = true;
+			btn_join.disabled = false;
+		}
+		
+		function OnDisconnect(){
+			OnHostLost();
+			btn_join.disabled = true;
+			btn_leave.disabled = false;
+			inp_msg.disabled = false;
+			btn_msg.disabled = false;
+			inp_rem_msg.disabled = false;
+		}
+
+        function OnLobbyJoin(){
+            btn_join.disabled = true;
+			btn_leave.disabled = false;
+            inp_msg.disabled = false;
+			btn_msg.disabled = false;
+			inp_rem_msg.disabled = false;
+        }
+		
+		function OnLobbyLeave(){
+			btn_join.disabled = false;
+			btn_leave.disabled = true;
+			inp_msg.disabled = true;
+			btn_msg.disabled = true;
+			inp_rem_msg.disabled = true;
+			lobby_id.value = '';
+			inp_rem_msg.value = '';
+		}
+		
+		function OnHostLost(){
+			OnLobbyLeave()
+		}
+    </script>
+</body>
+</html>

@@ -82,6 +82,14 @@ public class Player
             }
         }
     }
+    public void SetHorizontalWalls(uint horizontalWalls)
+    {
+        this.horizontalWalls = horizontalWalls;
+    }
+    public void SetVerticalWalls(uint verticalWalls)
+    {
+        this.verticalWalls = verticalWalls;
+    }
     void Start()
     {
         

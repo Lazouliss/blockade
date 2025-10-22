@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -39,9 +41,9 @@ namespace blockade.Blockade_IHM
         /// <returns></returns>
         public void SetPlayer2Name(string inputName)
         {
-            if (UIManager.SetPlayerName(inputName) != "0")
+            if (UIManager.getPlayerName(inputName) != "0")
             {
-                Player2Name = UIManager.SetPlayerName(inputName);
+                Player2Name = UIManager.getPlayerName(inputName);
                 Debug.Log("Player2 : " + Player2Name);
             }
         }

@@ -15,10 +15,10 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void setIALevel1(int level)
+        public void getIALevel1(int level)
         {
-            levelValue1 = UIManager.setIALevel(level).Item1;
-            levelString1 = UIManager.setIALevel(level).Item2;
+            levelValue1 = UIManager.getIALevel(level).Item1;
+            levelString1 = UIManager.getIALevel(level).Item2;
             Debug.Log("levelValue1 : " + levelValue1);
             Debug.Log("levelString1 : " + levelString1);
         }
@@ -29,10 +29,10 @@ namespace blockade.Blockade_IHM
         /// Publique
         /// </summary>
         /// <returns></returns>
-        public void setIALevel2(int level)
+        public void getIALevel2(int level)
         {
-            levelValue2 = UIManager.setIALevel(level).Item1;
-            levelString2 = UIManager.setIALevel(level).Item2;
+            levelValue2 = UIManager.getIALevel(level).Item1;
+            levelString2 = UIManager.getIALevel(level).Item2;
             Debug.Log("levelValue2 : " + levelValue2);
             Debug.Log("levelString2 : " + levelString2);
         }
