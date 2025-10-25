@@ -64,10 +64,53 @@ My project/
 
 ## Installation
 
+### Easy install
+
+**:warning: WARNING:** This installation does not work at the moment, you need to be connected to the server to create an account when launching the game.
+
 1. Clone the repository
 2. Open the project in Unity
 3. Open the main scene in `Assets/Scenes`
 4. Press Play to test the game
+
+### Full install (Online Mod)
+
+#### Prerequirements
+
+- Having Python installed on your computer with these libraries : sanic, sqlalchemy, pyjwt, mysql-connector-python
+
+You can check by using the command:
+```bash
+python -m pip list
+```
+
+And install them with (if needed):
+```bash
+python -m pip install sanic sqlalchemy pyjwt mysql-connector-python
+```
+
+- Having mysql installed on your computer
+
+#### Installation
+
+1. Clone the repository
+2. Create the blockade database using this command : 
+
+```bash
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS blockade;"
+```
+It connects you with root access without using any password, and then create the database.
+Change the credentials (``root:``) if you have a different MySQL username/password.
+
+3. Start the server in the ``blockade/API&Serv`` folder
+
+```bash
+python api.py
+```
+
+4. Open the project in Unity
+5. Open the main scene in `Assets/Scenes`
+6. Press Play to test the game
 
 ---
 
