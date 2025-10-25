@@ -21,7 +21,7 @@ It was made in the context of a group project in my last year of bachelor with a
 - Players must always leave at least one possible path to the goal
 
 ### Victory Condition
-The first player to move both pawns to their opponent's starting spots wins the game.
+The first player to move on of their pawns to their opponent's starting spots wins the game.
 
 ## Project Structure
 
