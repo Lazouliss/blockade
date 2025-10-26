@@ -4,6 +4,8 @@ A Unity implementation of the classic board game Blockade, where players strateg
 
 It was made in the context of a group project in my last year of bachelor with a group of 15 students. I was responsible of the UI team. I developed the implementation of the DTOs received from the game logic section into the interface and the error management of the whole UI.
 
+The whole game is in French. It will not be translated.
+
 ## Game Rules
 
 ### Overview
@@ -62,16 +64,20 @@ My project/
 - Implements DTO pattern for game state management
 - Support for multiple languages
 
+## Known Bugs
+
+- Sometimes the IA go through a wall you just placed without taking it into account. Probably because its board is only updated AFTER finishing its turn.
+- For diagonal movements, the animation can go through walls even if it's possible to go around it. The information received do not always give the right sequence even if it has checked that the move is possible.
+
 ## Installation
 
 ### Easy install
-
-**:warning: WARNING:** This installation does not work at the moment, you need to be connected to the server to create an account when launching the game.
 
 1. Clone the repository
 2. Open the project in Unity
 3. Open the main scene in `Assets/Scenes`
 4. Press Play to test the game
+5. Click on "Connexion Invite" to play as a guest (serverless)
 
 ### Full install (Online Mod)
 
