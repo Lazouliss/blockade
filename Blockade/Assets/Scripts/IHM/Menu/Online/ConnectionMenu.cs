@@ -7,7 +7,7 @@ namespace blockade.Blockade_IHM
 {
     public class ConnectionMenu : MonoBehaviour
     {
-        public static string PlayerName;
+        public static string PlayerName = "Invite";
         public static string PlayerPassword;
 
         public TMP_InputField inputPassword;
